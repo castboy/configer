@@ -1,35 +1,18 @@
 package server
 
-type Servor interface {
-	Tableor
-	Cacheor
-}
+// all functions under this package
 
-type Tableor interface {
-	TableInsert() (int64, error)
-	TableDelete() (int64, error)
-	TableUpdate() (int64, error)
-	TableGet() (bool, error)
-}
-
-type Cacheor interface {
-	CacheInsert() error
-	CacheDelete() error
-	CacheUpdate() error
-	CacheGet() bool
-}
-
-func Insert(a Servor) error {
-	_, err := a.TableInsert()
+func Insert(a configor) error {
+	_, err := a.tableInsert()
 	if err != nil {
 		return err
 	}
 
-	return a.CacheInsert()
+	return a.cacheInsert()
 }
 
-func Delete(a Servor) error {
-	num, err := a.TableDelete()
+func Delete(a configor) error {
+	num, err := a.tableDelete()
 	if err != nil {
 		return err
 	}
@@ -37,11 +20,11 @@ func Delete(a Servor) error {
 	if num == 0 {
 	}
 
-	return a.CacheDelete()
+	return a.cacheDelete()
 }
 
-func Update(a Servor) error {
-	num, err := a.TableUpdate()
+func Update(a configor) error {
+	num, err := a.tableUpdate()
 	if err != nil {
 		return err
 	}
@@ -50,16 +33,16 @@ func Update(a Servor) error {
 
 	}
 
-	return a.CacheUpdate()
+	return a.cacheUpdate()
 }
 
-func Get(a Servor) error {
-	hit := a.CacheGet()
+func Get(a configor) error {
+	hit := a.cacheGet()
 	if hit {
 		return nil
 	}
 
-	hit, err := a.TableGet()
+	hit, err := a.tableGet()
 	if err != nil {
 		return err
 	}
