@@ -2,54 +2,38 @@ package server
 
 // all functions under this package
 
-func Insert(a configor) error {
-	_, err := a.tableInsert()
+func Insert(a configor) (num int64, err error) {
+	num, err = a.GetTabler().Insert()
 	if err != nil {
-		return err
+		return
 	}
 
-	return a.cacheInsert()
+	return a.GetCacher().Insert()
 }
 
-func Delete(a configor) error {
-	num, err := a.tableDelete()
+func Delete(a configor) (num int64, err error) {
+	num, err = a.GetCacher().Delete()
 	if err != nil {
-		return err
+		return
 	}
 
-	if num == 0 {
-	}
-
-	return a.cacheDelete()
+	return a.GetCacher().Delete()
 }
 
-func Update(a configor) error {
-	num, err := a.tableUpdate()
+func Update(a configor) (num int64, err error) {
+	num, err = a.GetCacher().Update()
 	if err != nil {
-		return err
+		return
 	}
 
-	if num == 0 {
-
-	}
-
-	return a.cacheUpdate()
+	return a.GetCacher().Update()
 }
 
-func Get(a configor) error {
-	hit := a.cacheGet()
-	if hit {
-		return nil
+func Get(a configor) (exist bool, err error) {
+	exist, _ = a.GetCacher().Get()
+	if !exist || err != nil {
+		exist, err = a.GetTabler().Get()
 	}
 
-	hit, err := a.tableGet()
-	if err != nil {
-		return err
-	}
-
-	if !hit {
-
-	}
-
-	return nil
+	return
 }

@@ -6,32 +6,32 @@ import (
 )
 
 type TablerA struct {
+	a *structure.A
 	*xorm.Engine
 }
 
 var tablerA *TablerA
 
-func GetTablerA() *TablerA {
-	if tablerA == nil {
-		tablerA = &TablerA{xEngine}
+func NewTablerA(a *structure.A) *TablerA {
+	return &TablerA{
+		a,
+		xEngine,
 	}
-
-	return tablerA
 }
 
 // implement Tableor
-func (t *TablerA) Insert(a *structure.A) (int64, error) {
-	return t.Table(a).Insert(a)
+func (t *TablerA) Insert() (int64, error) {
+	return t.Table(t.a).Insert(t.a)
 }
 
-func (t *TablerA) Delete(a *structure.A) (int64, error) {
-	return t.Table(a).Delete(a)
+func (t *TablerA) Delete() (int64, error) {
+	return t.Table(t.a).Delete(t.a)
 }
 
-func (t *TablerA) Update(a *structure.A) (int64, error) {
-	return t.Table(a).Update(a)
+func (t *TablerA) Update() (int64, error) {
+	return t.Table(t.a).Update(t.a)
 }
 
-func (t *TablerA) Get(a *structure.A) (bool, error) {
-	return t.Table(a).Where("name=?", a.Name).Get(a)
+func (t *TablerA) Get() (bool, error) {
+	return t.Table(t.a).Where("name=?", t.a.Name).NoAutoCondition(true).Get(t.a)
 }

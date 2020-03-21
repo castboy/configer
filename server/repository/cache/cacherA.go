@@ -3,32 +3,32 @@ package cache
 import "configer/server/structure"
 
 type CacherA struct {
-
+	a *structure.A
 }
 
 var cacherA *CacherA
 
-func GetCacherA() *CacherA {
+func NewCacherA(a *structure.A) *CacherA {
 	if cacherA == nil {
-		cacherA = &CacherA{}
+		cacherA = &CacherA{a}
 	}
 
 	return cacherA
 }
 
 // implement Cacheor
-func (c *CacherA) Insert(a *structure.A) error {
-	return nil
+func (c *CacherA) Insert() (num int64, err error) {
+	return
 }
 
-func (c *CacherA) Delete(a *structure.A) error {
-	return nil
+func (c *CacherA) Delete() (num int64, err error) {
+	return
 }
 
-func (c *CacherA) Update(a *structure.A) error {
-	return nil
+func (c *CacherA) Update() (num int64, err error) {
+	return
 }
 
-func (c *CacherA) Get(a *structure.A) bool {
-	return false
+func (c *CacherA) Get() (exist bool, err error) {
+	return
 }

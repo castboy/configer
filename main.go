@@ -8,11 +8,10 @@ import (
 
 func main() {
 	a := &structure.A{Name: "wmq"}
-	aer := server.NewAer(a)
-	err := server.Get(aer)
-	if err == nil {
-		fmt.Println(err)
-	}
+	exist, err := server.Get(server.NewAer(a))
+	fmt.Println(a, exist, err)
 
-	fmt.Println(a)
+	b := &structure.A{Name: "wxx", Age: 30}
+	num, err := server.Insert(server.NewAer(b))
+	fmt.Println(num, err)
 }
