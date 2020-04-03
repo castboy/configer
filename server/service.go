@@ -5,16 +5,16 @@ import "configer/server/check"
 // any structure can call functions under this package, if it implement interface below.
 
 type TableOperator interface {
-	baseOperator
+	BaseOperator
 }
 
 type CacheOperator interface {
-	baseOperator
+	BaseOperator
 
 	Cache(i interface{})
 }
 
-type baseOperator interface {
+type BaseOperator interface {
 	Insert() (int64, error)
 	Delete() (int64, error)
 	Update() (int64, error)
