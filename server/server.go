@@ -12,7 +12,7 @@ func Insert(a configor) (num int64, err error) {
 }
 
 func Delete(a configor) (num int64, err error) {
-	num, err = a.GetCacher().Delete()
+	num, err = a.GetTabler().Delete()
 	if err != nil {
 		return
 	}
@@ -21,7 +21,7 @@ func Delete(a configor) (num int64, err error) {
 }
 
 func Update(a configor) (num int64, err error) {
-	num, err = a.GetCacher().Update()
+	num, err = a.GetTabler().Update()
 	if err != nil {
 		return
 	}
