@@ -10,7 +10,7 @@ import (
 // Symboler as an implement of interface defined in this package.
 
 type Symboler struct {
-	cacherSymbol  CacheOperator
+	cacherSymbol  cache.CacheOperator
 	tablerSymbol  mysql.TableOperator
 	checkerSymbol check.Checkor
 }
@@ -23,7 +23,7 @@ func NewSymboler(a *structure.Symbol) *Symboler {
 	}
 }
 
-func (a *Symboler) GetCacher() CacheOperator {
+func (a *Symboler) GetCacher() cache.CacheOperator {
 	return a.cacherSymbol
 }
 
