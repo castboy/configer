@@ -3,13 +3,10 @@ package server
 import (
 	"configer/server/check"
 	"configer/server/repository"
+	"configer/server/repository/mysql"
 )
 
 // any structure can call functions under this package, if it implement interface below.
-
-type TableOperator interface {
-	repository.BaseOperator
-}
 
 type CacheOperator interface {
 	repository.BaseOperator
@@ -18,7 +15,7 @@ type CacheOperator interface {
 }
 
 type configor interface {
-	GetTabler() TableOperator
+	GetTabler() mysql.TableOperator
 	GetCacher() CacheOperator
 	GetChecker() check.Checkor
 }

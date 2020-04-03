@@ -11,7 +11,7 @@ import (
 
 type Symboler struct {
 	cacherSymbol  CacheOperator
-	tablerSymbol  TableOperator
+	tablerSymbol  mysql.TableOperator
 	checkerSymbol check.Checkor
 }
 
@@ -27,7 +27,7 @@ func (a *Symboler) GetCacher() CacheOperator {
 	return a.cacherSymbol
 }
 
-func (a *Symboler) GetTabler() TableOperator {
+func (a *Symboler) GetTabler() mysql.TableOperator {
 	return a.tablerSymbol
 }
 
