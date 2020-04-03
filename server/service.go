@@ -8,7 +8,7 @@ type TableOperator interface {
 	baseOperator
 }
 
-type cacheOperator interface {
+type CacheOperator interface {
 	baseOperator
 
 	Cache(i interface{})
@@ -24,7 +24,7 @@ type baseOperator interface {
 
 type configor interface {
 	GetTabler() TableOperator
-	GetCacher() cacheOperator
+	GetCacher() CacheOperator
 	GetChecker() check.Checkor
 }
 
