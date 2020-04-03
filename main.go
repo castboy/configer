@@ -7,11 +7,11 @@ import (
 )
 
 func main() {
-	a := &structure.A{Name: "wmq"}
-	exist, err := server.Get(server.NewAer(a))
+	a := &structure.Symbol{Symbol: "AUDCAD"}
+	exist, err := server.Get(server.NewSymboler(a))
 	fmt.Println(a, exist, err)
 
-	b := &structure.A{Name: "wxx", Age: 30}
-	num, err := server.Insert(server.NewAer(b))
+	b := &structure.Symbol{Symbol: "AUDCAD"}
+	num, err := server.Insert(server.NewSymboler(b))
 	fmt.Println(num, err)
 }
