@@ -10,9 +10,9 @@ import (
 // Symboler as an implement of interface defined in this package.
 
 type Symboler struct {
-	cacherSymbol cacheOperator
-	tablerSymbol tableOperator
-	checkerSymbol checkor
+	cacherSymbol  cacheOperator
+	tablerSymbol  tableOperator
+	checkerSymbol check.Checkor
 }
 
 func NewSymboler(a *structure.Symbol) *Symboler {
@@ -31,7 +31,7 @@ func (a *Symboler) GetTabler() tableOperator {
 	return a.tablerSymbol
 }
 
-func (a *Symboler) GetChecker() checkor {
+func (a *Symboler) GetChecker() check.Checkor {
 	return a.checkerSymbol
 }
 
