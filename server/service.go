@@ -4,7 +4,7 @@ import "configer/server/check"
 
 // any structure can call functions under this package, if it implement interface below.
 
-type tableOperator interface {
+type TableOperator interface {
 	baseOperator
 }
 
@@ -23,7 +23,7 @@ type baseOperator interface {
 }
 
 type configor interface {
-	GetTabler() tableOperator
+	GetTabler() TableOperator
 	GetCacher() cacheOperator
 	GetChecker() check.Checkor
 }

@@ -11,7 +11,7 @@ import (
 
 type Symboler struct {
 	cacherSymbol  cacheOperator
-	tablerSymbol  tableOperator
+	tablerSymbol  TableOperator
 	checkerSymbol check.Checkor
 }
 
@@ -27,7 +27,7 @@ func (a *Symboler) GetCacher() cacheOperator {
 	return a.cacherSymbol
 }
 
-func (a *Symboler) GetTabler() tableOperator {
+func (a *Symboler) GetTabler() TableOperator {
 	return a.tablerSymbol
 }
 
