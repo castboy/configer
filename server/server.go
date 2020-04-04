@@ -1,8 +1,10 @@
 package server
 
+import "configer/server/implement"
+
 // all functions under this package
 
-func Insert(a configor) (num int64, err error) {
+func Insert(a implement.Configor) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
 	if err != nil {
 		return
@@ -16,7 +18,7 @@ func Insert(a configor) (num int64, err error) {
 	return a.GetCacher().Insert()
 }
 
-func Delete(a configor) (num int64, err error) {
+func Delete(a implement.Configor) (num int64, err error) {
 	num, err = a.GetTabler().Delete()
 	if err != nil {
 		return
@@ -25,7 +27,7 @@ func Delete(a configor) (num int64, err error) {
 	return a.GetCacher().Delete()
 }
 
-func Update(a configor) (num int64, err error) {
+func Update(a implement.Configor) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
 	if err != nil {
 		return
@@ -39,7 +41,7 @@ func Update(a configor) (num int64, err error) {
 	return a.GetCacher().Update()
 }
 
-func Get(a configor) (exist bool, err error) {
+func Get(a implement.Configor) (exist bool, err error) {
 	exist, _ = a.GetCacher().Get()
 	if !exist {
 		exist, err = a.GetTabler().Get()
@@ -57,7 +59,7 @@ func Get(a configor) (exist bool, err error) {
 	return
 }
 
-func Cache(a configor) error {
+func Cache(a implement.Configor) error {
 	i, err := a.GetTabler().Export()
 	if err != nil {
 		return err

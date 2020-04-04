@@ -1,4 +1,4 @@
-package server
+package implement
 
 import (
 	"configer/server/check"
@@ -6,9 +6,7 @@ import (
 	"configer/server/repository/mysql"
 )
 
-// any structure can call functions under this package, if it implement interface below.
-
-type configor interface {
+type Configor interface {
 	GetTabler() mysql.TableOperator
 	GetCacher() cache.CacheOperator
 	GetChecker() check.Checkor

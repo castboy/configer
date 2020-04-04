@@ -1,4 +1,4 @@
-package server
+package implement
 
 import (
 	"configer/server/check"
@@ -6,8 +6,6 @@ import (
 	"configer/server/repository/mysql"
 	"configer/server/structure"
 )
-
-// Symboler as an implement of interface defined in this package.
 
 type Symboler struct {
 	cacherSymbol  cache.CacheOperator
