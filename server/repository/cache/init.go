@@ -24,11 +24,19 @@ type sessionCache struct {
 	sync.RWMutex
 }
 
+type securityCache struct {
+	ID2Name map[int]string
+	name2ID map[string]int
+	info    map[string]*structure.Security
+	sync.RWMutex
+}
+
 const AllTypeLength int = 6
 
 var symbCache *symbolCache
 var srcCache *sourceCache
 var sessCache [AllTypeLength]*sessionCache
+var secCache *securityCache
 
 func init() {
 	symbCache = &symbolCache{
@@ -47,5 +55,11 @@ func init() {
 		sessCache[i] = &sessionCache{
 			info: make(map[int]map[int32][]string),
 		}
+	}
+
+	secCache = &securityCache{
+		ID2Name: make(map[int]string),
+		name2ID: make(map[string]int),
+		info:    make(map[string]*structure.Security),
 	}
 }
