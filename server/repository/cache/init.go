@@ -31,12 +31,18 @@ type securityCache struct {
 	sync.RWMutex
 }
 
+type marketDSTCache struct {
+	info map[structure.MarketType]*structure.MarketDST
+	sync.RWMutex
+}
+
 const AllTypeLength int = 6
 
 var symbCache *symbolCache
 var srcCache *sourceCache
 var sessCache [AllTypeLength]*sessionCache
 var secCache *securityCache
+var mdCache *marketDSTCache
 
 func init() {
 	symbCache = &symbolCache{
@@ -61,5 +67,9 @@ func init() {
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
 		info:    make(map[string]*structure.Security),
+	}
+
+	mdCache = &marketDSTCache{
+		info: make(map[structure.MarketType]*structure.MarketDST),
 	}
 }
