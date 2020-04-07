@@ -3,16 +3,16 @@ package cache
 import "configer/server/structure"
 
 type CacherSymbol struct {
-	a *structure.Symbol
-	b *symbolCache
+	bean  *structure.Symbol
+	cache *symbolCache
 }
 
 var cacherSymbol *CacherSymbol
 
-func NewCacherSymbol(a *structure.Symbol) *CacherSymbol {
+func NewCacherSymbol(bean *structure.Symbol) *CacherSymbol {
 	if cacherSymbol == nil {
 		cacherSymbol = &CacherSymbol{
-			a,
+			bean,
 			symbCache,
 		}
 	}
@@ -22,22 +22,22 @@ func NewCacherSymbol(a *structure.Symbol) *CacherSymbol {
 
 // implement Cacheor
 func (c *CacherSymbol) Insert() (num int64, err error) {
-	c.b.insert(c.a)
+	c.cache.insert(c.bean)
 	return
 }
 
 func (c *CacherSymbol) Delete() (num int64, err error) {
-	c.b.delete(c.a)
+	c.cache.delete(c.bean)
 	return
 }
 
 func (c *CacherSymbol) Update() (num int64, err error) {
-	c.b.update(c.a)
+	c.cache.update(c.bean)
 	return
 }
 
 func (c *CacherSymbol) Get() (exist bool, err error) {
-	c.b.get(c.a)
+	c.cache.get(c.bean)
 	return
 }
 

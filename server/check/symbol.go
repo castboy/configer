@@ -3,15 +3,15 @@ package check
 import "configer/server/structure"
 
 type CheckerSymbol struct {
-	a *structure.Symbol
+	bean *structure.Symbol
 }
 
 var checkerSymbol *CheckerSymbol
 
-func NewCheckerSymbol(a *structure.Symbol) *CheckerSymbol {
+func NewCheckerSymbol(bean *structure.Symbol) *CheckerSymbol {
 	if checkerSymbol == nil {
 		checkerSymbol = &CheckerSymbol{
-			a,
+			bean,
 		}
 	}
 
@@ -19,5 +19,5 @@ func NewCheckerSymbol(a *structure.Symbol) *CheckerSymbol {
 }
 
 func (c *CheckerSymbol) FormatCheck() error {
-	return c.a.FormatCheck()
+	return c.bean.FormatCheck()
 }

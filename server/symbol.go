@@ -8,9 +8,9 @@ import (
 )
 
 type Symboler struct {
-	cacherSymbol  cache.CacheOperator
-	tablerSymbol  mysql.TableOperator
-	checkerSymbol check.Checkor
+	cacher  cache.CacheOperator
+	tabler  mysql.TableOperator
+	checker check.Checkor
 }
 
 func NewSymboler(a *structure.Symbol) *Symboler {
@@ -22,14 +22,14 @@ func NewSymboler(a *structure.Symbol) *Symboler {
 }
 
 func (a *Symboler) GetCacher() cache.CacheOperator {
-	return a.cacherSymbol
+	return a.cacher
 }
 
 func (a *Symboler) GetTabler() mysql.TableOperator {
-	return a.tablerSymbol
+	return a.tabler
 }
 
 func (a *Symboler) GetChecker() check.Checkor {
-	return a.checkerSymbol
+	return a.checker
 }
 
