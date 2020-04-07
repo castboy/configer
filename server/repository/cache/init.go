@@ -19,9 +19,16 @@ type sourceCache struct {
 	sync.RWMutex
 }
 
+type sessionCache struct {
+	info map[int]map[int32][]string // int -> sourceID; string -> timeSpan.
+	sync.RWMutex
+}
+
+const AllTypeLength int = 6
 
 var symbCache *symbolCache
 var srcCache *sourceCache
+var sessCache [AllTypeLength]*sessionCache
 
 func init() {
 	symbCache = &symbolCache{
@@ -34,5 +41,11 @@ func init() {
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
 		info:    make(map[string]*structure.Source),
+	}
+
+	for i := 0; i < AllTypeLength; i++ {
+		sessCache[i] = &sessionCache{
+			info: make(map[int]map[int32][]string),
+		}
 	}
 }
