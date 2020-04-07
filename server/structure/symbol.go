@@ -37,3 +37,7 @@ var SymbolStatusMsg = map[SymbolStatus]string{
 func (st SymbolStatus) String() string {
 	return fmt.Sprintf("symbol trade right is `%s`", SymbolStatusMsg[st])
 }
+
+func (sb *Symbol) FormatCheck() error {
+	return nil
+}

@@ -19,5 +19,5 @@ func NewCheckerSymbol(a *structure.Symbol) *CheckerSymbol {
 }
 
 func (c *CheckerSymbol) FormatCheck() error {
-	return nil
+	return c.a.FormatCheck()
 }
