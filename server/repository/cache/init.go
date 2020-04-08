@@ -41,7 +41,13 @@ type fullSymbolNameCache struct {
 	sync.RWMutex
 }
 
+type convSymbolCache struct {
+	info map[string]*structure.ConvSymbol
+	sync.RWMutex
+}
+
 const AllTypeLength int = 6
+const ConvTypeLength int = 2
 
 var symbCache *symbolCache
 var srcCache *sourceCache
@@ -49,6 +55,7 @@ var sessCache [AllTypeLength]*sessionCache
 var secCache *securityCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
+var csCache [ConvTypeLength]*convSymbolCache
 
 func init() {
 	symbCache = &symbolCache{
@@ -82,4 +89,11 @@ func init() {
 	fsnCache = &fullSymbolNameCache{
 		info: make(map[structure.SymbolLeverage]*structure.FullSymbolName),
 	}
+
+	for i := 0; i < ConvTypeLength; i++ {
+		csCache[i] = &convSymbolCache{
+			info: make(map[string]*structure.ConvSymbol),
+		}
+	}
+
 }
