@@ -1,10 +1,11 @@
 package repository
 
-type BaseOperator interface {
-	Insert() (int64, error)
-	Delete() (int64, error)
-	Update() (int64, error)
-	Get() (bool, error)
-	Export() (i interface{}, err error)
-}
+import (
+	"configer/server/check"
+	"configer/server/repository/cache"
+)
 
+type Configor interface {
+	GetCacher() cache.CacheOperator
+	GetChecker() check.Checkor
+}

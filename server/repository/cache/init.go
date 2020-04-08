@@ -36,6 +36,11 @@ type marketDSTCache struct {
 	sync.RWMutex
 }
 
+type fullSymbolNameCache struct {
+	info map[structure.SymbolLeverage]*structure.FullSymbolName
+	sync.RWMutex
+}
+
 const AllTypeLength int = 6
 
 var symbCache *symbolCache
@@ -43,6 +48,7 @@ var srcCache *sourceCache
 var sessCache [AllTypeLength]*sessionCache
 var secCache *securityCache
 var mdCache *marketDSTCache
+var fsnCache *fullSymbolNameCache
 
 func init() {
 	symbCache = &symbolCache{
@@ -71,5 +77,9 @@ func init() {
 
 	mdCache = &marketDSTCache{
 		info: make(map[structure.MarketType]*structure.MarketDST),
+	}
+
+	fsnCache = &fullSymbolNameCache{
+		info: make(map[structure.SymbolLeverage]*structure.FullSymbolName),
 	}
 }

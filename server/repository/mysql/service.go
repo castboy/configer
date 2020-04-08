@@ -1,8 +1,10 @@
 package mysql
 
-import "configer/server/repository"
-
 type TableOperator interface {
-	repository.BaseOperator
+	Insert() (int64, error)
+	Delete() (int64, error)
+	Update() (int64, error)
+	Get() (bool, error)
+	Export() (i interface{}, err error)
 }
 
