@@ -8,7 +8,7 @@ import (
 
 type ExtendOperator interface {
 	GetTabler() mysql.ExtendOperator
-	GetCacher() cache.ExtendOperator
+	GetCacher() cache.BaseOperator
 	GetChecker() check.Checkor
 }
 

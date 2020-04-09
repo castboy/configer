@@ -9,7 +9,7 @@ import (
 
 type ConvSymboler struct {
 	tabler  mysql.ExtendOperator
-	cacher  cache.ExtendOperator
+	cacher  cache.BaseOperator
 	checker check.Checkor
 }
 
