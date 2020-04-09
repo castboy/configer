@@ -5,7 +5,7 @@ import (
 	"configer/server/repository/cache"
 )
 
-type Configor interface {
-	GetCacher() cache.CacheOperator
+type BaseOperator interface {
+	GetCacher() cache.BaseOperator
 	GetChecker() check.Checkor
 }

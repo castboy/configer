@@ -1,6 +1,6 @@
 package mysql
 
-type TableOperator interface {
+type BaseOperator interface {
 	Insert() (int64, error)
 	Delete() (int64, error)
 	Update() (int64, error)

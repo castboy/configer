@@ -7,7 +7,7 @@ import (
 )
 
 type FullSymbolNamer struct {
-	cacher  cache.CacheOperator
+	cacher  cache.BaseOperator
 	checker check.Checkor
 }
 
@@ -18,7 +18,7 @@ func NewFullSymbolNamer(bean *structure.FullSymbolName) *FullSymbolNamer {
 	}
 }
 
-func (a *FullSymbolNamer) GetCacher() cache.CacheOperator {
+func (a *FullSymbolNamer) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 

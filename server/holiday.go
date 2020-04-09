@@ -8,8 +8,8 @@ import (
 )
 
 type Holidayer struct {
-	cacher  cache.CacheOperator
-	tabler  mysql.TableOperator
+	cacher  cache.BaseOperator
+	tabler  mysql.BaseOperator
 	checker check.Checkor
 }
 
@@ -21,11 +21,11 @@ func NewHolidayer(bean *structure.Holiday) *Holidayer {
 	}
 }
 
-func (a *Holidayer) GetCacher() cache.CacheOperator {
+func (a *Holidayer) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *Holidayer) GetTabler() mysql.TableOperator {
+func (a *Holidayer) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 

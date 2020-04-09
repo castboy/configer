@@ -7,7 +7,7 @@ import (
 )
 
 type ConvSymboler struct {
-	cacher  cache.CacheOperator
+	cacher  cache.BaseOperator
 	checker check.Checkor
 }
 
@@ -18,7 +18,7 @@ func NewConvSymboler(bean *structure.ConvSymbol) *ConvSymboler {
 	}
 }
 
-func (a *ConvSymboler) GetCacher() cache.CacheOperator {
+func (a *ConvSymboler) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 

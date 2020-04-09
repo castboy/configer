@@ -8,8 +8,8 @@ import (
 )
 
 type Sessioner struct {
-	cacher  cache.CacheOperator
-	tabler  mysql.TableOperator
+	cacher  cache.BaseOperator
+	tabler  mysql.BaseOperator
 	checker check.Checkor
 }
 
@@ -21,11 +21,11 @@ func NewSessioner(bean *structure.Session) *Sessioner {
 	}
 }
 
-func (a *Sessioner) GetCacher() cache.CacheOperator {
+func (a *Sessioner) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *Sessioner) GetTabler() mysql.TableOperator {
+func (a *Sessioner) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 

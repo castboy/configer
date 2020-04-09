@@ -8,8 +8,8 @@ import (
 )
 
 type MarketDSTer struct {
-	cacher  cache.CacheOperator
-	tabler  mysql.TableOperator
+	cacher  cache.BaseOperator
+	tabler  mysql.BaseOperator
 	checker check.Checkor
 }
 
@@ -21,11 +21,11 @@ func NewMarketDSTer(bean *structure.MarketDST) *MarketDSTer {
 	}
 }
 
-func (a *MarketDSTer) GetCacher() cache.CacheOperator {
+func (a *MarketDSTer) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *MarketDSTer) GetTabler() mysql.TableOperator {
+func (a *MarketDSTer) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 

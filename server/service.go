@@ -6,9 +6,9 @@ import (
 	"configer/server/repository/mysql"
 )
 
-type Configor interface {
-	GetTabler() mysql.TableOperator
-	GetCacher() cache.CacheOperator
+type BaseOperator interface {
+	GetTabler() mysql.BaseOperator
+	GetCacher() cache.BaseOperator
 	GetChecker() check.Checkor
 }
 

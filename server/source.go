@@ -8,8 +8,8 @@ import (
 )
 
 type Sourcer struct {
-	cacher  cache.CacheOperator
-	tabler  mysql.TableOperator
+	cacher  cache.BaseOperator
+	tabler  mysql.BaseOperator
 	checker check.Checkor
 }
 
@@ -21,11 +21,11 @@ func NewSourcer(bean *structure.Source) *Sourcer {
 	}
 }
 
-func (a *Sourcer) GetCacher() cache.CacheOperator {
+func (a *Sourcer) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *Sourcer) GetTabler() mysql.TableOperator {
+func (a *Sourcer) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 

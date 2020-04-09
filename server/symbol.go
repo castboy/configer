@@ -8,8 +8,8 @@ import (
 )
 
 type Symboler struct {
-	cacher  cache.CacheOperator
-	tabler  mysql.TableOperator
+	cacher  cache.BaseOperator
+	tabler  mysql.BaseOperator
 	checker check.Checkor
 }
 
@@ -21,11 +21,11 @@ func NewSymboler(a *structure.Symbol) *Symboler {
 	}
 }
 
-func (a *Symboler) GetCacher() cache.CacheOperator {
+func (a *Symboler) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *Symboler) GetTabler() mysql.TableOperator {
+func (a *Symboler) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 

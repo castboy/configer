@@ -8,8 +8,8 @@ import (
 )
 
 type Securityer struct {
-	cacher  cache.CacheOperator
-	tabler  mysql.TableOperator
+	cacher  cache.BaseOperator
+	tabler  mysql.BaseOperator
 	checker check.Checkor
 }
 
@@ -21,11 +21,11 @@ func NewSecurityer(bean *structure.Security) *Securityer {
 	}
 }
 
-func (a *Securityer) GetCacher() cache.CacheOperator {
+func (a *Securityer) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *Securityer) GetTabler() mysql.TableOperator {
+func (a *Securityer) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 
