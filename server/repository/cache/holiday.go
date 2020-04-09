@@ -61,24 +61,19 @@ func (c *holidayCache) insert(ho *structure.Holiday) {
 	c.Lock()
 	defer c.Unlock()
 
-	if c.info[ho.DateSymbol] == nil {
-		c.info[ho.DateSymbol] = ho.HolidayTime
-		return
-	}
-
-	c.info[ho.DateSymbol] = append(c.info[ho.DateSymbol], ho.HolidayTime...)
+	c.info[ho.ID] = ho
 }
 
 func (c *holidayCache) delete(ho *structure.Holiday) {
 	c.Lock()
 	defer c.Unlock()
 
-	delete(c.info, ho.DateSymbol)
+	delete(c.info, ho.ID)
 }
 
 func (c *holidayCache) get(ho *structure.Holiday) {
 	c.RLock()
 	defer c.RUnlock()
 
-	ho.HolidayTime = c.info[ho.DateSymbol]
+	ho = c.info[ho.ID]
 }

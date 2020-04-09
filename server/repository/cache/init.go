@@ -47,7 +47,7 @@ type convSymbolCache struct {
 }
 
 type holidayCache struct {
-	info map[structure.DateSymbol][]structure.HolidayTime
+	info map[int]*structure.Holiday
 	sync.RWMutex
 }
 
@@ -103,6 +103,6 @@ func init() {
 	}
 
 	holiCache = &holidayCache{
-		info: make(map[structure.DateSymbol][]structure.HolidayTime),
+		info: make(map[int]*structure.Holiday),
 	}
 }
