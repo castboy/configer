@@ -55,6 +55,10 @@ func Get(a BaseOperator) (exist bool, err error) {
 	return
 }
 
+func Export(a BaseOperator) (i interface{}, err error) {
+	return a.GetCacher().Export()
+}
+
 func Cache(a BaseOperator) error {
 	i, err := a.GetTabler().Export()
 	if err != nil {
