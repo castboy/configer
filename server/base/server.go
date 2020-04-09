@@ -1,6 +1,4 @@
-package server
-
-// all functions under this package
+package base
 
 func Insert(a BaseOperator) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
@@ -68,13 +66,3 @@ func Cache(a BaseOperator) error {
 	return nil
 }
 
-func ExtendCache(a ExtendOperator) error {
-	i, err := a.GetTabler().Export()
-	if err != nil {
-		return err
-	}
-
-	a.GetCacher().Cache(i)
-
-	return nil
-}

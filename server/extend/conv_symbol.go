@@ -1,4 +1,4 @@
-package server
+package extend
 
 import (
 	"configer/server/check"
