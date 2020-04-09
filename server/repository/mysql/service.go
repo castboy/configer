@@ -8,3 +8,7 @@ type TableOperator interface {
 	Export() (i interface{}, err error)
 }
 
+type ExtendOperator interface {
+	Export() (i interface{}, err error)
+}
+

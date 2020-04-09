@@ -12,3 +12,9 @@ type Configor interface {
 	GetChecker() check.Checkor
 }
 
+type ExtendOperator interface {
+	GetTabler() mysql.ExtendOperator
+	GetCacher() cache.ExtendOperator
+	GetChecker() check.Checkor
+}
+

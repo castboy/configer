@@ -67,3 +67,14 @@ func Cache(a Configor) error {
 
 	return nil
 }
+
+func ExtendCache(a ExtendOperator) error {
+	i, err := a.GetTabler().Export()
+	if err != nil {
+		return err
+	}
+
+	a.GetCacher().Cache(i)
+
+	return nil
+}

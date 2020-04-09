@@ -10,3 +10,7 @@ type CacheOperator interface {
 	Cache(i interface{})
 }
 
+type ExtendOperator interface {
+	Cache(i interface{})
+}
+
