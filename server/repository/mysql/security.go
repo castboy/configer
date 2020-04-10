@@ -6,7 +6,7 @@ import (
 )
 
 type TablerSecurity struct {
-	bean *structure.Security
+	bean structure.Xormor
 	*xorm.Engine
 }
 

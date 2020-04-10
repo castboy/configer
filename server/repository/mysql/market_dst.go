@@ -6,7 +6,7 @@ import (
 )
 
 type TablerMarketDST struct {
-	bean *structure.MarketDST
+	bean structure.Xormor
 	*xorm.Engine
 }
 

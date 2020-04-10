@@ -6,7 +6,7 @@ import (
 )
 
 type TablerSource struct {
-	bean *structure.Source
+	bean structure.Xormor
 	*xorm.Engine
 }
 

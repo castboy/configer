@@ -6,7 +6,7 @@ import (
 )
 
 type TablerHoliday struct {
-	bean *structure.Holiday
+	bean structure.Xormor
 	*xorm.Engine
 }
 

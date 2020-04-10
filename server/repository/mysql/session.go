@@ -7,7 +7,7 @@ import (
 )
 
 type TablerSession struct {
-	bean *structure.Session
+	bean structure.Xormor
 	*xorm.Engine
 }
 
