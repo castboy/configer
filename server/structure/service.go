@@ -1,4 +1,4 @@
-package check
+package structure
 
 type Checkor interface {
 	FormatCheck() error

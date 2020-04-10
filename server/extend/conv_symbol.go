@@ -1,7 +1,6 @@
 package extend
 
 import (
-	"configer/server/check"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
@@ -10,14 +9,14 @@ import (
 type ConvSymboler struct {
 	tabler  mysql.ExtendOperator
 	cacher  cache.BaseOperator
-	checker check.Checkor
+	checker structure.Checkor
 }
 
 func NewConvSymboler(tabler *structure.Symbol, bean *structure.ConvSymbol) *ConvSymboler {
 	return &ConvSymboler{
 		mysql.NewTablerSymbol(tabler),
 		cache.NewCacherConvSymbol(bean),
-		check.NewCheckerConvSymbol(bean),
+		bean,
 	}
 }
 
@@ -29,6 +28,6 @@ func (a *ConvSymboler) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *ConvSymboler) GetChecker() check.Checkor {
+func (a *ConvSymboler) GetChecker() structure.Checkor {
 	return a.checker
 }

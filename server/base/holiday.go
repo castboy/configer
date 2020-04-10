@@ -1,7 +1,6 @@
 package base
 
 import (
-	"configer/server/check"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
@@ -10,14 +9,14 @@ import (
 type Holidayer struct {
 	cacher  cache.BaseOperator
 	tabler  mysql.BaseOperator
-	checker check.Checkor
+	checker structure.Checkor
 }
 
 func NewHolidayer(bean *structure.Holiday) *Holidayer {
 	return &Holidayer{
 		cache.NewCacherHoliday(bean),
 		mysql.NewTablerHoliday(bean),
-		check.NewCheckerHoliday(bean),
+		bean,
 	}
 }
 
@@ -29,6 +28,6 @@ func (a *Holidayer) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 
-func (a *Holidayer) GetChecker() check.Checkor {
+func (a *Holidayer) GetChecker() structure.Checkor {
 	return a.checker
 }

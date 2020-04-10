@@ -1,7 +1,6 @@
 package base
 
 import (
-	"configer/server/check"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
@@ -10,14 +9,14 @@ import (
 type MarketDSTer struct {
 	cacher  cache.BaseOperator
 	tabler  mysql.BaseOperator
-	checker check.Checkor
+	checker structure.Checkor
 }
 
 func NewMarketDSTer(bean *structure.MarketDST) *MarketDSTer {
 	return &MarketDSTer{
 		cache.NewCacherMarketDST(bean),
 		mysql.NewTablerMarketDST(bean),
-		check.NewCheckerMarketDST(bean),
+		bean,
 	}
 }
 
@@ -29,6 +28,6 @@ func (a *MarketDSTer) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 
-func (a *MarketDSTer) GetChecker() check.Checkor {
+func (a *MarketDSTer) GetChecker() structure.Checkor {
 	return a.checker
 }

@@ -1,7 +1,6 @@
 package base
 
 import (
-	"configer/server/check"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
@@ -10,14 +9,14 @@ import (
 type Symboler struct {
 	cacher  cache.BaseOperator
 	tabler  mysql.BaseOperator
-	checker check.Checkor
+	checker structure.Checkor
 }
 
 func NewSymboler(a *structure.Symbol) *Symboler {
 	return &Symboler{
 		cache.NewCacherSymbol(a),
 		mysql.NewTablerSymbol(a),
-		check.NewCheckerSymbol(a),
+		a,
 	}
 }
 
@@ -29,7 +28,7 @@ func (a *Symboler) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 
-func (a *Symboler) GetChecker() check.Checkor {
+func (a *Symboler) GetChecker() structure.Checkor {
 	return a.checker
 }
 

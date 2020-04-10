@@ -1,7 +1,7 @@
 package extend
 
 import (
-	"configer/server/check"
+	"configer/server/structure"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 )
@@ -9,6 +9,6 @@ import (
 type ExtendOperator interface {
 	GetTabler() mysql.ExtendOperator
 	GetCacher() cache.BaseOperator
-	GetChecker() check.Checkor
+	GetChecker() structure.Checkor
 }
 

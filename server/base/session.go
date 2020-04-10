@@ -1,7 +1,6 @@
 package base
 
 import (
-	"configer/server/check"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
@@ -10,14 +9,14 @@ import (
 type Sessioner struct {
 	cacher  cache.BaseOperator
 	tabler  mysql.BaseOperator
-	checker check.Checkor
+	checker structure.Checkor
 }
 
 func NewSessioner(bean *structure.Session) *Sessioner {
 	return &Sessioner{
 		cache.NewCacherSession(bean),
 		mysql.NewTablerSession(bean),
-		check.NewCheckerSession(bean),
+		bean,
 	}
 }
 
@@ -29,6 +28,6 @@ func (a *Sessioner) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 
-func (a *Sessioner) GetChecker() check.Checkor {
+func (a *Sessioner) GetChecker() structure.Checkor {
 	return a.checker
 }
