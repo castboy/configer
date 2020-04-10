@@ -3,6 +3,7 @@ package mysql
 import (
 	"configer/server/structure"
 	"github.com/go-xorm/xorm"
+	"github.com/shopspring/decimal"
 )
 
 type TablerSymbol struct {
@@ -39,6 +40,10 @@ func (t *TablerSymbol) Get() (bool, error) {
 func (t *TablerSymbol) Export() (interface{}, error) {
 	i := []structure.Symbol{}
 	err := t.Table(t.bean).Find(&i)
+
+	for j := range i {
+		i[j].Leverage = int32(i[j].MarginDivider.Mul(decimal.NewFromFloat(100)).IntPart())
+	}
 
 	return i, err
 }
