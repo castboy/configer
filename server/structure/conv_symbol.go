@@ -22,3 +22,7 @@ const (
 func (cs *ConvSymbol) FormatCheck() error {
 	return nil
 }
+
+func (cs *ConvSymbol) AutoCondition() (cond string) {
+	return
+}

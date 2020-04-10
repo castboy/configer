@@ -26,3 +26,7 @@ const (
 func (se *Session) FormatCheck() error {
 	return nil
 }
+
+func (se *Session) AutoCondition() (cond string) {
+	return
+}

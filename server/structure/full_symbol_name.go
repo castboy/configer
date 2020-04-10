@@ -13,3 +13,7 @@ type SymbolLeverage struct {
 func (fs *FullSymbolName) FormatCheck() error {
 	return nil
 }
+
+func (fs *FullSymbolName) AutoCondition() (cond string) {
+	return
+}

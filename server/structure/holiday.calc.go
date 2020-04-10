@@ -19,3 +19,7 @@ type TimeSpan struct {
 func (hc *HolidayCalc) FormatCheck() error {
 	return nil
 }
+
+func (hc *HolidayCalc) AutoCondition() (cond string) {
+	return
+}

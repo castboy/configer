@@ -110,3 +110,7 @@ const (
 func (src *Source) FormatCheck() error {
 	return nil
 }
+
+func (src *Source) AutoCondition() (cond string) {
+	return
+}

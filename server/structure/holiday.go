@@ -23,3 +23,7 @@ const (
 func (ho *Holiday) FormatCheck() error {
 	return nil
 }
+
+func (ho *Holiday) AutoCondition() (cond string) {
+	return
+}
