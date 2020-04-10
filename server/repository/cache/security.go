@@ -45,13 +45,13 @@ func (c *CacherSecurity) Get() (exist bool, err error) {
 }
 
 func (c *CacherSecurity) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherSecurity) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
-	for i := range sb {
-		_ = i
+	se := i.([]structure.Security)
+	for i := range se {
+		c.cache.insert(&se[i])
 	}
 }
 
@@ -74,4 +74,11 @@ func (c *securityCache) get(security *structure.Security) {
 	}
 
 	security = c.info[security.SecurityName]
+}
+
+func (c *securityCache) export() (interface{}, error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }

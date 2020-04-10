@@ -36,11 +36,11 @@ func (t *TablerSecurity) Get() (bool, error) {
 	return t.Table(t.bean).Get(t.bean)
 }
 
-func (t *TablerSecurity) Export() (i interface{}, err error) {
-	i = []structure.Security{}
-	err = t.Table(t.bean).Find(&i)
+func (t *TablerSecurity) Export() (interface{}, error) {
+	i := []structure.Security{}
+	err := t.Table(t.bean).Find(&i)
 
-	return
+	return i, err
 }
 
 func (t *TablerSecurity) Where() (cond string) {
