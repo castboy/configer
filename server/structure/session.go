@@ -13,6 +13,7 @@ type SessionType int
 const (
 	Quote SessionType = iota
 	Trade
+	SessionTypeLength
 )
 
 type DSTType int
@@ -21,6 +22,7 @@ const (
 	DST DSTType = iota
 	DSTNone
 	None
+	DSTTypeLength
 )
 
 func (se *Session) FormatCheck() error {

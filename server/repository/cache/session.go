@@ -45,19 +45,30 @@ func (c *CacherSession) Get() (exist bool, err error) {
 }
 
 func (c *CacherSession) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherSession) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
-	for i := range sb {
-		_ = i
+	se := i.([]structure.Session)
+	for i := range se {
+		c.cache.set(&se[i])
 	}
 }
 
 // cache
 func (c *sessionCache) set(session *structure.Session) {
+	c.Lock()
+	defer c.Unlock()
+
+	c.info[session.SourceID] = session.Session
 }
 
 func (c *sessionCache) get(session *structure.Session) {
+}
+
+func (c *sessionCache) export() (interface{}, error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }

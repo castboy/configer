@@ -39,11 +39,11 @@ func (t *TablerSession) Get() (exist bool, err error) {
 	return t.Table(t.bean).Get(t.bean)
 }
 
-func (t *TablerSession) Export() (i interface{}, err error) {
-	i = []structure.Session{}
-	err = t.Table(t.bean).Find(&i)
+func (t *TablerSession) Export() (interface{}, error) {
+	i := []structure.Session{}
+	err := t.Table(t.bean).Find(&i)
 
-	return
+	return i, err
 }
 
 func (t *TablerSession) Where() (cond string) {
