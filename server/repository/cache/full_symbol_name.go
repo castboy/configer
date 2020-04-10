@@ -2,6 +2,7 @@ package cache
 
 import (
 	"configer/server/structure"
+	"configer/server/utils"
 	"fmt"
 )
 
@@ -46,13 +47,18 @@ func (c *CacherFullSymbolName) Get() (exist bool, err error) {
 }
 
 func (c *CacherFullSymbolName) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherFullSymbolName) Cache(i interface{}) {
 	sb := i.([]structure.Symbol)
 	for i := range sb {
-		_ = i
+		fsn := &structure.FullSymbolName{}
+		fsn.Sl.Symbol = utils.GetRequestSymbol(sb[i].Symbol)
+		fsn.Sl.Leverage = sb[i].Leverage
+		fsn.FullName = sb[i].Symbol
+
+		c.cache.insert(fsn)
 	}
 }
 
@@ -76,4 +82,11 @@ func (c *fullSymbolNameCache) get(fsn *structure.FullSymbolName) {
 	defer c.RUnlock()
 
 	fsn = c.info[fsn.Sl]
+}
+
+func (c *fullSymbolNameCache) export() (interface{}, error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }
