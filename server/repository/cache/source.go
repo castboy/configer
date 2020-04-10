@@ -1,6 +1,8 @@
 package cache
 
-import "configer/server/structure"
+import (
+	"configer/server/structure"
+)
 
 type CacherSource struct {
 	bean  *structure.Source
@@ -42,13 +44,13 @@ func (c *CacherSource) Get() (exist bool, err error) {
 }
 
 func (c *CacherSource) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherSource) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
-	for i := range sb {
-		_ = i
+	src := i.([]structure.Source)
+	for i := range src {
+		c.cache.insert(&src[i])
 	}
 }
 
@@ -117,4 +119,11 @@ func (c *sourceCache) get(source *structure.Source) {
 	}
 
 	source = c.info[source.Source]
+}
+
+func (c *sourceCache) export() (i interface{}, err error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }

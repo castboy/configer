@@ -36,11 +36,11 @@ func (t *TablerSource) Get() (bool, error) {
 	return t.Table(t.bean).Get(t.bean)
 }
 
-func (t *TablerSource) Export() (i interface{}, err error) {
-	i = []structure.Source{}
-	err = t.Table(t.bean).Find(&i)
+func (t *TablerSource) Export() (interface{}, error) {
+	i := []structure.Source{}
+	err := t.Table(t.bean).Find(&i)
 
-	return
+	return i, err
 }
 
 func (t *TablerSource) Where() (cond string) {
