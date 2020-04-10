@@ -45,13 +45,13 @@ func (c *CacherMarketDST) Get() (exist bool, err error) {
 }
 
 func (c *CacherMarketDST) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherMarketDST) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
-	for i := range sb {
-		_ = i
+	md := i.([]structure.MarketDST)
+	for i := range md {
+		c.cache.set(&md[i])
 	}
 }
 
@@ -68,4 +68,11 @@ func (c *marketDSTCache) get(marketDST *structure.MarketDST) {
 	defer c.RUnlock()
 
 	marketDST = c.info[marketDST.MarketOwnerType]
+}
+
+func (c *marketDSTCache) export() (interface{}, error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }

@@ -36,11 +36,11 @@ func (t *TablerMarketDST) Get() (bool, error) {
 	return t.Table(t.bean).Get(t.bean)
 }
 
-func (t *TablerMarketDST) Export() (i interface{}, err error) {
-	i = []structure.MarketDST{}
-	err = t.Table(t.bean).Find(&i)
+func (t *TablerMarketDST) Export() (interface{}, error) {
+	i := []structure.MarketDST{}
+	err := t.Table(t.bean).Find(&i)
 
-	return
+	return i, err
 }
 
 func (t *TablerMarketDST) Where() (cond string) {
