@@ -25,7 +25,7 @@ func (a *FullSymbolNamer) GetTabler() mysql.ExtendOperator {
 	return a.tabler
 }
 
-func (a *FullSymbolNamer) GetCacher() cache.ExtendOperator {
+func (a *FullSymbolNamer) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 

@@ -51,6 +51,11 @@ type holidayCache struct {
 	sync.RWMutex
 }
 
+type holidayCalcCache struct {
+	info map[int]map[structure.DateSymbol]*structure.TimeSpan
+	sync.RWMutex
+}
+
 const AllTypeLength int = 6
 const ConvTypeLength int = 2
 
@@ -62,6 +67,7 @@ var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
 var csCache [ConvTypeLength]*convSymbolCache
 var holiCache *holidayCache
+var holiCalcCache *holidayCalcCache
 
 func init() {
 	symbCache = &symbolCache{
@@ -104,5 +110,9 @@ func init() {
 
 	holiCache = &holidayCache{
 		info: make(map[int]*structure.Holiday),
+	}
+
+	holiCalcCache = &holidayCalcCache{
+		info: make(map[int]map[structure.DateSymbol]*structure.TimeSpan),
 	}
 }

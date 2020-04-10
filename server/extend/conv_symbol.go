@@ -25,7 +25,7 @@ func (a *ConvSymboler) GetTabler() mysql.ExtendOperator {
 	return a.tabler
 }
 
-func (a *ConvSymboler) GetCacher() cache.ExtendOperator {
+func (a *ConvSymboler) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
