@@ -1,6 +1,8 @@
 package cache
 
-import "configer/server/structure"
+import (
+	"configer/server/structure"
+)
 
 type CacherSymbol struct {
 	bean  *structure.Symbol
@@ -42,13 +44,13 @@ func (c *CacherSymbol) Get() (exist bool, err error) {
 }
 
 func (c *CacherSymbol) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherSymbol) Cache(i interface{}) {
 	sb := i.([]structure.Symbol)
 	for i := range sb {
-		_ = i
+		c.cache.insert(&sb[i])
 	}
 }
 
@@ -104,4 +106,11 @@ func (c *symbolCache) get(symbol *structure.Symbol) {
 	ID := c.name2ID[symbol.Symbol]
 
 	symbol = c.info[ID]
+}
+
+func (c *symbolCache) export() (i interface{}, err error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }

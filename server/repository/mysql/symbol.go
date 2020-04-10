@@ -36,11 +36,11 @@ func (t *TablerSymbol) Get() (bool, error) {
 	return t.Table(t.bean).Get(t.bean)
 }
 
-func (t *TablerSymbol) Export() (i interface{}, err error) {
-	i = []structure.Symbol{}
-	err = t.Table(t.bean).Find(&i)
+func (t *TablerSymbol) Export() (interface{}, error) {
+	i := []structure.Symbol{}
+	err := t.Table(t.bean).Find(&i)
 
-	return
+	return i, err
 }
 
 func (t *TablerSymbol) Where() (cond string) {
