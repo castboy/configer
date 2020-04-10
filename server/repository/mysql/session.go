@@ -46,5 +46,9 @@ func (t *TablerSession) Export() (i interface{}, err error) {
 	return
 }
 
+func (t *TablerSession) Where() (cond string) {
+	return
+}
+
 
 

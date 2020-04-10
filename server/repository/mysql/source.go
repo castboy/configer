@@ -43,5 +43,8 @@ func (t *TablerSource) Export() (i interface{}, err error) {
 	return
 }
 
+func (t *TablerSource) Where() (cond string) {
+	return
+}
 
 

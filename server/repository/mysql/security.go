@@ -43,4 +43,7 @@ func (t *TablerSecurity) Export() (i interface{}, err error) {
 	return
 }
 
+func (t *TablerSecurity) Where() (cond string) {
+	return
+}
 
