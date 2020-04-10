@@ -5,7 +5,8 @@ type BaseOperator interface {
 	Delete() (int64, error)
 	Update() (int64, error)
 	Get() (bool, error)
-	Export() (i interface{}, err error)
+
+	ExtendOperator
 }
 
 type ExtendOperator interface {

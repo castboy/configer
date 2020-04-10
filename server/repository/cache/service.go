@@ -7,7 +7,7 @@ type BaseOperator interface {
 	Get() (bool, error)
 	Export() (i interface{}, err error)
 
-	Cache(i interface{})
+	ExtendOperator
 }
 
 type ExtendOperator interface {
