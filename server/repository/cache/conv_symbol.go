@@ -11,17 +11,11 @@ type CacherConvSymbol struct {
 	cache *convSymbolCache
 }
 
-var cacherConvSymbol *CacherConvSymbol
-
 func NewCacherConvSymbol(bean *structure.ConvSymbol) *CacherConvSymbol {
-	if cacherConvSymbol == nil {
-		cacherConvSymbol = &CacherConvSymbol{
-			bean: bean,
-			cache: csCache[bean.ConvType],
-		}
+	return &CacherConvSymbol{
+		bean: bean,
+		cache: csCache[bean.ConvType],
 	}
-
-	return cacherConvSymbol
 }
 
 // implement Cacheor

@@ -9,17 +9,11 @@ type CacherSymbol struct {
 	cache *symbolCache
 }
 
-var cacherSymbol *CacherSymbol
-
 func NewCacherSymbol(bean *structure.Symbol) *CacherSymbol {
-	if cacherSymbol == nil {
-		cacherSymbol = &CacherSymbol{
-			bean,
-			symbCache,
-		}
+	return &CacherSymbol{
+		bean,
+		symbCache,
 	}
-
-	return cacherSymbol
 }
 
 // implement Cacheor

@@ -10,17 +10,11 @@ type CacherSecurity struct {
 	cache *securityCache
 }
 
-var cacherSecurity *CacherSecurity
-
 func NewCacherSecurity(bean *structure.Security) *CacherSecurity {
-	if cacherSecurity == nil {
-		cacherSecurity = &CacherSecurity{
-			bean,
-			secCache,
-		}
+	return &CacherSecurity{
+		bean,
+		secCache,
 	}
-
-	return cacherSecurity
 }
 
 // implement Cacheor

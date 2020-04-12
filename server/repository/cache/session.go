@@ -10,17 +10,11 @@ type CacherSession struct {
 	cache *sessionCache
 }
 
-var cacherSession *CacherSession
-
 func NewCacherSession(bean *structure.Session) *CacherSession {
-	if cacherSession == nil {
-		cacherSession = &CacherSession{
-			bean,
-			sessCache[int(bean.Dst*2)+int(bean.Type)],
-		}
+	return &CacherSession{
+		bean,
+		sessCache[int(bean.Dst*2)+int(bean.Type)],
 	}
-
-	return cacherSession
 }
 
 // implement Cacheor

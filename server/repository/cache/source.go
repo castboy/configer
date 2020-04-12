@@ -9,17 +9,11 @@ type CacherSource struct {
 	cache *sourceCache
 }
 
-var cacherSource *CacherSource
-
 func NewCacherSource(bean *structure.Source) *CacherSource {
-	if cacherSource == nil {
-		cacherSource = &CacherSource{
-			bean,
-			srcCache,
-		}
+	return &CacherSource{
+		bean,
+		srcCache,
 	}
-
-	return cacherSource
 }
 
 // implement Cacheor

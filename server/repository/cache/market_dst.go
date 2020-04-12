@@ -10,17 +10,11 @@ type CacherMarketDST struct {
 	cache *marketDSTCache
 }
 
-var cacherMarketDST *CacherMarketDST
-
 func NewCacherMarketDST(bean *structure.MarketDST) *CacherMarketDST {
-	if cacherMarketDST == nil {
-		cacherMarketDST = &CacherMarketDST{
-			bean,
-			mdCache,
-		}
+	return &CacherMarketDST{
+		bean,
+		mdCache,
 	}
-
-	return cacherMarketDST
 }
 
 // implement Cacheor

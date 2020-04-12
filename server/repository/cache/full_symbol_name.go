@@ -11,18 +11,11 @@ type CacherFullSymbolName struct {
 	cache *fullSymbolNameCache
 }
 
-
-var cacherFullSymbolName *CacherFullSymbolName
-
 func NewCacherFullSymbolName(bean *structure.FullSymbolName) *CacherFullSymbolName {
-	if cacherFullSymbolName == nil {
-		cacherFullSymbolName = &CacherFullSymbolName{
-			bean,
-			fsnCache,
-		}
+	return &CacherFullSymbolName{
+		bean,
+		fsnCache,
 	}
-
-	return cacherFullSymbolName
 }
 
 // implement Cacheor

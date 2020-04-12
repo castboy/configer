@@ -9,18 +9,11 @@ type CacherHolidayCalc struct {
 	cache *holidayCalcCache
 }
 
-
-var cacherHolidayCalc *CacherHolidayCalc
-
 func NewCacherHolidayCalc(bean *structure.HolidayCalc) *CacherHolidayCalc {
-	if cacherHolidayCalc == nil {
-		cacherHolidayCalc = &CacherHolidayCalc{
-			bean,
-			holiCalcCache,
-		}
+	return &CacherHolidayCalc{
+		bean,
+		holiCalcCache,
 	}
-
-	return cacherHolidayCalc
 }
 
 // implement Cacheor
