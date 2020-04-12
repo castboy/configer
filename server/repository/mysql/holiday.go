@@ -34,10 +34,10 @@ func (t *TablerHoliday) Get() (bool, error) {
 	return t.Table(t.bean).Get(t.bean)
 }
 
-func (t *TablerHoliday) Export() (i interface{}, err error) {
-	i = []structure.Holiday{}
-	err = t.Table(t.bean).Find(&i)
+func (t *TablerHoliday) Export() (interface{}, error) {
+	i := []structure.Holiday{}
+	err := t.Table(t.bean).Find(&i)
 
-	return
+	return i, err
 }
 

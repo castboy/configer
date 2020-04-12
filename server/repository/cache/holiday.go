@@ -39,13 +39,13 @@ func (c *CacherHoliday) Get() (exist bool, err error) {
 }
 
 func (c *CacherHoliday) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherHoliday) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
-	for i := range sb {
-		_ = i
+	ho := i.([]structure.Holiday)
+	for i := range ho {
+		c.cache.insert(&ho[i])
 	}
 }
 
@@ -69,4 +69,11 @@ func (c *holidayCache) get(ho *structure.Holiday) {
 	defer c.RUnlock()
 
 	ho = c.info[ho.ID]
+}
+
+func (c *holidayCache) export() (interface{}, error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }
