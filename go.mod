@@ -11,4 +11,5 @@ require (
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 // indirect
+	xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb
 )

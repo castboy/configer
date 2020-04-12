@@ -12,9 +12,9 @@ type ConvSymboler struct {
 	checker structure.Checkor
 }
 
-func NewConvSymboler(tabler *structure.Symbol, bean *structure.ConvSymbol) *ConvSymboler {
+func NewConvSymboler(tabler *structure.Source, bean *structure.ConvSymbol) *ConvSymboler {
 	return &ConvSymboler{
-		mysql.NewTablerSymbol(tabler),
+		mysql.NewTablerSource(tabler),
 		cache.NewCacherConvSymbol(bean),
 		bean,
 	}

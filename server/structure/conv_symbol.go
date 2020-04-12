@@ -1,7 +1,7 @@
 package structure
 
 type ConvSymbol struct {
-	ConvInfo
+	*ConvInfo
 	ConvType
 	SourceName string
 }
@@ -17,6 +17,7 @@ type ConvType int
 const (
 	MarginConv ConvType = iota
 	ProfitConv
+	ConvTypeLength
 )
 
 func (cs *ConvSymbol) FormatCheck() error {

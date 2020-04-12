@@ -2,6 +2,7 @@ package cache
 
 import (
 	"configer/server/structure"
+	"configer/server/utils"
 	"fmt"
 )
 
@@ -44,14 +45,18 @@ func (c *CacherConvSymbol) Get() (exist bool, err error) {
 }
 
 func (c *CacherConvSymbol) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *CacherConvSymbol) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
-	for i := range sb {
-		_ = i
+	src := i.([]structure.Source)
+	for i := range src {
+		c.bean.ConvInfo = utils.BuildConvInfo(src[i].Source, src)
+		c.bean.SourceName = src[i].Source
+
+		c.cache.insert(c.bean)
 	}
+
 }
 
 // cache
@@ -67,4 +72,11 @@ func (c *convSymbolCache) get(cs *structure.ConvSymbol) {
 	defer c.RUnlock()
 
 	cs = c.info[cs.SourceName]
+}
+
+func (c *convSymbolCache) export() (interface{}, error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }
