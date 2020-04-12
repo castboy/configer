@@ -10,8 +10,6 @@ type TablerMarketDST struct {
 	*xorm.Engine
 }
 
-var tablerMarketDST *TablerMarketDST
-
 func NewTablerMarketDST(bean *structure.MarketDST) *TablerMarketDST {
 	return &TablerMarketDST{
 		bean,

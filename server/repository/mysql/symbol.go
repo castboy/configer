@@ -11,8 +11,6 @@ type TablerSymbol struct {
 	*xorm.Engine
 }
 
-var tablerSymbol *TablerSymbol
-
 func NewTablerSymbol(bean *structure.Symbol) *TablerSymbol {
 	return &TablerSymbol{
 		bean,

@@ -10,8 +10,6 @@ type TablerSource struct {
 	*xorm.Engine
 }
 
-var tablerSource *TablerSource
-
 func NewTablerSource(bean *structure.Source) *TablerSource {
 	return &TablerSource{
 		bean,

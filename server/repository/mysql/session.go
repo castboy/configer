@@ -11,8 +11,6 @@ type TablerSession struct {
 	*xorm.Engine
 }
 
-var tablerSession *TablerSession
-
 func NewTablerSession(bean *structure.Session) *TablerSession {
 	return &TablerSession{
 		bean,

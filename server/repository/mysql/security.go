@@ -10,8 +10,6 @@ type TablerSecurity struct {
 	*xorm.Engine
 }
 
-var tablerSecurity *TablerSecurity
-
 func NewTablerSecurity(bean *structure.Security) *TablerSecurity {
 	return &TablerSecurity{
 		bean,

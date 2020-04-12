@@ -10,8 +10,6 @@ type TablerHoliday struct {
 	*xorm.Engine
 }
 
-var tablerHoliday *TablerHoliday
-
 func NewTablerHoliday(bean *structure.Holiday) *TablerHoliday {
 	return &TablerHoliday{
 		bean,
