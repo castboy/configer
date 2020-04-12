@@ -41,8 +41,3 @@ func (t *TablerHoliday) Export() (i interface{}, err error) {
 	return
 }
 
-func (t *TablerHoliday) Where() (cond string) {
-	return
-}
-
-

@@ -46,9 +46,4 @@ func (t *TablerSymbol) Export() (interface{}, error) {
 	return i, err
 }
 
-func (t *TablerSymbol) Where() (cond string) {
-	return
-}
-
-
 

@@ -40,8 +40,3 @@ func (t *TablerSecurity) Export() (interface{}, error) {
 
 	return i, err
 }
-
-func (t *TablerSecurity) Where() (cond string) {
-	return
-}
-

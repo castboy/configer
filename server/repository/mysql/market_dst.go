@@ -41,8 +41,3 @@ func (t *TablerMarketDST) Export() (interface{}, error) {
 	return i, err
 }
 
-func (t *TablerMarketDST) Where() (cond string) {
-	return
-}
-
-
