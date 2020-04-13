@@ -13,3 +13,6 @@ type Cacheor1 interface {
 	GetID() int
 }
 
+type Cacheor2 interface {
+	GetName() string
+}

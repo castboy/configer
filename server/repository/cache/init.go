@@ -2,6 +2,7 @@ package cache
 
 import (
 	"configer/server/repository/cache/cache1"
+	"configer/server/repository/cache/cache2"
 	"configer/server/structure"
 	"sync"
 )
@@ -18,11 +19,6 @@ type marketDSTCache struct {
 
 type fullSymbolNameCache struct {
 	info map[structure.SymbolLeverage]*structure.FullSymbolName
-	sync.RWMutex
-}
-
-type convSymbolCache struct {
-	info map[string]*structure.ConvSymbol
 	sync.RWMutex
 }
 
@@ -46,7 +42,7 @@ var secCache *cache1.BaseCache
 var sessCache [AllTypeLength]*sessionCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
-var csCache [ConvTypeLength]*convSymbolCache
+var csCache [ConvTypeLength]*cache2.BaseCache
 var holiCache *holidayCache
 var holiCalcCache *holidayCalcCache
 
@@ -70,9 +66,7 @@ func init() {
 	}
 
 	for i := 0; i < ConvTypeLength; i++ {
-		csCache[i] = &convSymbolCache{
-			info: make(map[string]*structure.ConvSymbol),
-		}
+		csCache[i] = cache2.NewBaseCache()
 	}
 
 	holiCache = &holidayCache{

@@ -27,3 +27,7 @@ func (cs *ConvSymbol) FormatCheck() error {
 func (cs *ConvSymbol) AutoCondition() (cond string) {
 	return
 }
+
+func (cs *ConvSymbol) GetName() string {
+	return cs.SourceName
+}
