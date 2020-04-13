@@ -8,7 +8,7 @@ type Xormor interface {
 	AutoCondition() string
 }
 
-type Cacheor interface {
+type Cacheor1 interface {
 	GetName() string
 	GetID() int
 }

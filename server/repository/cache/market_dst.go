@@ -17,7 +17,7 @@ func NewCacherMarketDST(bean *structure.MarketDST) *CacherMarketDST {
 	}
 }
 
-// implement Cacheor
+// implement Cacheor1
 func (c *CacherMarketDST) Insert() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return

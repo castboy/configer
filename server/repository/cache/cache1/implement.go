@@ -8,7 +8,7 @@ import (
 type BaseCache struct {
 	ID2Name map[int]string
 	name2ID map[string]int
-	info    map[string]structure.Cacheor
+	info    map[string]structure.Cacheor1
 	sync.RWMutex
 }
 
@@ -16,11 +16,11 @@ func NewBaseCache() *BaseCache {
 	return &BaseCache{
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
-		info:    make(map[string]structure.Cacheor),
+		info:    make(map[string]structure.Cacheor1),
 	}
 }
 // cache
-func (c *BaseCache) Insert(bean structure.Cacheor) {
+func (c *BaseCache) Insert(bean structure.Cacheor1) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -32,7 +32,7 @@ func (c *BaseCache) Insert(bean structure.Cacheor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Delete(bean structure.Cacheor) {
+func (c *BaseCache) Delete(bean structure.Cacheor1) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -52,7 +52,7 @@ func (c *BaseCache) Delete(bean structure.Cacheor) {
 	delete(c.info, name)
 }
 
-func (c *BaseCache) Update(bean structure.Cacheor) {
+func (c *BaseCache) Update(bean structure.Cacheor1) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -70,7 +70,7 @@ func (c *BaseCache) Update(bean structure.Cacheor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Get(bean structure.Cacheor) structure.Cacheor {
+func (c *BaseCache) Get(bean structure.Cacheor1) structure.Cacheor1 {
 	c.RLock()
 	defer c.RUnlock()
 

@@ -17,7 +17,7 @@ func NewCacherSession(bean *structure.Session) *CacherSession {
 	}
 }
 
-// implement Cacheor
+// implement Cacheor1
 func (c *CacherSession) Insert() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return

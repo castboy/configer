@@ -17,7 +17,7 @@ func NewCacherHoliday(bean *structure.Holiday) *CacherHoliday {
 	}
 }
 
-// implement Cacheor
+// implement Cacheor1
 func (c *CacherHoliday) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return

@@ -18,7 +18,7 @@ func NewCacherConvSymbol(bean *structure.ConvSymbol) *CacherConvSymbol {
 	}
 }
 
-// implement Cacheor
+// implement Cacheor1
 func (c *CacherConvSymbol) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return

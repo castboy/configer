@@ -18,7 +18,7 @@ type CacherSecurity struct {
 }
 
 type Cacher struct {
-	bean  structure.Cacheor
+	bean  structure.Cacheor1
 	cache cache1.Cache1
 }
 
@@ -49,7 +49,7 @@ func NewCacherSecurity(bean *structure.Security) *CacherSecurity {
 	}
 }
 
-// implement Cacheor
+// implement Cacheor1
 func (c *Cacher) Insert() (num int64, err error) {
 	c.cache.Insert(c.bean)
 	return
