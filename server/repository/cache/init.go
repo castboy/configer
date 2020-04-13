@@ -8,7 +8,7 @@ import (
 type symbolCache struct {
 	ID2Name map[int]string
 	name2ID map[string]int
-	info    map[int]structure.Cacheor
+	info    map[string]structure.Cacheor
 	sync.RWMutex
 }
 
@@ -73,7 +73,7 @@ func init() {
 	symbCache = &symbolCache{
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
-		info:    make(map[int]structure.Cacheor),
+		info:    make(map[string]structure.Cacheor),
 	}
 
 	srcCache = &sourceCache{

@@ -58,7 +58,7 @@ func (c *symbolCache) insert(bean structure.Cacheor) {
 
 	c.ID2Name[ID] = name
 	c.name2ID[name] = ID
-	c.info[ID] = bean
+	c.info[name] = bean
 }
 
 func (c *symbolCache) delete(bean structure.Cacheor) {
@@ -78,7 +78,7 @@ func (c *symbolCache) delete(bean structure.Cacheor) {
 
 	delete(c.name2ID, name)
 	delete(c.ID2Name, ID)
-	delete(c.info, ID)
+	delete(c.info, name)
 }
 
 func (c *symbolCache) update(bean structure.Cacheor) {
@@ -96,7 +96,7 @@ func (c *symbolCache) update(bean structure.Cacheor) {
 		ID = c.name2ID[name]
 	}
 
-	c.info[ID] = bean
+	c.info[name] = bean
 }
 
 func (c *symbolCache) get(bean structure.Cacheor) structure.Cacheor {
@@ -114,7 +114,7 @@ func (c *symbolCache) get(bean structure.Cacheor) structure.Cacheor {
 		ID = c.name2ID[name]
 	}
 
-	return c.info[ID]
+	return c.info[name]
 }
 
 func (c *symbolCache) export() (i interface{}, err error) {
