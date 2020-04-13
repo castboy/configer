@@ -1,16 +1,10 @@
 package cache
 
 import (
+	"configer/server/repository/cache/cache1"
 	"configer/server/structure"
 	"sync"
 )
-
-type baseCache struct {
-	ID2Name map[int]string
-	name2ID map[string]int
-	info    map[string]structure.Cacheor
-	sync.RWMutex
-}
 
 type sessionCache struct {
 	info map[int]map[int32][]string // int -> sourceID; string -> timeSpan.
@@ -45,9 +39,9 @@ type holidayCalcCache struct {
 const AllTypeLength int = 6
 const ConvTypeLength int = 2
 
-var symbCache *baseCache
-var srcCache *baseCache
-var secCache *baseCache
+var symbCache *cache1.BaseCache
+var srcCache *cache1.BaseCache
+var secCache *cache1.BaseCache
 
 var sessCache [AllTypeLength]*sessionCache
 var mdCache *marketDSTCache
@@ -57,23 +51,9 @@ var holiCache *holidayCache
 var holiCalcCache *holidayCalcCache
 
 func init() {
-	symbCache = &baseCache{
-		ID2Name: make(map[int]string),
-		name2ID: make(map[string]int),
-		info:    make(map[string]structure.Cacheor),
-	}
-
-	srcCache = &baseCache{
-		ID2Name: make(map[int]string),
-		name2ID: make(map[string]int),
-		info:    make(map[string]structure.Cacheor),
-	}
-
-	secCache = &baseCache{
-		ID2Name: make(map[int]string),
-		name2ID: make(map[string]int),
-		info:    make(map[string]structure.Cacheor),
-	}
+	symbCache = cache1.NewBaseCache()
+	srcCache = cache1.NewBaseCache()
+	secCache = cache1.NewBaseCache()
 
 	for i := 0; i < AllTypeLength; i++ {
 		sessCache[i] = &sessionCache{
