@@ -5,39 +5,71 @@ import (
 )
 
 type CacherSymbol struct {
+	*Cacher
+}
+
+type CacherSource struct {
+	*Cacher
+}
+
+type CacherSecurity struct {
+	*Cacher
+}
+
+type Cacher struct {
 	bean  structure.Cacheor
-	cache *symbolCache
+	cache *baseCache
 }
 
 func NewCacherSymbol(bean *structure.Symbol) *CacherSymbol {
 	return &CacherSymbol{
-		bean,
-		symbCache,
+		&Cacher{
+			bean,
+			symbCache,
+		},
+	}
+}
+
+func NewCacherSource(bean *structure.Source) *CacherSource {
+	return &CacherSource{
+		&Cacher{
+			bean,
+			srcCache,
+		},
+	}
+}
+
+func NewCacherSecurity(bean *structure.Security) *CacherSecurity {
+	return &CacherSecurity{
+		&Cacher{
+			bean,
+			secCache,
+		},
 	}
 }
 
 // implement Cacheor
-func (c *CacherSymbol) Insert() (num int64, err error) {
+func (c *Cacher) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return
 }
 
-func (c *CacherSymbol) Delete() (num int64, err error) {
+func (c *Cacher) Delete() (num int64, err error) {
 	c.cache.delete(c.bean)
 	return
 }
 
-func (c *CacherSymbol) Update() (num int64, err error) {
+func (c *Cacher) Update() (num int64, err error) {
 	c.cache.update(c.bean)
 	return
 }
 
-func (c *CacherSymbol) Get() (exist bool, err error) {
+func (c *Cacher) Get() (exist bool, err error) {
 	c.cache.get(c.bean)
 	return
 }
 
-func (c *CacherSymbol) Export() (i interface{}, err error) {
+func (c *Cacher) Export() (i interface{}, err error) {
 	return c.cache.export()
 }
 
@@ -48,8 +80,22 @@ func (c *CacherSymbol) Cache(i interface{}) {
 	}
 }
 
+func (c *CacherSource) Cache(i interface{}) {
+	src := i.([]structure.Source)
+	for i := range src {
+		c.cache.insert(&src[i])
+	}
+}
+
+func (c *CacherSecurity) Cache(i interface{}) {
+	se := i.([]structure.Security)
+	for i := range se {
+		c.cache.insert(&se[i])
+	}
+}
+
 // cache
-func (c *symbolCache) insert(bean structure.Cacheor) {
+func (c *baseCache) insert(bean structure.Cacheor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -61,7 +107,7 @@ func (c *symbolCache) insert(bean structure.Cacheor) {
 	c.info[name] = bean
 }
 
-func (c *symbolCache) delete(bean structure.Cacheor) {
+func (c *baseCache) delete(bean structure.Cacheor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -81,7 +127,7 @@ func (c *symbolCache) delete(bean structure.Cacheor) {
 	delete(c.info, name)
 }
 
-func (c *symbolCache) update(bean structure.Cacheor) {
+func (c *baseCache) update(bean structure.Cacheor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -99,7 +145,7 @@ func (c *symbolCache) update(bean structure.Cacheor) {
 	c.info[name] = bean
 }
 
-func (c *symbolCache) get(bean structure.Cacheor) structure.Cacheor {
+func (c *baseCache) get(bean structure.Cacheor) structure.Cacheor {
 	c.RLock()
 	defer c.RUnlock()
 
@@ -117,7 +163,7 @@ func (c *symbolCache) get(bean structure.Cacheor) structure.Cacheor {
 	return c.info[name]
 }
 
-func (c *symbolCache) export() (i interface{}, err error) {
+func (c *baseCache) export() (i interface{}, err error) {
 	c.RLock()
 	defer c.RUnlock()
 

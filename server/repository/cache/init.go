@@ -5,29 +5,15 @@ import (
 	"sync"
 )
 
-type symbolCache struct {
+type baseCache struct {
 	ID2Name map[int]string
 	name2ID map[string]int
 	info    map[string]structure.Cacheor
 	sync.RWMutex
 }
 
-type sourceCache struct {
-	ID2Name map[int]string
-	name2ID map[string]int
-	info    map[string]*structure.Source
-	sync.RWMutex
-}
-
 type sessionCache struct {
 	info map[int]map[int32][]string // int -> sourceID; string -> timeSpan.
-	sync.RWMutex
-}
-
-type securityCache struct {
-	ID2Name map[int]string
-	name2ID map[string]int
-	info    map[string]*structure.Security
 	sync.RWMutex
 }
 
@@ -59,10 +45,11 @@ type holidayCalcCache struct {
 const AllTypeLength int = 6
 const ConvTypeLength int = 2
 
-var symbCache *symbolCache
-var srcCache *sourceCache
+var symbCache *baseCache
+var srcCache *baseCache
+var secCache *baseCache
+
 var sessCache [AllTypeLength]*sessionCache
-var secCache *securityCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
 var csCache [ConvTypeLength]*convSymbolCache
@@ -70,28 +57,28 @@ var holiCache *holidayCache
 var holiCalcCache *holidayCalcCache
 
 func init() {
-	symbCache = &symbolCache{
+	symbCache = &baseCache{
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
 		info:    make(map[string]structure.Cacheor),
 	}
 
-	srcCache = &sourceCache{
+	srcCache = &baseCache{
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
-		info:    make(map[string]*structure.Source),
+		info:    make(map[string]structure.Cacheor),
+	}
+
+	secCache = &baseCache{
+		ID2Name: make(map[int]string),
+		name2ID: make(map[string]int),
+		info:    make(map[string]structure.Cacheor),
 	}
 
 	for i := 0; i < AllTypeLength; i++ {
 		sessCache[i] = &sessionCache{
 			info: make(map[int]map[int32][]string),
 		}
-	}
-
-	secCache = &securityCache{
-		ID2Name: make(map[int]string),
-		name2ID: make(map[string]int),
-		info:    make(map[string]*structure.Security),
 	}
 
 	mdCache = &marketDSTCache{

@@ -114,3 +114,11 @@ func (src *Source) FormatCheck() error {
 func (src *Source) AutoCondition() (cond string) {
 	return
 }
+
+func (src *Source) GetName() string {
+	return src.Source
+}
+
+func (src *Source) GetID() int {
+	return src.ID
+}

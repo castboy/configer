@@ -14,3 +14,11 @@ func (sec *Security) FormatCheck() error {
 func (sec *Security) AutoCondition() (cond string) {
 	return
 }
+
+func (sec *Security) GetName() string {
+	return sec.SecurityName
+}
+
+func (sec *Security) GetID() int {
+	return sec.ID
+}

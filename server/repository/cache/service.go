@@ -13,4 +13,3 @@ type BaseOperator interface {
 type ExtendOperator interface {
 	Cache(i interface{})
 }
-
