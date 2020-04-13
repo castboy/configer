@@ -5,7 +5,7 @@ import (
 )
 
 type CacherSymbol struct {
-	bean  *structure.Symbol
+	bean  structure.Cacheor
 	cache *symbolCache
 }
 
@@ -49,57 +49,72 @@ func (c *CacherSymbol) Cache(i interface{}) {
 }
 
 // cache
-func (c *symbolCache) insert(symbol *structure.Symbol) {
+func (c *symbolCache) insert(bean structure.Cacheor) {
 	c.Lock()
 	defer c.Unlock()
 
-	c.ID2Name[symbol.ID] = symbol.Symbol
-	c.name2ID[symbol.Symbol] = symbol.ID
-	c.info[symbol.ID] = symbol
+	ID := bean.GetID()
+	name := bean.GetName()
+
+	c.ID2Name[ID] = name
+	c.name2ID[name] = ID
+	c.info[ID] = bean
 }
 
-func (c *symbolCache) delete(symbol *structure.Symbol) {
+func (c *symbolCache) delete(bean structure.Cacheor) {
 	c.Lock()
 	defer c.Unlock()
 
-	if symbol.Symbol == "" {
-		symbol.Symbol = c.ID2Name[symbol.ID]
-	} else if symbol.ID == 0 {
-		symbol.ID = c.name2ID[symbol.Symbol]
+	var ID int
+	var name string
+
+	ID = bean.GetID()
+	if ID != 0 {
+		name = c.ID2Name[ID]
+	} else {
+		name = bean.GetName()
+		ID = c.name2ID[name]
 	}
 
-	delete(c.name2ID, symbol.Symbol)
-	delete(c.ID2Name, symbol.ID)
-	delete(c.info, symbol.ID)
+	delete(c.name2ID, name)
+	delete(c.ID2Name, ID)
+	delete(c.info, ID)
 }
 
-func (c *symbolCache) update(symbol *structure.Symbol) {
+func (c *symbolCache) update(bean structure.Cacheor) {
 	c.Lock()
 	defer c.Unlock()
 
-	if symbol.Symbol == "" {
-		symbol.Symbol = c.ID2Name[symbol.ID]
-	} else if symbol.ID == 0 {
-		symbol.ID = c.name2ID[symbol.Symbol]
+	var ID int
+	var name string
+
+	ID = bean.GetID()
+	if ID != 0 {
+		name = c.ID2Name[ID]
+	} else {
+		name = bean.GetName()
+		ID = c.name2ID[name]
 	}
 
-	// update fields obviously.
-	c.info[symbol.ID].SourceID = symbol.SourceID
-	c.info[symbol.ID].Leverage = symbol.Leverage
-	c.info[symbol.ID].SecurityID = symbol.SecurityID
-	c.info[symbol.ID].MarginInitial = symbol.MarginInitial
-	c.info[symbol.ID].MarginDivider = symbol.MarginDivider
-	c.info[symbol.ID].Percentage = symbol.Percentage
-	c.info[symbol.ID].Status = symbol.Status
+	c.info[ID] = bean
 }
 
-func (c *symbolCache) get(symbol *structure.Symbol) {
+func (c *symbolCache) get(bean structure.Cacheor) structure.Cacheor {
 	c.RLock()
 	defer c.RUnlock()
 
-	ID := c.name2ID[symbol.Symbol]
+	var ID int
+	var name string
 
-	symbol = c.info[ID]
+	ID = bean.GetID()
+	if ID != 0 {
+		name = c.ID2Name[ID]
+	} else {
+		name = bean.GetName()
+		ID = c.name2ID[name]
+	}
+
+	return c.info[ID]
 }
 
 func (c *symbolCache) export() (i interface{}, err error) {

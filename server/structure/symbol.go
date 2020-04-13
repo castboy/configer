@@ -45,3 +45,11 @@ func (sb *Symbol) FormatCheck() error {
 func (sb *Symbol) AutoCondition() (cond string) {
 	return
 }
+
+func (sb *Symbol) GetName() string {
+	return sb.Symbol
+}
+
+func (sb *Symbol) GetID() int {
+	return sb.ID
+}
