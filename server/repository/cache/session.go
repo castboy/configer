@@ -33,7 +33,7 @@ func (c *CacherSession) Update() (num int64, err error) {
 	return
 }
 
-func (c *CacherSession) Get() (exist bool, err error) {
+func (c *CacherSession) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }

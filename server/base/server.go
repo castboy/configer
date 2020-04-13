@@ -37,20 +37,20 @@ func Update(a BaseOperator) (num int64, err error) {
 	return a.GetCacher().Update()
 }
 
-func Get(a BaseOperator) (exist bool, err error) {
-	exist, _ = a.GetCacher().Get()
-	if !exist {
-		exist, err = a.GetTabler().Get()
-		err = a.GetChecker().FormatCheck()
-		if err != nil {
-			exist = false
-			return
-		}
-
-		if exist {
-			a.GetCacher().Insert()
-		}
-	}
+func Get(a BaseOperator) (i interface{}, exist bool, err error) {
+	i, exist = a.GetCacher().Get()
+	//if !exist {
+	//	exist, err = a.GetTabler().Get()
+	//	err = a.GetChecker().FormatCheck()
+	//	if err != nil {
+	//		exist = false
+	//		return
+	//	}
+	//
+	//	if exist {
+	//		a.GetCacher().Insert()
+	//	}
+	//}
 
 	return
 }

@@ -40,9 +40,8 @@ func (c *Cacher2) Update() (num int64, err error) {
 	return
 }
 
-func (c *Cacher2) Get() (exist bool, err error) {
-	c.cache.Get(c.bean)
-	return
+func (c *Cacher2) Get() (i interface{}, exist bool) {
+	return c.cache.Get(c.bean)
 }
 
 func (c *Cacher2) Export() (i interface{}, err error) {

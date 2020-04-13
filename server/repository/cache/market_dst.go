@@ -33,7 +33,7 @@ func (c *CacherMarketDST) Update() (num int64, err error) {
 	return
 }
 
-func (c *CacherMarketDST) Get() (exist bool, err error) {
+func (c *CacherMarketDST) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }

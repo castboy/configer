@@ -41,13 +41,14 @@ func (c *BaseCache) Update(bean structure.Cacheor2) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Get(bean structure.Cacheor2) structure.Cacheor2 {
+func (c *BaseCache) Get(bean structure.Cacheor2) (res structure.Cacheor2, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
 	name := bean.GetName()
 
-	return c.info[name]
+	res, exist =  c.info[name]
+	return
 }
 
 func (c *BaseCache) Export() (i interface{}, err error) {

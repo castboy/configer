@@ -34,7 +34,7 @@ func (c *CacherFullSymbolName) Update() (num int64, err error) {
 	return
 }
 
-func (c *CacherFullSymbolName) Get() (exist bool, err error) {
+func (c *CacherFullSymbolName) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }

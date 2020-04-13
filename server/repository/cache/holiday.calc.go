@@ -32,7 +32,7 @@ func (c *CacherHolidayCalc) Update() (num int64, err error) {
 	return
 }
 
-func (c *CacherHolidayCalc) Get() (exist bool, err error) {
+func (c *CacherHolidayCalc) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }
