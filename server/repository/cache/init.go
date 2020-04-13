@@ -3,6 +3,7 @@ package cache
 import (
 	"configer/server/repository/cache/cache1"
 	"configer/server/repository/cache/cache2"
+	"configer/server/repository/cache/cache3"
 	"configer/server/structure"
 	"sync"
 )
@@ -22,11 +23,6 @@ type fullSymbolNameCache struct {
 	sync.RWMutex
 }
 
-type holidayCache struct {
-	info map[int]*structure.Holiday
-	sync.RWMutex
-}
-
 type holidayCalcCache struct {
 	info map[int]map[structure.DateSymbol]*structure.TimeSpan
 	sync.RWMutex
@@ -43,7 +39,7 @@ var sessCache [AllTypeLength]*sessionCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
 var csCache [ConvTypeLength]*cache2.BaseCache
-var holiCache *holidayCache
+var holiCache *cache3.BaseCache
 var holiCalcCache *holidayCalcCache
 
 func init() {
@@ -69,9 +65,7 @@ func init() {
 		csCache[i] = cache2.NewBaseCache()
 	}
 
-	holiCache = &holidayCache{
-		info: make(map[int]*structure.Holiday),
-	}
+	holiCache = cache3.NewBaseCache()
 
 	holiCalcCache = &holidayCalcCache{
 		info: make(map[int]map[structure.DateSymbol]*structure.TimeSpan),

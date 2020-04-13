@@ -27,3 +27,7 @@ func (ho *Holiday) FormatCheck() error {
 func (ho *Holiday) AutoCondition() (cond string) {
 	return
 }
+
+func (ho *Holiday) GetID() int {
+	return ho.ID
+}
