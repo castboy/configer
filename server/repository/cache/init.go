@@ -9,11 +9,6 @@ import (
 	"sync"
 )
 
-type sessionCache struct {
-	info map[int]map[int32][]string // int -> sourceID; string -> timeSpan.
-	sync.RWMutex
-}
-
 type marketDSTCache struct {
 	info map[cache12.MarketType]*structure.MarketDST
 	sync.RWMutex
@@ -36,7 +31,7 @@ var symbCache *cache1.BaseCache
 var srcCache *cache1.BaseCache
 var secCache *cache1.BaseCache
 
-var sessCache [AllTypeLength]*sessionCache
+var sessCache [AllTypeLength]*indexID.BaseCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
 var csCache [ConvTypeLength]*cache.BaseCache
@@ -49,9 +44,7 @@ func init() {
 	secCache = cache1.NewBaseCache()
 
 	for i := 0; i < AllTypeLength; i++ {
-		sessCache[i] = &sessionCache{
-			info: make(map[int]map[int32][]string),
-		}
+		sessCache[i] = indexID.NewBaseCache()
 	}
 
 	mdCache = &marketDSTCache{

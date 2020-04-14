@@ -64,7 +64,7 @@ func NewTablerSource(bean *indexNameID.Source) *tablerSource {
 	}
 }
 
-func NewTablerSession(bean *structure.Session) *tablerSession {
+func NewTablerSession(bean *indexID.Session) *tablerSession {
 	return &tablerSession{
 		&tabler{
 			bean,
@@ -133,7 +133,7 @@ func (t *tablerSource) Export() (interface{}, error) {
 }
 
 func (t *tablerSession) Export() (interface{}, error) {
-	i := []structure.Session{}
+	i := []indexID.Session{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err

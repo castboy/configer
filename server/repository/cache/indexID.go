@@ -10,6 +10,10 @@ type cacherHoliday struct {
 	*ider
 }
 
+type cacherSession struct {
+	*ider
+}
+
 type ider struct {
 	bean  structure.IDor
 	cache cache.IDor
@@ -23,6 +27,16 @@ func NewCacherHoliday(bean *structure.Holiday) *cacherHoliday {
 		},
 	}
 }
+
+func NewCacherSession(bean *structure.Session) *cacherSession {
+	return &cacherSession{
+		&ider{
+		bean,
+		sessCache[int(bean.Dst*2)+int(bean.Type)],
+		},
+	}
+}
+
 
 func (c *ider) Insert() (num int64, err error) {
 	c.cache.Insert(c.bean)
@@ -52,5 +66,12 @@ func (c *cacherHoliday) Cache(i interface{}) {
 	ho := i.([]structure.Holiday)
 	for i := range ho {
 		c.cache.Insert(&ho[i])
+	}
+}
+
+func (c *cacherSession) Cache(i interface{}) {
+	se := i.([]structure.Session)
+	for i := range se {
+		c.cache.Update(&se[i])
 	}
 }

@@ -38,7 +38,7 @@ func NewSecurityer(bean *indexNameID.Security) *baser {
 	}
 }
 
-func NewSessioner(bean *structure.Session) *baser {
+func NewSessioner(bean *indexID.Session) *baser {
 	return &baser{
 		cache.NewCacherSession(bean),
 		mysql.NewTablerSession(bean),

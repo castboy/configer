@@ -1,4 +1,4 @@
-package structure
+package indexID
 
 type Session struct {
 	ID       int                `xorm:"id autoincr"`
@@ -35,4 +35,8 @@ func (se *Session) IndexCheck() error {
 
 func (se *Session) AutoCondition() (cond string) {
 	return
+}
+
+func (se *Session) GetID() int {
+	return se.ID
 }
