@@ -1,10 +1,65 @@
 package indexNameID
 
 import (
+	"fmt"
 	"github.com/shopspring/decimal"
 	"time"
 )
 
+// map symbol table.
+type Symbol struct {
+	ID            int             `json:"id" xorm:"id autoincr"`
+	Index         int             `json:"index" xorm:"index"`
+	Symbol        string          `json:"symbol" xorm:"symbol"`
+	SourceID      int             `json:"source_id" xorm:"source_id"`
+	Leverage      int32           `json:"leverage" xorm:"-"`
+	SecurityID    int             `json:"security_id" xorm:"security_id"`
+	MarginInitial decimal.Decimal `json:"margin_initial" xorm:"margin_initial"`
+	MarginDivider decimal.Decimal `json:"margin_divider" xorm:"margin_divider"`
+	Percentage    decimal.Decimal `json:"percentage" xorm:"percentage"`
+	Status        SymbolStatus    `json:"status" xorm:"status"`
+}
+
+type (
+	SymbolStatus int
+)
+
+const (
+	QuoteOnly SymbolStatus = iota
+	FullTrade
+	NotSupport
+)
+
+var SymbolStatusMsg = map[SymbolStatus]string{
+	QuoteOnly:  "quote only",
+	FullTrade:  "full trade",
+	NotSupport: "not support",
+}
+
+func (st SymbolStatus) String() string {
+	return fmt.Sprintf("symbol trade right is `%s`", SymbolStatusMsg[st])
+}
+
+func (sb *Symbol) FormatCheck() error {
+	return nil
+}
+func (sb *Symbol) IndexCheck() error {
+	return nil
+}
+
+func (sb *Symbol) AutoCondition() (cond string) {
+	return
+}
+
+func (sb *Symbol) GetName() string {
+	return sb.Symbol
+}
+
+func (sb *Symbol) GetID() int {
+	return sb.ID
+}
+
+// map source table.
 type Source struct {
 	ID              int             `json:"id" xorm:"id autoincr"`
 	Source          string          `json:"source" xorm:"source"`
@@ -35,28 +90,12 @@ type (
 	MarketType int
 )
 
-// ProfitForex: 0 =>(closePrice - openPrice ) * contractSize * lots
-//
-// ProfitCfd: 1 => (closePrice - openPrice ) * contractSize * lots
-//
-// ProfitFutures: 2
 const (
 	ProfitForex ProfitMode = iota
 	ProfitCfd
 	ProfitFutures
 )
 
-// ByPoints: 0 => lots * longOrShort points * pointsSize
-//
-// ByMoney: 1
-//
-// ByInterest: 2 => lots * contractSize * longOrShort points /100 /360
-//
-// ByMoneyInMarginCurrency: 3
-//
-// ByInterestOfCfds: 4 => lots * contractSize * price * longOrShort points /100 /360
-//
-// ByInterestOfFutures: 5
 const (
 	ByPoints SwapType = iota
 	ByMoney
@@ -66,15 +105,6 @@ const (
 	ByInterestOfFutures
 )
 
-// MarginForex: 0 => lots * contractSize / leverage * percentage / 100
-//
-// MarginCfd: 1 => lots * contractSize * marketPrice * percentage / 100
-//
-// MarginFutures: 2 => lots * marginInitial * percentage / 100
-//
-// MarginCfdIndex: 3
-//
-// MarginCfdLeverage: 4 => lots * contractSize * marketPrice / leverage * percentage / 100
 const (
 	MarginForex MarginMode = iota
 	MarginCfd
@@ -83,15 +113,6 @@ const (
 	MarginCfdLeverage
 )
 
-// SourceFx: 0 => Currency Pair
-//
-// SourceMetal: 1 => Precious Metals, Gold, Silver, etc.
-//
-// SourceEnergy: 2 => Oil or NAT GAS
-//
-// SourceIndex: 3 => Index
-//
-// SourceCrypto: 4 => Visual Coin
 const (
 	SourceFx SourceType = iota
 	SourceMetal
@@ -125,4 +146,32 @@ func (src *Source) GetName() string {
 
 func (src *Source) GetID() int {
 	return src.ID
+}
+
+// map security table.
+type Security struct {
+	ID           int      `json:"id" xorm:"id"`
+	SecurityName string   `json:"security_name" xorm:"security_name"`
+	Description  string   `json:"description" xorm:"description"`
+	Symbols      []string `json:"symbols" xorm:"-"`
+}
+
+func (sec *Security) FormatCheck() error {
+	return nil
+}
+
+func (sec *Security) IndexCheck() error {
+	return nil
+}
+
+func (sec *Security) AutoCondition() (cond string) {
+	return
+}
+
+func (sec *Security) GetName() string {
+	return sec.SecurityName
+}
+
+func (sec *Security) GetID() int {
+	return sec.ID
 }
