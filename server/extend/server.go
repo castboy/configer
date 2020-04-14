@@ -24,8 +24,15 @@ func Update(a ExtendOperator) (num int64, err error) {
 	return a.GetCacher().Update()
 }
 
-func Get(a ExtendOperator) (exist bool, err error) {
-	return a.GetCacher().Get()
+func Get(a ExtendOperator) (i interface{}, exist bool, err error) {
+	err = a.GetChecker().IndexCheck()
+	if err != nil {
+		return
+	}
+
+	i, exist = a.GetCacher().Get()
+
+	return
 }
 
 func Export(a ExtendOperator) (i interface{}, err error) {

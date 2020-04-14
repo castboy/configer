@@ -11,6 +11,10 @@ func (sec *Security) FormatCheck() error {
 	return nil
 }
 
+func (sec *Security) IndexCheck() error {
+	return nil
+}
+
 func (sec *Security) AutoCondition() (cond string) {
 	return
 }

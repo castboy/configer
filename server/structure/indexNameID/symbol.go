@@ -41,6 +41,9 @@ func (st SymbolStatus) String() string {
 func (sb *Symbol) FormatCheck() error {
 	return nil
 }
+func (sb *Symbol) IndexCheck() error {
+	return nil
+}
 
 func (sb *Symbol) AutoCondition() (cond string) {
 	return

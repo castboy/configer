@@ -10,6 +10,9 @@ type MarketDST struct {
 func (md *MarketDST) FormatCheck() error {
 	return nil
 }
+func (md *MarketDST) IndexCheck() error {
+	return nil
+}
 
 func (md *MarketDST) AutoCondition() (cond string) {
 	return

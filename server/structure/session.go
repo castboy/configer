@@ -29,6 +29,10 @@ func (se *Session) FormatCheck() error {
 	return nil
 }
 
+func (se *Session) IndexCheck() error {
+	return nil
+}
+
 func (se *Session) AutoCondition() (cond string) {
 	return
 }

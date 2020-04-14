@@ -38,19 +38,12 @@ func Update(a BaseOperator) (num int64, err error) {
 }
 
 func Get(a BaseOperator) (i interface{}, exist bool, err error) {
+	err = a.GetChecker().IndexCheck()
+	if err != nil {
+		return
+	}
+
 	i, exist = a.GetCacher().Get()
-	//if !exist {
-	//	exist, err = a.GetTabler().Get()
-	//	err = a.GetChecker().FormatCheck()
-	//	if err != nil {
-	//		exist = false
-	//		return
-	//	}
-	//
-	//	if exist {
-	//		a.GetCacher().Insert()
-	//	}
-	//}
 
 	return
 }

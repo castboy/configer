@@ -14,6 +14,10 @@ func (fs *FullSymbolName) FormatCheck() error {
 	return nil
 }
 
+func (fs *FullSymbolName) IndexCheck() error {
+	return nil
+}
+
 func (fs *FullSymbolName) AutoCondition() (cond string) {
 	return
 }
