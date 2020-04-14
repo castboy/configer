@@ -39,13 +39,19 @@ func (c *cacherHolidayCalc) Get() (i interface{}, exist bool) {
 }
 
 func (c *cacherHolidayCalc) Export() (i interface{}, err error) {
-	return
+	return c.cache.export()
 }
 
 func (c *cacherHolidayCalc) Cache(i interface{}) {
 	sb := i.([]indexNameID.Symbol)
 	for i := range sb {
-		_ = i
+		ho := &structure.HolidayCalc{}
+		ho.ID = c.bean.ID
+		ho.Date = c.bean.Date
+		ho.Symbol = sb[i].Symbol
+		ho.TimeSpans = c.bean.TimeSpans
+
+		c.cache.insert(ho)
 	}
 }
 
@@ -88,4 +94,11 @@ func (c *holidayCalcCache) get(ho *structure.HolidayCalc) {
 			ho.TimeSpans = append(ho.TimeSpans, ts)
 		}
 	}
+}
+
+func (c *holidayCalcCache) export() (i interface{}, err error) {
+	c.RLock()
+	defer c.RUnlock()
+
+	return c.info, nil
 }
