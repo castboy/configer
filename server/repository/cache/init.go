@@ -5,6 +5,8 @@ import (
 	cache "configer/server/repository/cache/indexName"
 	cache1 "configer/server/repository/cache/indexNameID"
 	"configer/server/structure"
+	indexID2 "configer/server/structure/indexID"
+	"configer/server/structure/indexName"
 	cache12 "configer/server/structure/indexNameID"
 	"sync"
 )
@@ -24,17 +26,16 @@ type holidayCalcCache struct {
 	sync.RWMutex
 }
 
-const AllTypeLength int = 6
-const ConvTypeLength int = 2
+const AllSessionTypeLength = int(indexID2.SessionTypeLength)*int(indexID2.DSTTypeLength)
 
 var symbCache *cache1.BaseCache
 var srcCache *cache1.BaseCache
 var secCache *cache1.BaseCache
 
-var sessCache [AllTypeLength]*indexID.BaseCache
+var sessCache [AllSessionTypeLength]*indexID.BaseCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
-var csCache [ConvTypeLength]*cache.BaseCache
+var csCache [indexName.ConvTypeLength]*cache.BaseCache
 var holiCache *indexID.BaseCache
 var holiCalcCache *holidayCalcCache
 
@@ -43,7 +44,7 @@ func init() {
 	srcCache = cache1.NewBaseCache()
 	secCache = cache1.NewBaseCache()
 
-	for i := 0; i < AllTypeLength; i++ {
+	for i := 0; i < AllSessionTypeLength; i++ {
 		sessCache[i] = indexID.NewBaseCache()
 	}
 
@@ -55,7 +56,7 @@ func init() {
 		info: make(map[structure.SymbolLeverage]*structure.FullSymbolName),
 	}
 
-	for i := 0; i < ConvTypeLength; i++ {
+	for i := 0; i < int(indexName.ConvTypeLength); i++ {
 		csCache[i] = cache.NewBaseCache()
 	}
 
