@@ -1,13 +1,10 @@
 package structure
 
-import (
-	indexID2 "configer/server/structure/indexID"
-	"configer/server/structure/indexNameID"
-)
+//implement `Checkor` ,`Xormor` interfaces.
 
 type MarketDST struct {
-	MarketOwnerType indexNameID.MarketType `json:"market_owner_type" xorm:"market_type"`
-	DST             indexID2.DSTType       `xorm:"dst_type"`
+	MarketOwnerType MarketType `json:"market_owner_type" xorm:"market_type"`
+	DST             DSTType    `xorm:"dst_type"`
 }
 
 func (md *MarketDST) FormatCheck() error {

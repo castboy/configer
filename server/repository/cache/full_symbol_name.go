@@ -2,7 +2,6 @@ package cache
 
 import (
 	"configer/server/structure"
-	"configer/server/structure/indexNameID"
 	"configer/server/utils"
 	"fmt"
 )
@@ -45,7 +44,7 @@ func (c *cacherFullSymbolName) Export() (i interface{}, err error) {
 }
 
 func (c *cacherFullSymbolName) Cache(i interface{}) {
-	sb := i.([]indexNameID.Symbol)
+	sb := i.([]structure.Symbol)
 	for i := range sb {
 		fsn := &structure.FullSymbolName{}
 		fsn.Sl.Symbol = utils.GetRequestSymbol(sb[i].Symbol)

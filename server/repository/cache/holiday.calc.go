@@ -2,7 +2,6 @@ package cache
 
 import (
 	"configer/server/structure"
-	"configer/server/structure/indexNameID"
 )
 
 type cacherHolidayCalc struct {
@@ -43,7 +42,7 @@ func (c *cacherHolidayCalc) Export() (i interface{}, err error) {
 }
 
 func (c *cacherHolidayCalc) Cache(i interface{}) {
-	sb := i.([]indexNameID.Symbol)
+	sb := i.([]structure.Symbol)
 	for i := range sb {
 		ho := &structure.HolidayCalc{}
 		ho.ID = c.bean.ID

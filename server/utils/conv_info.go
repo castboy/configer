@@ -1,17 +1,16 @@
 package utils
 
 import (
-	"configer/server/structure/indexName"
-	"configer/server/structure/indexNameID"
+	"configer/server/structure"
 )
 
-func BuildConvInfo(currency string, sources []indexNameID.Source) *indexName.ConvInfo {
+func BuildConvInfo(currency string, sources []structure.Source) *structure.ConvInfo {
 	if currency == "USD" {
-		return &indexName.ConvInfo{}
+		return &structure.ConvInfo{}
 	}
 
 	for j := range sources {
-		cs := &indexName.ConvInfo{
+		cs := &structure.ConvInfo{
 			ConvNeed:   true,
 			ConvSymbol: sources[j].Source,
 		}

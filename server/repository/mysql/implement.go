@@ -2,8 +2,6 @@ package mysql
 
 import (
 	"configer/server/structure"
-	"configer/server/structure/indexID"
-	"configer/server/structure/indexNameID"
 	"github.com/go-xorm/xorm"
 	"github.com/shopspring/decimal"
 )
@@ -37,7 +35,7 @@ type tablerMarketDST struct {
 	*tabler
 }
 
-func NewTablerSymbol(bean *indexNameID.Symbol) *tablerSymbol {
+func NewTablerSymbol(bean *structure.Symbol) *tablerSymbol {
 	return &tablerSymbol{
 		&tabler{
 			bean,
@@ -46,7 +44,7 @@ func NewTablerSymbol(bean *indexNameID.Symbol) *tablerSymbol {
 	}
 }
 
-func NewTablerHoliday(bean *indexID.Holiday) *tablerHoliday {
+func NewTablerHoliday(bean *structure.Holiday) *tablerHoliday {
 	return &tablerHoliday{
 		&tabler{
 			bean,
@@ -55,7 +53,7 @@ func NewTablerHoliday(bean *indexID.Holiday) *tablerHoliday {
 	}
 }
 
-func NewTablerSource(bean *indexNameID.Source) *tablerSource {
+func NewTablerSource(bean *structure.Source) *tablerSource {
 	return &tablerSource{
 		&tabler{
 			bean,
@@ -64,7 +62,7 @@ func NewTablerSource(bean *indexNameID.Source) *tablerSource {
 	}
 }
 
-func NewTablerSession(bean *indexID.Session) *tablerSession {
+func NewTablerSession(bean *structure.Session) *tablerSession {
 	return &tablerSession{
 		&tabler{
 			bean,
@@ -73,7 +71,7 @@ func NewTablerSession(bean *indexID.Session) *tablerSession {
 	}
 }
 
-func NewTablerSecurity(bean *indexNameID.Security) *tablerSecurity {
+func NewTablerSecurity(bean *structure.Security) *tablerSecurity {
 	return &tablerSecurity{
 		&tabler{
 			bean,
@@ -108,7 +106,7 @@ func (t *tabler) Get() (bool, error) {
 }
 
 func (t *tablerSymbol) Export() (interface{}, error) {
-	i := []indexNameID.Symbol{}
+	i := []structure.Symbol{}
 	err := t.Table(t.bean).Find(&i)
 
 	for j := range i {
@@ -119,28 +117,28 @@ func (t *tablerSymbol) Export() (interface{}, error) {
 }
 
 func (t *tablerHoliday) Export() (interface{}, error) {
-	i := []indexID.Holiday{}
+	i := []structure.Holiday{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err
 }
 
 func (t *tablerSource) Export() (interface{}, error) {
-	i := []indexNameID.Source{}
+	i := []structure.Source{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err
 }
 
 func (t *tablerSession) Export() (interface{}, error) {
-	i := []indexID.Session{}
+	i := []structure.Session{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err
 }
 
 func (t *tablerSecurity) Export() (interface{}, error) {
-	i := []indexNameID.Security{}
+	i := []structure.Security{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err

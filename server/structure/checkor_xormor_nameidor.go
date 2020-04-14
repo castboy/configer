@@ -1,10 +1,12 @@
-package indexNameID
+package structure
 
 import (
 	"fmt"
 	"github.com/shopspring/decimal"
 	"time"
 )
+
+//implement `Checkor` ,`Xormor` , `NameIDor` interfaces.
 
 // map symbol table.
 type Symbol struct {

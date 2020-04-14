@@ -1,23 +1,23 @@
 package indexID
 
 import (
-	"configer/server/structure/indexID"
+	"configer/server/structure"
 	"sync"
 )
 
 type BaseCache struct {
-	info map[int]indexID.IDor
+	info map[int]structure.IDor
 	sync.RWMutex
 }
 
 func NewBaseCache() *BaseCache {
 	return &BaseCache{
-		info: map[int]indexID.IDor{},
+		info: map[int]structure.IDor{},
 	}
 }
 
 // cache
-func (c *BaseCache) Insert(bean indexID.IDor) {
+func (c *BaseCache) Insert(bean structure.IDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -25,7 +25,7 @@ func (c *BaseCache) Insert(bean indexID.IDor) {
 	c.info[ID] = bean
 }
 
-func (c *BaseCache) Delete(bean indexID.IDor) {
+func (c *BaseCache) Delete(bean structure.IDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -33,7 +33,7 @@ func (c *BaseCache) Delete(bean indexID.IDor) {
 	delete(c.info, ID)
 }
 
-func (c *BaseCache) Update(bean indexID.IDor) {
+func (c *BaseCache) Update(bean structure.IDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -41,7 +41,7 @@ func (c *BaseCache) Update(bean indexID.IDor) {
 	c.info[ID] = bean
 }
 
-func (c *BaseCache) Get(bean indexID.IDor) (res indexID.IDor, exist bool) {
+func (c *BaseCache) Get(bean structure.IDor) (res structure.IDor, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 

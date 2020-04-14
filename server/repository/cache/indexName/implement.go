@@ -1,23 +1,23 @@
 package indexName
 
 import (
-	"configer/server/structure/indexName"
+	"configer/server/structure"
 	"sync"
 )
 
 type BaseCache struct {
-	info map[string]indexName.Nameor
+	info map[string]structure.Nameor
 	sync.RWMutex
 }
 
 func NewBaseCache() *BaseCache {
 	return &BaseCache{
-		info: map[string]indexName.Nameor{},
+		info: map[string]structure.Nameor{},
 	}
 }
 
 // cache
-func (c *BaseCache) Insert(bean indexName.Nameor) {
+func (c *BaseCache) Insert(bean structure.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -25,7 +25,7 @@ func (c *BaseCache) Insert(bean indexName.Nameor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Delete(bean indexName.Nameor) {
+func (c *BaseCache) Delete(bean structure.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -33,7 +33,7 @@ func (c *BaseCache) Delete(bean indexName.Nameor) {
 	delete(c.info, name)
 }
 
-func (c *BaseCache) Update(bean indexName.Nameor) {
+func (c *BaseCache) Update(bean structure.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -41,7 +41,7 @@ func (c *BaseCache) Update(bean indexName.Nameor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Get(bean indexName.Nameor) (res indexName.Nameor, exist bool) {
+func (c *BaseCache) Get(bean structure.Nameor) (res structure.Nameor, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 

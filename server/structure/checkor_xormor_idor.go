@@ -1,4 +1,6 @@
-package indexID
+package structure
+
+//implement `Checkor` ,`Xormor` , `IDor` interfaces.
 
 // map session table.
 type Session struct {

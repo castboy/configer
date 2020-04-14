@@ -1,13 +1,13 @@
 package indexID
 
 import (
-	"configer/server/structure/indexID"
+	"configer/server/structure"
 )
 
 type IDor interface {
-	Insert(bean indexID.IDor)
-	Delete(bean indexID.IDor)
-	Update(bean indexID.IDor)
-	Get(bean indexID.IDor) (indexID.IDor, bool)
+	Insert(bean structure.IDor)
+	Delete(bean structure.IDor)
+	Update(bean structure.IDor)
+	Get(bean structure.IDor) (structure.IDor, bool)
 	Export() (i interface{}, err error)
 }

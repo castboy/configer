@@ -1,4 +1,6 @@
-package indexName
+package structure
+
+//implement `Checkor` ,`Xormor` , `Nameor` interfaces.
 
 type ConvSymbol struct {
 	*ConvInfo

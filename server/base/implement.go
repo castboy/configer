@@ -4,8 +4,6 @@ import (
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
-	"configer/server/structure/indexID"
-	"configer/server/structure/indexNameID"
 )
 
 type baser struct {
@@ -14,7 +12,7 @@ type baser struct {
 	checker structure.Checkor
 }
 
-func NewHolidayer(bean *indexID.Holiday) *baser {
+func NewHolidayer(bean *structure.Holiday) *baser {
 	return &baser{
 		cache.NewCacherHoliday(bean),
 		mysql.NewTablerHoliday(bean),
@@ -30,7 +28,7 @@ func NewMarketDSTer(bean *structure.MarketDST) *baser {
 	}
 }
 
-func NewSecurityer(bean *indexNameID.Security) *baser {
+func NewSecurityer(bean *structure.Security) *baser {
 	return &baser{
 		cache.NewCacherSecurity(bean),
 		mysql.NewTablerSecurity(bean),
@@ -38,7 +36,7 @@ func NewSecurityer(bean *indexNameID.Security) *baser {
 	}
 }
 
-func NewSessioner(bean *indexID.Session) *baser {
+func NewSessioner(bean *structure.Session) *baser {
 	return &baser{
 		cache.NewCacherSession(bean),
 		mysql.NewTablerSession(bean),
@@ -46,7 +44,7 @@ func NewSessioner(bean *indexID.Session) *baser {
 	}
 }
 
-func NewSourcer(bean *indexNameID.Source) *baser {
+func NewSourcer(bean *structure.Source) *baser {
 	return &baser{
 		cache.NewCacherSource(bean),
 		mysql.NewTablerSource(bean),
@@ -54,7 +52,7 @@ func NewSourcer(bean *indexNameID.Source) *baser {
 	}
 }
 
-func NewSymboler(a *indexNameID.Symbol) *baser {
+func NewSymboler(a *structure.Symbol) *baser {
 	return &baser{
 		cache.NewCacherSymbol(a),
 		mysql.NewTablerSymbol(a),

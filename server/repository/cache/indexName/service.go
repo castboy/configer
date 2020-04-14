@@ -1,13 +1,13 @@
 package indexName
 
 import (
-	"configer/server/structure/indexName"
+	"configer/server/structure"
 )
 
 type Nameor interface {
-	Insert(bean indexName.Nameor)
-	Delete(bean indexName.Nameor)
-	Update(bean indexName.Nameor)
-	Get(bean indexName.Nameor) (indexName.Nameor, bool)
+	Insert(bean structure.Nameor)
+	Delete(bean structure.Nameor)
+	Update(bean structure.Nameor)
+	Get(bean structure.Nameor) (structure.Nameor, bool)
 	Export() (i interface{}, err error)
 }
