@@ -6,7 +6,7 @@ import (
 	"configer/server/structure"
 )
 
-type ExtendOperator interface {
+type operator interface {
 	GetTabler() mysql.ExtendOperator
 	GetCacher() cache.BaseOperator
 	GetChecker() structure.Checkor

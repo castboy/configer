@@ -7,44 +7,44 @@ import (
 	"fmt"
 )
 
-type CacherFullSymbolName struct {
+type cacherFullSymbolName struct {
 	bean  *structure.FullSymbolName
 	cache *fullSymbolNameCache
 }
 
-func NewCacherFullSymbolName(bean *structure.FullSymbolName) *CacherFullSymbolName {
-	return &CacherFullSymbolName{
+func NewCacherFullSymbolName(bean *structure.FullSymbolName) *cacherFullSymbolName {
+	return &cacherFullSymbolName{
 		bean,
 		fsnCache,
 	}
 }
 
 // implement NameIDor
-func (c *CacherFullSymbolName) Insert() (num int64, err error) {
+func (c *cacherFullSymbolName) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return
 }
 
-func (c *CacherFullSymbolName) Delete() (num int64, err error) {
+func (c *cacherFullSymbolName) Delete() (num int64, err error) {
 	c.cache.delete(c.bean)
 	return
 }
 
-func (c *CacherFullSymbolName) Update() (num int64, err error) {
+func (c *cacherFullSymbolName) Update() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return
 }
 
-func (c *CacherFullSymbolName) Get() (i interface{}, exist bool) {
+func (c *cacherFullSymbolName) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }
 
-func (c *CacherFullSymbolName) Export() (i interface{}, err error) {
+func (c *cacherFullSymbolName) Export() (i interface{}, err error) {
 	return c.cache.export()
 }
 
-func (c *CacherFullSymbolName) Cache(i interface{}) {
+func (c *cacherFullSymbolName) Cache(i interface{}) {
 	sb := i.([]indexNameID.Symbol)
 	for i := range sb {
 		fsn := &structure.FullSymbolName{}

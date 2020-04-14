@@ -2,8 +2,8 @@ package cache
 
 import (
 	"configer/server/repository/cache/indexID"
-	"configer/server/repository/cache/indexName"
-	"configer/server/repository/cache/indexNameID"
+	cache "configer/server/repository/cache/indexName"
+	cache1 "configer/server/repository/cache/indexNameID"
 	"configer/server/structure"
 	cache12 "configer/server/structure/indexNameID"
 	"sync"
@@ -32,21 +32,21 @@ type holidayCalcCache struct {
 const AllTypeLength int = 6
 const ConvTypeLength int = 2
 
-var symbCache *indexNameID.BaseCache
-var srcCache *indexNameID.BaseCache
-var secCache *indexNameID.BaseCache
+var symbCache *cache1.BaseCache
+var srcCache *cache1.BaseCache
+var secCache *cache1.BaseCache
 
 var sessCache [AllTypeLength]*sessionCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
-var csCache [ConvTypeLength]*indexName.BaseCache
+var csCache [ConvTypeLength]*cache.BaseCache
 var holiCache *indexID.BaseCache
 var holiCalcCache *holidayCalcCache
 
 func init() {
-	symbCache = indexNameID.NewBaseCache()
-	srcCache = indexNameID.NewBaseCache()
-	secCache = indexNameID.NewBaseCache()
+	symbCache = cache1.NewBaseCache()
+	srcCache = cache1.NewBaseCache()
+	secCache = cache1.NewBaseCache()
 
 	for i := 0; i < AllTypeLength; i++ {
 		sessCache[i] = &sessionCache{
@@ -63,7 +63,7 @@ func init() {
 	}
 
 	for i := 0; i < ConvTypeLength; i++ {
-		csCache[i] = indexName.NewBaseCache()
+		csCache[i] = cache.NewBaseCache()
 	}
 
 	holiCache = indexID.NewBaseCache()

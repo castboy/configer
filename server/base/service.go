@@ -6,7 +6,7 @@ import (
 	"configer/server/structure"
 )
 
-type BaseOperator interface {
+type operator interface {
 	GetTabler() mysql.BaseOperator
 	GetCacher() cache.BaseOperator
 	GetChecker() structure.Checkor

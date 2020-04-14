@@ -6,49 +6,49 @@ import (
 	"fmt"
 )
 
-type CacherHoliday struct {
-	*IndexID
+type cacherHoliday struct {
+	*ider
 }
 
-type IndexID struct {
+type ider struct {
 	bean  structure.IDor
 	cache cache.IDor
 }
 
-func NewCacherHoliday(bean *structure.Holiday) *CacherHoliday {
-	return &CacherHoliday{
-		&IndexID{
+func NewCacherHoliday(bean *structure.Holiday) *cacherHoliday {
+	return &cacherHoliday{
+		&ider{
 			bean,
 			holiCache,
 		},
 	}
 }
 
-func (c *IndexID) Insert() (num int64, err error) {
+func (c *ider) Insert() (num int64, err error) {
 	c.cache.Insert(c.bean)
 	return
 }
 
-func (c *IndexID) Delete() (num int64, err error) {
+func (c *ider) Delete() (num int64, err error) {
 	c.cache.Delete(c.bean)
 	return
 }
 
-func (c *IndexID) Update() (num int64, err error) {
+func (c *ider) Update() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return
 }
 
-func (c *IndexID) Get() (i interface{}, exist bool) {
+func (c *ider) Get() (i interface{}, exist bool) {
 	c.cache.Get(c.bean)
 	return
 }
 
-func (c *IndexID) Export() (i interface{}, err error) {
+func (c *ider) Export() (i interface{}, err error) {
 	return c.cache.Export()
 }
 
-func (c *CacherHoliday) Cache(i interface{}) {
+func (c *cacherHoliday) Cache(i interface{}) {
 	ho := i.([]structure.Holiday)
 	for i := range ho {
 		c.cache.Insert(&ho[i])

@@ -2,7 +2,7 @@ package extend
 
 // all functions under this package
 
-func Insert(a ExtendOperator) (num int64, err error) {
+func Insert(a operator) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
 	if err != nil {
 		return
@@ -11,11 +11,11 @@ func Insert(a ExtendOperator) (num int64, err error) {
 	return a.GetCacher().Insert()
 }
 
-func Delete(a ExtendOperator) (num int64, err error) {
+func Delete(a operator) (num int64, err error) {
 	return a.GetCacher().Delete()
 }
 
-func Update(a ExtendOperator) (num int64, err error) {
+func Update(a operator) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
 	if err != nil {
 		return
@@ -24,7 +24,7 @@ func Update(a ExtendOperator) (num int64, err error) {
 	return a.GetCacher().Update()
 }
 
-func Get(a ExtendOperator) (i interface{}, exist bool, err error) {
+func Get(a operator) (i interface{}, exist bool, err error) {
 	err = a.GetChecker().IndexCheck()
 	if err != nil {
 		return
@@ -35,11 +35,11 @@ func Get(a ExtendOperator) (i interface{}, exist bool, err error) {
 	return
 }
 
-func Export(a ExtendOperator) (i interface{}, err error) {
+func Export(a operator) (i interface{}, err error) {
 	return a.GetCacher().Export()
 }
 
-func Cache(a ExtendOperator) error {
+func Cache(a operator) error {
 	i, err := a.GetTabler().Export()
 	if err != nil {
 		return err

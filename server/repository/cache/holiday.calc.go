@@ -5,44 +5,44 @@ import (
 	"configer/server/structure/indexNameID"
 )
 
-type CacherHolidayCalc struct {
+type cacherHolidayCalc struct {
 	bean  *structure.HolidayCalc
 	cache *holidayCalcCache
 }
 
-func NewCacherHolidayCalc(bean *structure.HolidayCalc) *CacherHolidayCalc {
-	return &CacherHolidayCalc{
+func NewCacherHolidayCalc(bean *structure.HolidayCalc) *cacherHolidayCalc {
+	return &cacherHolidayCalc{
 		bean,
 		holiCalcCache,
 	}
 }
 
 // implement NameIDor
-func (c *CacherHolidayCalc) Insert() (num int64, err error) {
+func (c *cacherHolidayCalc) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return
 }
 
-func (c *CacherHolidayCalc) Delete() (num int64, err error) {
+func (c *cacherHolidayCalc) Delete() (num int64, err error) {
 	c.cache.delete(c.bean)
 	return
 }
 
-func (c *CacherHolidayCalc) Update() (num int64, err error) {
+func (c *cacherHolidayCalc) Update() (num int64, err error) {
 	c.cache.update(c.bean)
 	return
 }
 
-func (c *CacherHolidayCalc) Get() (i interface{}, exist bool) {
+func (c *cacherHolidayCalc) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }
 
-func (c *CacherHolidayCalc) Export() (i interface{}, err error) {
+func (c *cacherHolidayCalc) Export() (i interface{}, err error) {
 	return
 }
 
-func (c *CacherHolidayCalc) Cache(i interface{}) {
+func (c *cacherHolidayCalc) Cache(i interface{}) {
 	sb := i.([]indexNameID.Symbol)
 	for i := range sb {
 		_ = i

@@ -5,44 +5,44 @@ import (
 	"fmt"
 )
 
-type CacherMarketDST struct {
+type cacherMarketDST struct {
 	bean  *structure.MarketDST
 	cache *marketDSTCache
 }
 
-func NewCacherMarketDST(bean *structure.MarketDST) *CacherMarketDST {
-	return &CacherMarketDST{
+func NewCacherMarketDST(bean *structure.MarketDST) *cacherMarketDST {
+	return &cacherMarketDST{
 		bean,
 		mdCache,
 	}
 }
 
 // implement Cacheor1
-func (c *CacherMarketDST) Insert() (num int64, err error) {
+func (c *cacherMarketDST) Insert() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return
 }
 
-func (c *CacherMarketDST) Delete() (num int64, err error) {
+func (c *cacherMarketDST) Delete() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return
 }
 
-func (c *CacherMarketDST) Update() (num int64, err error) {
+func (c *cacherMarketDST) Update() (num int64, err error) {
 	c.cache.set(c.bean)
 	return
 }
 
-func (c *CacherMarketDST) Get() (i interface{}, exist bool) {
+func (c *cacherMarketDST) Get() (i interface{}, exist bool) {
 	c.cache.get(c.bean)
 	return
 }
 
-func (c *CacherMarketDST) Export() (i interface{}, err error) {
+func (c *cacherMarketDST) Export() (i interface{}, err error) {
 	return c.cache.export()
 }
 
-func (c *CacherMarketDST) Cache(i interface{}) {
+func (c *cacherMarketDST) Cache(i interface{}) {
 	md := i.([]structure.MarketDST)
 	for i := range md {
 		c.cache.set(&md[i])

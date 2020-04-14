@@ -1,6 +1,6 @@
 package base
 
-func Insert(a BaseOperator) (num int64, err error) {
+func Insert(a operator) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
 	if err != nil {
 		return
@@ -14,7 +14,7 @@ func Insert(a BaseOperator) (num int64, err error) {
 	return a.GetCacher().Insert()
 }
 
-func Delete(a BaseOperator) (num int64, err error) {
+func Delete(a operator) (num int64, err error) {
 	num, err = a.GetTabler().Delete()
 	if err != nil {
 		return
@@ -23,7 +23,7 @@ func Delete(a BaseOperator) (num int64, err error) {
 	return a.GetCacher().Delete()
 }
 
-func Update(a BaseOperator) (num int64, err error) {
+func Update(a operator) (num int64, err error) {
 	err = a.GetChecker().FormatCheck()
 	if err != nil {
 		return
@@ -37,7 +37,7 @@ func Update(a BaseOperator) (num int64, err error) {
 	return a.GetCacher().Update()
 }
 
-func Get(a BaseOperator) (i interface{}, exist bool, err error) {
+func Get(a operator) (i interface{}, exist bool, err error) {
 	err = a.GetChecker().IndexCheck()
 	if err != nil {
 		return
@@ -48,11 +48,11 @@ func Get(a BaseOperator) (i interface{}, exist bool, err error) {
 	return
 }
 
-func Export(a BaseOperator) (i interface{}, err error) {
+func Export(a operator) (i interface{}, err error) {
 	return a.GetCacher().Export()
 }
 
-func Cache(a BaseOperator) error {
+func Cache(a operator) error {
 	i, err := a.GetTabler().Export()
 	if err != nil {
 		return err
