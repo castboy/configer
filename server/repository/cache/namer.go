@@ -1,8 +1,8 @@
 package cache
 
 import (
-	cache "configer/server/repository/cache/indexName"
-	structure2 "configer/server/structure"
+	"configer/server/repository/cache/nameor"
+	"configer/server/structure"
 	"configer/server/utils"
 	"fmt"
 )
@@ -12,11 +12,11 @@ type cacherConvSymbol struct {
 }
 
 type namer struct {
-	bean  structure2.Nameor
-	cache cache.Nameor
+	bean  structure.Nameor
+	cache nameor.Nameor
 }
 
-func NewCacherConvSymbol(bean *structure2.ConvSymbol) *cacherConvSymbol {
+func NewCacherConvSymbol(bean *structure.ConvSymbol) *cacherConvSymbol {
 	return &cacherConvSymbol{
 		&namer{
 			bean:  bean,
@@ -49,9 +49,9 @@ func (c *namer) Export() (i interface{}, err error) {
 }
 
 func (c *cacherConvSymbol) Cache(i interface{}) {
-	src := i.([]structure2.Source)
+	src := i.([]structure.Source)
 	for i := range src {
-		bean := c.bean.(*structure2.ConvSymbol)
+		bean := c.bean.(*structure.ConvSymbol)
 
 		bean.ConvInfo = utils.BuildConvInfo(src[i].Source, src)
 		bean.SourceName = src[i].Source

@@ -1,19 +1,19 @@
-package indexNameID
+package nameIDor
 
 import (
 	"configer/server/structure"
 	"sync"
 )
 
-type BaseCache struct {
+type NameIDer struct {
 	ID2Name map[int]string
 	name2ID map[string]int
 	info    map[string]structure.NameIDor
 	sync.RWMutex
 }
 
-func NewBaseCache() *BaseCache {
-	return &BaseCache{
+func NewNameIDer() *NameIDer {
+	return &NameIDer{
 		ID2Name: make(map[int]string),
 		name2ID: make(map[string]int),
 		info:    make(map[string]structure.NameIDor),
@@ -21,7 +21,7 @@ func NewBaseCache() *BaseCache {
 }
 
 // cache
-func (c *BaseCache) Insert(bean structure.NameIDor) {
+func (c *NameIDer) Insert(bean structure.NameIDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -33,7 +33,7 @@ func (c *BaseCache) Insert(bean structure.NameIDor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Delete(bean structure.NameIDor) {
+func (c *NameIDer) Delete(bean structure.NameIDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -53,7 +53,7 @@ func (c *BaseCache) Delete(bean structure.NameIDor) {
 	delete(c.info, name)
 }
 
-func (c *BaseCache) Update(bean structure.NameIDor) {
+func (c *NameIDer) Update(bean structure.NameIDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -71,7 +71,7 @@ func (c *BaseCache) Update(bean structure.NameIDor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Get(bean structure.NameIDor) (res structure.NameIDor, exist bool) {
+func (c *NameIDer) Get(bean structure.NameIDor) (res structure.NameIDor, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
@@ -91,7 +91,7 @@ func (c *BaseCache) Get(bean structure.NameIDor) (res structure.NameIDor, exist 
 	return
 }
 
-func (c *BaseCache) Export() (i interface{}, err error) {
+func (c *NameIDer) Export() (i interface{}, err error) {
 	c.RLock()
 	defer c.RUnlock()
 

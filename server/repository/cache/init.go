@@ -1,9 +1,9 @@
 package cache
 
 import (
-	"configer/server/repository/cache/indexID"
-	cache "configer/server/repository/cache/indexName"
-	cache1 "configer/server/repository/cache/indexNameID"
+	"configer/server/repository/cache/idor"
+	"configer/server/repository/cache/nameor"
+	"configer/server/repository/cache/nameIDor"
 	"configer/server/structure"
 	"sync"
 )
@@ -25,24 +25,24 @@ type holidayCalcCache struct {
 
 const AllSessionTypeLength = int(structure.SessionTypeLength)*int(structure.DSTTypeLength)
 
-var symbCache *cache1.BaseCache
-var srcCache *cache1.BaseCache
-var secCache *cache1.BaseCache
+var symbCache *nameIDor.NameIDer
+var srcCache *nameIDor.NameIDer
+var secCache *nameIDor.NameIDer
 
-var sessCache [AllSessionTypeLength]*indexID.BaseCache
+var sessCache [AllSessionTypeLength]*idor.IDer
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
-var csCache [structure.ConvTypeLength]*cache.BaseCache
-var holiCache *indexID.BaseCache
+var csCache [structure.ConvTypeLength]*nameor.Namer
+var holiCache *idor.IDer
 var holiCalcCache *holidayCalcCache
 
 func init() {
-	symbCache = cache1.NewBaseCache()
-	srcCache = cache1.NewBaseCache()
-	secCache = cache1.NewBaseCache()
+	symbCache = nameIDor.NewNameIDer()
+	srcCache = nameIDor.NewNameIDer()
+	secCache = nameIDor.NewNameIDer()
 
 	for i := 0; i < AllSessionTypeLength; i++ {
-		sessCache[i] = indexID.NewBaseCache()
+		sessCache[i] = idor.NewIDer()
 	}
 
 	mdCache = &marketDSTCache{
@@ -54,10 +54,10 @@ func init() {
 	}
 
 	for i := 0; i < int(structure.ConvTypeLength); i++ {
-		csCache[i] = cache.NewBaseCache()
+		csCache[i] = nameor.NewNamer()
 	}
 
-	holiCache = indexID.NewBaseCache()
+	holiCache = idor.NewIDer()
 
 	holiCalcCache = &holidayCalcCache{
 		info: make(map[int]map[structure.DateSymbol]*structure.TimeSpan),

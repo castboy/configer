@@ -1,4 +1,4 @@
-package indexName
+package nameor
 
 import (
 	"configer/server/structure"

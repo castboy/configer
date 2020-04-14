@@ -1,8 +1,8 @@
 package cache
 
 import (
-	cache "configer/server/repository/cache/indexID"
-	structure2 "configer/server/structure"
+	"configer/server/repository/cache/idor"
+	"configer/server/structure"
 	"fmt"
 )
 
@@ -15,11 +15,11 @@ type cacherSession struct {
 }
 
 type ider struct {
-	bean  structure2.IDor
-	cache cache.IDor
+	bean  structure.IDor
+	cache idor.IDor
 }
 
-func NewCacherHoliday(bean *structure2.Holiday) *cacherHoliday {
+func NewCacherHoliday(bean *structure.Holiday) *cacherHoliday {
 	return &cacherHoliday{
 		&ider{
 			bean,
@@ -28,7 +28,7 @@ func NewCacherHoliday(bean *structure2.Holiday) *cacherHoliday {
 	}
 }
 
-func NewCacherSession(bean *structure2.Session) *cacherSession {
+func NewCacherSession(bean *structure.Session) *cacherSession {
 	return &cacherSession{
 		&ider{
 		bean,
@@ -63,14 +63,14 @@ func (c *ider) Export() (i interface{}, err error) {
 }
 
 func (c *cacherHoliday) Cache(i interface{}) {
-	ho := i.([]structure2.Holiday)
+	ho := i.([]structure.Holiday)
 	for i := range ho {
 		c.cache.Insert(&ho[i])
 	}
 }
 
 func (c *cacherSession) Cache(i interface{}) {
-	se := i.([]structure2.Session)
+	se := i.([]structure.Session)
 	for i := range se {
 		c.cache.Update(&se[i])
 	}

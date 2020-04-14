@@ -1,23 +1,23 @@
-package indexID
+package idor
 
 import (
 	"configer/server/structure"
 	"sync"
 )
 
-type BaseCache struct {
+type IDer struct {
 	info map[int]structure.IDor
 	sync.RWMutex
 }
 
-func NewBaseCache() *BaseCache {
-	return &BaseCache{
+func NewIDer() *IDer {
+	return &IDer{
 		info: map[int]structure.IDor{},
 	}
 }
 
 // cache
-func (c *BaseCache) Insert(bean structure.IDor) {
+func (c *IDer) Insert(bean structure.IDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -25,7 +25,7 @@ func (c *BaseCache) Insert(bean structure.IDor) {
 	c.info[ID] = bean
 }
 
-func (c *BaseCache) Delete(bean structure.IDor) {
+func (c *IDer) Delete(bean structure.IDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -33,7 +33,7 @@ func (c *BaseCache) Delete(bean structure.IDor) {
 	delete(c.info, ID)
 }
 
-func (c *BaseCache) Update(bean structure.IDor) {
+func (c *IDer) Update(bean structure.IDor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -41,7 +41,7 @@ func (c *BaseCache) Update(bean structure.IDor) {
 	c.info[ID] = bean
 }
 
-func (c *BaseCache) Get(bean structure.IDor) (res structure.IDor, exist bool) {
+func (c *IDer) Get(bean structure.IDor) (res structure.IDor, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
@@ -51,7 +51,7 @@ func (c *BaseCache) Get(bean structure.IDor) (res structure.IDor, exist bool) {
 	return
 }
 
-func (c *BaseCache) Export() (i interface{}, err error) {
+func (c *IDer) Export() (i interface{}, err error) {
 	c.RLock()
 	defer c.RUnlock()
 

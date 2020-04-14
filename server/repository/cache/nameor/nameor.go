@@ -1,23 +1,23 @@
-package indexName
+package nameor
 
 import (
 	"configer/server/structure"
 	"sync"
 )
 
-type BaseCache struct {
+type Namer struct {
 	info map[string]structure.Nameor
 	sync.RWMutex
 }
 
-func NewBaseCache() *BaseCache {
-	return &BaseCache{
+func NewNamer() *Namer {
+	return &Namer{
 		info: map[string]structure.Nameor{},
 	}
 }
 
 // cache
-func (c *BaseCache) Insert(bean structure.Nameor) {
+func (c *Namer) Insert(bean structure.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -25,7 +25,7 @@ func (c *BaseCache) Insert(bean structure.Nameor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Delete(bean structure.Nameor) {
+func (c *Namer) Delete(bean structure.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -33,7 +33,7 @@ func (c *BaseCache) Delete(bean structure.Nameor) {
 	delete(c.info, name)
 }
 
-func (c *BaseCache) Update(bean structure.Nameor) {
+func (c *Namer) Update(bean structure.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -41,7 +41,7 @@ func (c *BaseCache) Update(bean structure.Nameor) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Get(bean structure.Nameor) (res structure.Nameor, exist bool) {
+func (c *Namer) Get(bean structure.Nameor) (res structure.Nameor, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
@@ -51,7 +51,7 @@ func (c *BaseCache) Get(bean structure.Nameor) (res structure.Nameor, exist bool
 	return
 }
 
-func (c *BaseCache) Export() (i interface{}, err error) {
+func (c *Namer) Export() (i interface{}, err error) {
 	c.RLock()
 	defer c.RUnlock()
 

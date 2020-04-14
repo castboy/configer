@@ -1,4 +1,4 @@
-package indexNameID
+package nameIDor
 
 import (
 	"configer/server/structure"

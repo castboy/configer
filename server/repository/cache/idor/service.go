@@ -1,4 +1,4 @@
-package indexID
+package idor
 
 import (
 	"configer/server/structure"

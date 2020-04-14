@@ -1,8 +1,8 @@
 package cache
 
 import (
-	cache "configer/server/repository/cache/indexNameID"
-	structure2 "configer/server/structure"
+	"configer/server/repository/cache/nameIDor"
+	"configer/server/structure"
 )
 
 type cacherSymbol struct {
@@ -18,11 +18,11 @@ type cacherSecurity struct {
 }
 
 type nameIDer struct {
-	bean  structure2.NameIDor
-	cache cache.NameIDor
+	bean  structure.NameIDor
+	cache nameIDor.NameIDor
 }
 
-func NewCacherSymbol(bean *structure2.Symbol) *cacherSymbol {
+func NewCacherSymbol(bean *structure.Symbol) *cacherSymbol {
 	return &cacherSymbol{
 		&nameIDer{
 			bean,
@@ -31,7 +31,7 @@ func NewCacherSymbol(bean *structure2.Symbol) *cacherSymbol {
 	}
 }
 
-func NewCacherSource(bean *structure2.Source) *cacherSource {
+func NewCacherSource(bean *structure.Source) *cacherSource {
 	return &cacherSource{
 		&nameIDer{
 			bean,
@@ -40,7 +40,7 @@ func NewCacherSource(bean *structure2.Source) *cacherSource {
 	}
 }
 
-func NewCacherSecurity(bean *structure2.Security) *cacherSecurity {
+func NewCacherSecurity(bean *structure.Security) *cacherSecurity {
 	return &cacherSecurity{
 		&nameIDer{
 			bean,
@@ -74,21 +74,21 @@ func (c *nameIDer) Export() (i interface{}, err error) {
 }
 
 func (c *cacherSymbol) Cache(i interface{}) {
-	sb := i.([]structure2.Symbol)
+	sb := i.([]structure.Symbol)
 	for i := range sb {
 		c.cache.Insert(&sb[i])
 	}
 }
 
 func (c *cacherSource) Cache(i interface{}) {
-	src := i.([]structure2.Source)
+	src := i.([]structure.Source)
 	for i := range src {
 		c.cache.Insert(&src[i])
 	}
 }
 
 func (c *cacherSecurity) Cache(i interface{}) {
-	se := i.([]structure2.Security)
+	se := i.([]structure.Security)
 	for i := range se {
 		c.cache.Insert(&se[i])
 	}
