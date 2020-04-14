@@ -1,4 +1,4 @@
-package structure
+package indexID
 
 type Holiday struct {
 	ID          int             `json:"id" xorm:"id"`

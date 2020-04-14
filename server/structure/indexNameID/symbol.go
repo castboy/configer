@@ -1,4 +1,4 @@
-package structure
+package indexNameID
 
 import (
 	"fmt"
@@ -29,8 +29,8 @@ const (
 )
 
 var SymbolStatusMsg = map[SymbolStatus]string{
-	QuoteOnly: "quote only",
-	FullTrade: "full trade",
+	QuoteOnly:  "quote only",
+	FullTrade:  "full trade",
 	NotSupport: "not support",
 }
 

@@ -2,8 +2,8 @@ package mysql
 
 import (
 	"configer/server/utils"
-	"github.com/go-xorm/xorm"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-xorm/xorm"
 )
 
 var xEngine *xorm.Engine
@@ -17,5 +17,5 @@ func init() {
 
 	xEngine.ShowSQL(true)
 
-	xEngine.SetTableMapper(utils.SetObjTables(utils.NewObjTable("MarketDST","market_dst")))
+	xEngine.SetTableMapper(utils.SetObjTables(utils.NewObjTable("MarketDST", "market_dst")))
 }

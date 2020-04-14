@@ -1,30 +1,30 @@
 package cache
 
 import (
-	"configer/server/repository/cache/cache1"
-	"configer/server/structure"
+	cache "configer/server/repository/cache/indexNameID"
+	structure "configer/server/structure/indexNameID"
 )
 
 type CacherSymbol struct {
-	*Cacher
+	*IndexNameID
 }
 
 type CacherSource struct {
-	*Cacher
+	*IndexNameID
 }
 
 type CacherSecurity struct {
-	*Cacher
+	*IndexNameID
 }
 
-type Cacher struct {
-	bean  structure.Cacheor1
-	cache cache1.Cache1
+type IndexNameID struct {
+	bean  structure.NameIDor
+	cache cache.NameIDor
 }
 
 func NewCacherSymbol(bean *structure.Symbol) *CacherSymbol {
 	return &CacherSymbol{
-		&Cacher{
+		&IndexNameID{
 			bean,
 			symbCache,
 		},
@@ -33,7 +33,7 @@ func NewCacherSymbol(bean *structure.Symbol) *CacherSymbol {
 
 func NewCacherSource(bean *structure.Source) *CacherSource {
 	return &CacherSource{
-		&Cacher{
+		&IndexNameID{
 			bean,
 			srcCache,
 		},
@@ -42,34 +42,34 @@ func NewCacherSource(bean *structure.Source) *CacherSource {
 
 func NewCacherSecurity(bean *structure.Security) *CacherSecurity {
 	return &CacherSecurity{
-		&Cacher{
+		&IndexNameID{
 			bean,
 			secCache,
 		},
 	}
 }
 
-// implement Cacheor1
-func (c *Cacher) Insert() (num int64, err error) {
+// implement NameIDor
+func (c *IndexNameID) Insert() (num int64, err error) {
 	c.cache.Insert(c.bean)
 	return
 }
 
-func (c *Cacher) Delete() (num int64, err error) {
+func (c *IndexNameID) Delete() (num int64, err error) {
 	c.cache.Delete(c.bean)
 	return
 }
 
-func (c *Cacher) Update() (num int64, err error) {
+func (c *IndexNameID) Update() (num int64, err error) {
 	c.cache.Update(c.bean)
 	return
 }
 
-func (c *Cacher) Get() (i interface{}, exist bool) {
+func (c *IndexNameID) Get() (i interface{}, exist bool) {
 	return c.cache.Get(c.bean)
 }
 
-func (c *Cacher) Export() (i interface{}, err error) {
+func (c *IndexNameID) Export() (i interface{}, err error) {
 	return c.cache.Export()
 }
 

@@ -1,10 +1,11 @@
 package cache
 
 import (
-	"configer/server/repository/cache/cache1"
-	"configer/server/repository/cache/cache2"
-	"configer/server/repository/cache/cache3"
+	"configer/server/repository/cache/indexID"
+	"configer/server/repository/cache/indexName"
+	"configer/server/repository/cache/indexNameID"
 	"configer/server/structure"
+	cache12 "configer/server/structure/indexNameID"
 	"sync"
 )
 
@@ -14,7 +15,7 @@ type sessionCache struct {
 }
 
 type marketDSTCache struct {
-	info map[structure.MarketType]*structure.MarketDST
+	info map[cache12.MarketType]*structure.MarketDST
 	sync.RWMutex
 }
 
@@ -31,21 +32,21 @@ type holidayCalcCache struct {
 const AllTypeLength int = 6
 const ConvTypeLength int = 2
 
-var symbCache *cache1.BaseCache
-var srcCache *cache1.BaseCache
-var secCache *cache1.BaseCache
+var symbCache *indexNameID.BaseCache
+var srcCache *indexNameID.BaseCache
+var secCache *indexNameID.BaseCache
 
 var sessCache [AllTypeLength]*sessionCache
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
-var csCache [ConvTypeLength]*cache2.BaseCache
-var holiCache *cache3.BaseCache
+var csCache [ConvTypeLength]*indexName.BaseCache
+var holiCache *indexID.BaseCache
 var holiCalcCache *holidayCalcCache
 
 func init() {
-	symbCache = cache1.NewBaseCache()
-	srcCache = cache1.NewBaseCache()
-	secCache = cache1.NewBaseCache()
+	symbCache = indexNameID.NewBaseCache()
+	srcCache = indexNameID.NewBaseCache()
+	secCache = indexNameID.NewBaseCache()
 
 	for i := 0; i < AllTypeLength; i++ {
 		sessCache[i] = &sessionCache{
@@ -54,7 +55,7 @@ func init() {
 	}
 
 	mdCache = &marketDSTCache{
-		info: make(map[structure.MarketType]*structure.MarketDST),
+		info: make(map[cache12.MarketType]*structure.MarketDST),
 	}
 
 	fsnCache = &fullSymbolNameCache{
@@ -62,10 +63,10 @@ func init() {
 	}
 
 	for i := 0; i < ConvTypeLength; i++ {
-		csCache[i] = cache2.NewBaseCache()
+		csCache[i] = indexName.NewBaseCache()
 	}
 
-	holiCache = cache3.NewBaseCache()
+	holiCache = indexID.NewBaseCache()
 
 	holiCalcCache = &holidayCalcCache{
 		info: make(map[int]map[structure.DateSymbol]*structure.TimeSpan),

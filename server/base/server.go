@@ -69,4 +69,3 @@ func Cache(a BaseOperator) error {
 
 	return nil
 }
-

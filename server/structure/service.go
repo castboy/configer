@@ -7,16 +7,3 @@ type Checkor interface {
 type Xormor interface {
 	AutoCondition() string
 }
-
-type Cacheor1 interface {
-	GetName() string
-	GetID() int
-}
-
-type Cacheor2 interface {
-	GetName() string
-}
-
-type Cacheor3 interface {
-	GetID() int
-}

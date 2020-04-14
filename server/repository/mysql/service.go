@@ -12,4 +12,3 @@ type BaseOperator interface {
 type ExtendOperator interface {
 	Export() (i interface{}, err error)
 }
-

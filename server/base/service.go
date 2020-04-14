@@ -1,9 +1,9 @@
 package base
 
 import (
-	"configer/server/structure"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
+	"configer/server/structure"
 )
 
 type BaseOperator interface {
@@ -11,4 +11,3 @@ type BaseOperator interface {
 	GetCacher() cache.BaseOperator
 	GetChecker() structure.Checkor
 }
-

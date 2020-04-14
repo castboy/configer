@@ -2,6 +2,8 @@ package mysql
 
 import (
 	"configer/server/structure"
+	"configer/server/structure/indexID"
+	"configer/server/structure/indexNameID"
 	"github.com/go-xorm/xorm"
 	"github.com/shopspring/decimal"
 )
@@ -35,7 +37,7 @@ type TablerMarketDST struct {
 	*Tabler
 }
 
-func NewTablerSymbol(bean *structure.Symbol) *TablerSymbol {
+func NewTablerSymbol(bean *indexNameID.Symbol) *TablerSymbol {
 	return &TablerSymbol{
 		&Tabler{
 			bean,
@@ -44,7 +46,7 @@ func NewTablerSymbol(bean *structure.Symbol) *TablerSymbol {
 	}
 }
 
-func NewTablerHoliday(bean *structure.Holiday) *TablerHoliday {
+func NewTablerHoliday(bean *indexID.Holiday) *TablerHoliday {
 	return &TablerHoliday{
 		&Tabler{
 			bean,
@@ -53,7 +55,7 @@ func NewTablerHoliday(bean *structure.Holiday) *TablerHoliday {
 	}
 }
 
-func NewTablerSource(bean *structure.Source) *TablerSource {
+func NewTablerSource(bean *indexNameID.Source) *TablerSource {
 	return &TablerSource{
 		&Tabler{
 			bean,
@@ -71,7 +73,7 @@ func NewTablerSession(bean *structure.Session) *TablerSession {
 	}
 }
 
-func NewTablerSecurity(bean *structure.Security) *TablerSecurity {
+func NewTablerSecurity(bean *indexNameID.Security) *TablerSecurity {
 	return &TablerSecurity{
 		&Tabler{
 			bean,
@@ -106,7 +108,7 @@ func (t *Tabler) Get() (bool, error) {
 }
 
 func (t *TablerSymbol) Export() (interface{}, error) {
-	i := []structure.Symbol{}
+	i := []indexNameID.Symbol{}
 	err := t.Table(t.bean).Find(&i)
 
 	for j := range i {
@@ -117,14 +119,14 @@ func (t *TablerSymbol) Export() (interface{}, error) {
 }
 
 func (t *TablerHoliday) Export() (interface{}, error) {
-	i := []structure.Holiday{}
+	i := []indexID.Holiday{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err
 }
 
 func (t *TablerSource) Export() (interface{}, error) {
-	i := []structure.Source{}
+	i := []indexNameID.Source{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err
@@ -138,7 +140,7 @@ func (t *TablerSession) Export() (interface{}, error) {
 }
 
 func (t *TablerSecurity) Export() (interface{}, error) {
-	i := []structure.Security{}
+	i := []indexNameID.Security{}
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err

@@ -1,4 +1,4 @@
-package structure
+package indexNameID
 
 type Security struct {
 	ID           int      `json:"id" xorm:"id"`

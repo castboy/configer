@@ -2,12 +2,13 @@ package cache
 
 import (
 	"configer/server/structure"
+	"configer/server/structure/indexNameID"
 	"configer/server/utils"
 	"fmt"
 )
 
 type CacherFullSymbolName struct {
-	bean *structure.FullSymbolName
+	bean  *structure.FullSymbolName
 	cache *fullSymbolNameCache
 }
 
@@ -18,7 +19,7 @@ func NewCacherFullSymbolName(bean *structure.FullSymbolName) *CacherFullSymbolNa
 	}
 }
 
-// implement Cacheor1
+// implement NameIDor
 func (c *CacherFullSymbolName) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return
@@ -44,7 +45,7 @@ func (c *CacherFullSymbolName) Export() (i interface{}, err error) {
 }
 
 func (c *CacherFullSymbolName) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
+	sb := i.([]indexNameID.Symbol)
 	for i := range sb {
 		fsn := &structure.FullSymbolName{}
 		fsn.Sl.Symbol = utils.GetRequestSymbol(sb[i].Symbol)

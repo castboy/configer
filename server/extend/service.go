@@ -1,9 +1,9 @@
 package extend
 
 import (
-	"configer/server/structure"
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
+	"configer/server/structure"
 )
 
 type ExtendOperator interface {
@@ -11,4 +11,3 @@ type ExtendOperator interface {
 	GetCacher() cache.BaseOperator
 	GetChecker() structure.Checkor
 }
-

@@ -4,6 +4,8 @@ import (
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
+	"configer/server/structure/indexID"
+	"configer/server/structure/indexNameID"
 )
 
 type Baser struct {
@@ -12,7 +14,7 @@ type Baser struct {
 	checker structure.Checkor
 }
 
-func NewHolidayer(bean *structure.Holiday) *Baser {
+func NewHolidayer(bean *indexID.Holiday) *Baser {
 	return &Baser{
 		cache.NewCacherHoliday(bean),
 		mysql.NewTablerHoliday(bean),
@@ -28,7 +30,7 @@ func NewMarketDSTer(bean *structure.MarketDST) *Baser {
 	}
 }
 
-func NewSecurityer(bean *structure.Security) *Baser {
+func NewSecurityer(bean *indexNameID.Security) *Baser {
 	return &Baser{
 		cache.NewCacherSecurity(bean),
 		mysql.NewTablerSecurity(bean),
@@ -44,7 +46,7 @@ func NewSessioner(bean *structure.Session) *Baser {
 	}
 }
 
-func NewSourcer(bean *structure.Source) *Baser {
+func NewSourcer(bean *indexNameID.Source) *Baser {
 	return &Baser{
 		cache.NewCacherSource(bean),
 		mysql.NewTablerSource(bean),
@@ -52,7 +54,7 @@ func NewSourcer(bean *structure.Source) *Baser {
 	}
 }
 
-func NewSymboler(a *structure.Symbol) *Baser {
+func NewSymboler(a *indexNameID.Symbol) *Baser {
 	return &Baser{
 		cache.NewCacherSymbol(a),
 		mysql.NewTablerSymbol(a),

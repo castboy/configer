@@ -1,4 +1,4 @@
-package structure
+package indexNameID
 
 import (
 	"github.com/shopspring/decimal"

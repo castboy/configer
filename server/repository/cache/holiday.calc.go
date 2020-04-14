@@ -2,10 +2,11 @@ package cache
 
 import (
 	"configer/server/structure"
+	"configer/server/structure/indexNameID"
 )
 
 type CacherHolidayCalc struct {
-	bean *structure.HolidayCalc
+	bean  *structure.HolidayCalc
 	cache *holidayCalcCache
 }
 
@@ -16,7 +17,7 @@ func NewCacherHolidayCalc(bean *structure.HolidayCalc) *CacherHolidayCalc {
 	}
 }
 
-// implement Cacheor1
+// implement NameIDor
 func (c *CacherHolidayCalc) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return
@@ -42,7 +43,7 @@ func (c *CacherHolidayCalc) Export() (i interface{}, err error) {
 }
 
 func (c *CacherHolidayCalc) Cache(i interface{}) {
-	sb := i.([]structure.Symbol)
+	sb := i.([]indexNameID.Symbol)
 	for i := range sb {
 		_ = i
 	}
@@ -75,7 +76,6 @@ func (c *holidayCalcCache) update(ho *structure.HolidayCalc) {
 		c.info[ho.ID][i] = ho.TimeSpans[0]
 	}
 }
-
 
 func (c *holidayCalcCache) get(ho *structure.HolidayCalc) {
 	c.RLock()

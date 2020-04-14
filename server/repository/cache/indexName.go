@@ -1,55 +1,56 @@
 package cache
 
 import (
-	"configer/server/repository/cache/cache2"
-	"configer/server/structure"
+	cache "configer/server/repository/cache/indexName"
+	structure "configer/server/structure/indexName"
+	"configer/server/structure/indexNameID"
 	"configer/server/utils"
 	"fmt"
 )
 
 type CacherConvSymbol struct {
-	*Cacher2
+	*IndexName
 }
 
-type Cacher2 struct {
-	bean structure.Cacheor2
-	cache cache2.Cache2
+type IndexName struct {
+	bean  structure.Nameor
+	cache cache.Nameor
 }
 
 func NewCacherConvSymbol(bean *structure.ConvSymbol) *CacherConvSymbol {
 	return &CacherConvSymbol{
-		&Cacher2{
-			bean: bean,
+		&IndexName{
+			bean:  bean,
 			cache: csCache[bean.ConvType],
 		},
 	}
 }
 
-// implement Cacheor1
-func (c *Cacher2) Insert() (num int64, err error) {
+// implement NameIDor
+func (c *IndexName) Insert() (num int64, err error) {
 	c.cache.Insert(c.bean)
 	return
 }
 
-func (c *Cacher2) Delete() (num int64, err error) {
+func (c *IndexName) Delete() (num int64, err error) {
 	err = fmt.Errorf("Method Not Support!")
 	return
 }
 
-func (c *Cacher2) Update() (num int64, err error) {
+func (c *IndexName) Update() (num int64, err error) {
 	return
 }
 
-func (c *Cacher2) Get() (i interface{}, exist bool) {
+func (c *IndexName) Get() (i interface{}, exist bool) {
 	return c.cache.Get(c.bean)
 }
 
-func (c *Cacher2) Export() (i interface{}, err error) {
+func (c *IndexName) Export() (i interface{}, err error) {
 	return c.cache.Export()
 }
 
 func (c *CacherConvSymbol) Cache(i interface{}) {
-	src := i.([]structure.Source)
+	src := i.([]indexNameID.Source)
 	for i := range src {
 		bean := c.bean.(*structure.ConvSymbol)
 

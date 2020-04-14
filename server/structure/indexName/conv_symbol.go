@@ -1,4 +1,4 @@
-package structure
+package indexName
 
 type ConvSymbol struct {
 	*ConvInfo

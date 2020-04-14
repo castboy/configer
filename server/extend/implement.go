@@ -4,6 +4,8 @@ import (
 	"configer/server/repository/cache"
 	"configer/server/repository/mysql"
 	"configer/server/structure"
+	"configer/server/structure/indexName"
+	"configer/server/structure/indexNameID"
 )
 
 type Extender struct {
@@ -12,7 +14,7 @@ type Extender struct {
 	checker structure.Checkor
 }
 
-func NewConvSymboler(tabler *structure.Source, bean *structure.ConvSymbol) *Extender {
+func NewConvSymboler(tabler *indexNameID.Source, bean *indexName.ConvSymbol) *Extender {
 	return &Extender{
 		mysql.NewTablerSource(tabler),
 		cache.NewCacherConvSymbol(bean),
@@ -20,7 +22,7 @@ func NewConvSymboler(tabler *structure.Source, bean *structure.ConvSymbol) *Exte
 	}
 }
 
-func NewFullSymbolNamer(tabler *structure.Symbol, bean *structure.FullSymbolName) *Extender {
+func NewFullSymbolNamer(tabler *indexNameID.Symbol, bean *structure.FullSymbolName) *Extender {
 	return &Extender{
 		mysql.NewTablerSymbol(tabler),
 		cache.NewCacherFullSymbolName(bean),
@@ -28,7 +30,7 @@ func NewFullSymbolNamer(tabler *structure.Symbol, bean *structure.FullSymbolName
 	}
 }
 
-func NewHolidayCalcer(symb *structure.Symbol, bean *structure.HolidayCalc) *Extender {
+func NewHolidayCalcer(symb *indexNameID.Symbol, bean *structure.HolidayCalc) *Extender {
 	return &Extender{
 		mysql.NewTablerSymbol(symb),
 		cache.NewCacherHolidayCalc(bean),

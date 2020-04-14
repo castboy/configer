@@ -1,23 +1,23 @@
-package cache2
+package indexName
 
 import (
-	"configer/server/structure"
+	"configer/server/structure/indexName"
 	"sync"
 )
 
 type BaseCache struct {
-	info map[string]structure.Cacheor2
+	info map[string]indexName.Nameor
 	sync.RWMutex
 }
 
 func NewBaseCache() *BaseCache {
 	return &BaseCache{
-		info: map[string]structure.Cacheor2{},
+		info: map[string]indexName.Nameor{},
 	}
 }
 
 // cache
-func (c *BaseCache) Insert(bean structure.Cacheor2) {
+func (c *BaseCache) Insert(bean indexName.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -25,7 +25,7 @@ func (c *BaseCache) Insert(bean structure.Cacheor2) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Delete(bean structure.Cacheor2) {
+func (c *BaseCache) Delete(bean indexName.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -33,7 +33,7 @@ func (c *BaseCache) Delete(bean structure.Cacheor2) {
 	delete(c.info, name)
 }
 
-func (c *BaseCache) Update(bean structure.Cacheor2) {
+func (c *BaseCache) Update(bean indexName.Nameor) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -41,13 +41,13 @@ func (c *BaseCache) Update(bean structure.Cacheor2) {
 	c.info[name] = bean
 }
 
-func (c *BaseCache) Get(bean structure.Cacheor2) (res structure.Cacheor2, exist bool) {
+func (c *BaseCache) Get(bean indexName.Nameor) (res indexName.Nameor, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
 	name := bean.GetName()
 
-	res, exist =  c.info[name]
+	res, exist = c.info[name]
 	return
 }
 
