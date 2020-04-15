@@ -1,6 +1,8 @@
 package structure
 
-//implement `Checkor` ,`Xormor` , `IDor` interfaces.
+type IDor interface {
+	GetID() int
+}
 
 // map session table.
 type Session struct {

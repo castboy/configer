@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3b34dd65-c147-44a7-a0be-6ebe88ebf9a5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/structure/holiday.calc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/structure/market_dst.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/market_dst.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/checkor_xormor.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/implement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/checkor_xormor_idor.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/idor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/checkor_xormor_nameidor.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/nameIDor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/checkor_xormor_nameor.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/nameor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +43,21 @@
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
+  <component name="ProjectId" id="1aYdIhVoxqlwFjLiL2NLxRR6fnu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -53,16 +65,16 @@
   </component>
   <component name="RecentsManager">
     <key name="GoMoveDeclarationDialog.RECENT_KEY">
+      <recent name="$PROJECT_DIR$/server/structure" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/server/utils" />
       <recent name="$PROJECT_DIR$/server/base" />
       <recent name="$PROJECT_DIR$/server/implement" />
-      <recent name="$PROJECT_DIR$/server/repository/mysql" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/structure" />
       <recent name="$PROJECT_DIR$/server/structure/indexID" />
       <recent name="$PROJECT_DIR$/server/indexID" />
-      <recent name="$PROJECT_DIR$/server/structure" />
       <recent name="$PROJECT_DIR$/server/base" />
       <recent name="$PROJECT_DIR$/server/extend" />
     </key>
@@ -93,7 +105,7 @@
     </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -105,26 +117,30 @@
     <proxy>off</proxy>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="459" key="GridCell.Tab.0.bottom" timestamp="1586855865223">
+    <state width="1398" height="428" key="GridCell.Tab.0.bottom" timestamp="1586861913087">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state width="1398" height="428" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1586858895854" />
+    <state width="1398" height="428" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1586861913087" />
+    <state width="1398" height="428" key="GridCell.Tab.0.center" timestamp="1586861913086">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state width="1398" height="428" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1586858895853" />
+    <state width="1398" height="428" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1586861913086" />
+    <state width="1398" height="428" key="GridCell.Tab.0.left" timestamp="1586861913085">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state width="1398" height="428" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1586858895851" />
+    <state width="1398" height="428" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1586861913085" />
+    <state width="1398" height="428" key="GridCell.Tab.0.right" timestamp="1586861913086">
+      <screen x="50" y="23" width="1390" height="877" />
+    </state>
+    <state width="1398" height="428" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1586858895853" />
+    <state width="1398" height="428" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1586861913086" />
+    <state x="690" y="163" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1586857202504">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="459" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1586855865223" />
-    <state width="1398" height="459" key="GridCell.Tab.0.center" timestamp="1586855865222">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="459" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1586855865222" />
-    <state width="1398" height="459" key="GridCell.Tab.0.left" timestamp="1586855865221">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="459" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1586855865221" />
-    <state width="1398" height="459" key="GridCell.Tab.0.right" timestamp="1586855865223">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state width="1398" height="459" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1586855865223" />
-    <state x="690" y="163" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1586854015253">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="690" y="163" key="com.goide.refactor.move.GoMoveDeclarationDialog/0.0.1440.900@0.0.1440.900" timestamp="1586854015253" />
+    <state x="690" y="163" key="com.goide.refactor.move.GoMoveDeclarationDialog/0.0.1440.900@0.0.1440.900" timestamp="1586857202504" />
   </component>
   <component name="masterDetails">
     <states>

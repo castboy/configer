@@ -1,7 +1,5 @@
 package structure
 
-//implement `Checkor` ,`Xormor` interfaces.
-
 type MarketDST struct {
 	MarketOwnerType MarketType `json:"market_owner_type" xorm:"market_type"`
 	DST             DSTType    `xorm:"dst_type"`

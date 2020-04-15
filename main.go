@@ -4,8 +4,6 @@ import (
 	"configer/server/base"
 	"configer/server/extend"
 	"configer/server/structure"
-	structIndexID "configer/server/structure/indexID"
-	structIndexNameID "configer/server/structure/indexNameID"
 	"fmt"
 	"github.com/juju/errors"
 )
@@ -34,7 +32,7 @@ func Start() error {
 	}*/
 
 	// cache security.
-	sec := &structIndexNameID.Security{}
+	sec := &structure.Security{}
 	err := base.Cache(base.NewSecurityer(sec))
 	if err != nil {
 
@@ -62,7 +60,7 @@ func Start() error {
 	}*/
 
 	// cache holiday
-	ho := &structIndexID.Holiday{}
+	ho := &structure.Holiday{}
 	holidayer := base.NewHolidayer(ho)
 	err = base.Cache(holidayer)
 	if err != nil {
@@ -75,9 +73,9 @@ func Start() error {
 		fmt.Println(hs, err)
 	}
 
-	holidays := hs.(map[int]structIndexID.IDor)
+	holidays := hs.(map[int]structure.IDor)
 	for i := range holidays {
-		err = CacheHolidayCalc(holidays[i].(*structIndexID.Holiday))
+		err = CacheHolidayCalc(holidays[i].(*structure.Holiday))
 	}
 
 	i, err := extend.Export(extend.NewHolidayCalcer(nil, &structure.HolidayCalc{}))
@@ -87,55 +85,55 @@ func Start() error {
 }
 
 
-func CacheHolidayCalc(ho *structIndexID.Holiday) (err error) {
+func CacheHolidayCalc(ho *structure.Holiday) (err error) {
 	hc := &structure.HolidayCalc{}
 	hc.ID = ho.ID
 	hc.Date = ho.Date
 	hc.TimeSpans = append(hc.TimeSpans, &structure.TimeSpan{From: ho.From, To: ho.To})
 
 	switch ho.Category {
-	case structIndexID.HolidayAll:
-		err := extend.Cache(extend.NewHolidayCalcer(&structIndexNameID.Symbol{}, hc))
+	case structure.HolidayAll:
+		err := extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{}, hc))
 		if err != nil {
 
 		}
 
-	case structIndexID.HolidaySecurity:
-		i, exist, err := base.Get(base.NewSecurityer(&structIndexNameID.Security{SecurityName: ho.Symbol}))
-		if err != nil {
-
-		}
-
-		if !exist {
-			fmt.Println(errors.NotFoundf("%v", &structIndexNameID.Security{SecurityName: ho.Symbol}))
-		}
-
-		se := i.(*structIndexNameID.Security)
-
-		err = extend.Cache(extend.NewHolidayCalcer(&structIndexNameID.Symbol{SecurityID: se.ID}, hc))
-		if err != nil {
-
-		}
-
-	case structIndexID.HolidaySource:
-		i, exist, err := base.Get(base.NewSourcer(&structIndexNameID.Source{Source: ho.Symbol}))
+	case structure.HolidaySecurity:
+		i, exist, err := base.Get(base.NewSecurityer(&structure.Security{SecurityName: ho.Symbol}))
 		if err != nil {
 
 		}
 
 		if !exist {
-
+			fmt.Println(errors.NotFoundf("%v", &structure.Security{SecurityName: ho.Symbol}))
 		}
 
-		src := i.(*structIndexNameID.Source)
+		se := i.(*structure.Security)
 
-		err = extend.Cache(extend.NewHolidayCalcer(&structIndexNameID.Symbol{SourceID: src.ID}, hc))
+		err = extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{SecurityID: se.ID}, hc))
 		if err != nil {
 
 		}
 
-	case structIndexID.HolidaySymbol:
-		err = extend.Cache(extend.NewHolidayCalcer(&structIndexNameID.Symbol{Symbol: ho.Symbol}, hc))
+	case structure.HolidaySource:
+		i, exist, err := base.Get(base.NewSourcer(&structure.Source{Source: ho.Symbol}))
+		if err != nil {
+
+		}
+
+		if !exist {
+
+		}
+
+		src := i.(*structure.Source)
+
+		err = extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{SourceID: src.ID}, hc))
+		if err != nil {
+
+		}
+
+	case structure.HolidaySymbol:
+		err = extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{Symbol: ho.Symbol}, hc))
 		if err != nil {
 
 		}

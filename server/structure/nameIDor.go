@@ -6,7 +6,10 @@ import (
 	"time"
 )
 
-//implement `Checkor` ,`Xormor` , `NameIDor` interfaces.
+type NameIDor interface {
+	GetName() string
+	GetID() int
+}
 
 // map symbol table.
 type Symbol struct {

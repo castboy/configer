@@ -1,6 +1,8 @@
 package structure
 
-//implement `Checkor` ,`Xormor` , `Nameor` interfaces.
+type Nameor interface {
+	GetName() string
+}
 
 type ConvSymbol struct {
 	*ConvInfo
