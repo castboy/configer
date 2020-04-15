@@ -12,17 +12,17 @@ type extender struct {
 	checker structure.Checkor
 }
 
-func NewConvSymboler(tabler *structure.Source, bean *structure.ConvSymbol) *extender {
+func NewConvSymboler(bean *structure.ConvSymbol) *extender {
 	return &extender{
-		mysql.NewTablerSource(tabler),
+		mysql.NewTablerSource(&structure.Source{}),
 		cache.NewCacherConvSymbol(bean),
 		bean,
 	}
 }
 
-func NewFullSymbolNamer(tabler *structure.Symbol, bean *structure.FullSymbolName) *extender {
+func NewFullSymbolNamer(bean *structure.FullSymbolName) *extender {
 	return &extender{
-		mysql.NewTablerSymbol(tabler),
+		mysql.NewTablerSymbol(&structure.Symbol{}),
 		cache.NewCacherFullSymbolName(bean),
 		bean,
 	}
