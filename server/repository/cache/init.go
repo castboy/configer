@@ -3,7 +3,6 @@ package cache
 import (
 	"configer/server/repository/cache/idor"
 	"configer/server/repository/cache/nameIDor"
-	"configer/server/repository/cache/nameor"
 	"configer/server/structure"
 	"sync"
 )
@@ -32,7 +31,7 @@ var secCache *nameIDor.NameIDer
 var sessCache [AllSessionTypeLength]*idor.IDer
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
-var csCache [structure.ConvTypeLength]*nameor.Namer
+var csCache [structure.ConvTypeLength]*idor.IDer
 var holiCache *idor.IDer
 var holiCalcCache *holidayCalcCache
 
@@ -54,7 +53,7 @@ func init() {
 	}
 
 	for i := 0; i < int(structure.ConvTypeLength); i++ {
-		csCache[i] = nameor.NewNamer()
+		csCache[i] = idor.NewIDer()
 	}
 
 	holiCache = idor.NewIDer()

@@ -3,6 +3,7 @@ package cache
 import (
 	"configer/server/repository/cache/idor"
 	"configer/server/structure"
+	"configer/server/utils"
 	"fmt"
 )
 
@@ -11,6 +12,10 @@ type cacherHoliday struct {
 }
 
 type cacherSession struct {
+	*ider
+}
+
+type cacherConvSymbol struct {
 	*ider
 }
 
@@ -37,6 +42,15 @@ func NewCacherSession(bean *structure.Session) *cacherSession {
 	}
 }
 
+func NewCacherConvSymbol(bean *structure.ConvSymbol) *cacherConvSymbol {
+	return &cacherConvSymbol{
+		&ider{
+			bean:  bean,
+			cache: csCache[bean.ConvType],
+		},
+	}
+}
+
 
 func (c *ider) Insert() (num int64, err error) {
 	c.cache.Insert(c.bean)
@@ -54,8 +68,7 @@ func (c *ider) Update() (num int64, err error) {
 }
 
 func (c *ider) Get() (i interface{}, exist bool) {
-	c.cache.Get(c.bean)
-	return
+	return c.cache.Get(c.bean)
 }
 
 func (c *ider) Export() (i interface{}, err error) {
@@ -74,4 +87,23 @@ func (c *cacherSession) Cache(i interface{}) {
 	for i := range se {
 		c.cache.Update(&se[i])
 	}
+}
+
+func (c *cacherConvSymbol) Cache(j interface{}) {
+	src := j.([]structure.Source)
+	for i := range src {
+		insertBean := &structure.ConvSymbol{}
+		bean := c.bean.(*structure.ConvSymbol)
+		if bean.ConvType == structure.MarginConv {
+			insertBean.ConvInfo = utils.BuildConvInfo(src[i].MarginCurrency, src)
+		} else if bean.ConvType == structure.ProfitConv {
+			insertBean.ConvInfo = utils.BuildConvInfo(src[i].ProfitCurrency, src)
+		}
+
+		insertBean.SourceID = src[i].ID
+		insertBean.ConvType = bean.ConvType
+
+		c.cache.Insert(insertBean)
+	}
+
 }

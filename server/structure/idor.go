@@ -84,3 +84,40 @@ func (ho *Holiday) AutoCondition() (cond string) {
 func (ho *Holiday) GetID() int {
 	return ho.ID
 }
+
+//
+type ConvSymbol struct {
+	*ConvInfo
+	ConvType
+	SourceID int
+}
+
+type ConvInfo struct {
+	ConvNeed,
+	ConvMultiply bool
+	ConvSymbol string
+}
+
+type ConvType int
+
+const (
+	MarginConv ConvType = iota
+	ProfitConv
+	ConvTypeLength
+)
+
+func (cs *ConvSymbol) FormatCheck() error {
+	return nil
+}
+
+func (cs *ConvSymbol) IndexCheck() error {
+	return nil
+}
+
+func (cs *ConvSymbol) AutoCondition() (cond string) {
+	return
+}
+
+func (cs *ConvSymbol) GetID() int {
+	return cs.SourceID
+}

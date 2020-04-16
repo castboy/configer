@@ -22,6 +22,7 @@ func (c *IDer) Insert(bean structure.IDor) {
 	defer c.Unlock()
 
 	ID := bean.GetID()
+
 	c.info[ID] = bean
 }
 
@@ -48,6 +49,7 @@ func (c *IDer) Get(bean structure.IDor) (res structure.IDor, exist bool) {
 	ID := bean.GetID()
 
 	res, exist = c.info[ID]
+
 	return
 }
 

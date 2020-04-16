@@ -67,8 +67,11 @@ func main() {
 	//ss, err := ExportSessions("AUDCAD", 1, 0)
 	//fmt.Println(ss, err)
 
-	hs, err := GetHolidays()
-	fmt.Println(hs, err)
+	//hs, err := GetHolidays()
+	//fmt.Println(hs, err)
+
+	conv, err := GetConvSymbolInfo(structure.MarginConv, "AUDCAD")
+	fmt.Println(conv, err)
 }
 
 type ExportSymbol struct {
@@ -188,13 +191,9 @@ func DeleteSymbolByName(symbolName string) error {
 }
 
 func GetConvSymbolInfo(t structure.ConvType, symbolName string) (*structure.ConvInfo, error) {
-	sourceName, err := GetSourceNameBySymbolName(symbolName)
-	if err != nil {
-
-	}
-
-	convSymb := &structure.ConvSymbol{ConvType: t, SourceName: sourceName}
-	i, exist, err := extend.Get(extend.NewConvSymboler(convSymb))
+	symbol := &structure.Symbol{Symbol: symbolName}
+	symboler := base.NewSymboler(symbol)
+	i, exist, err := base.Get(symboler)
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +202,19 @@ func GetConvSymbolInfo(t structure.ConvType, symbolName string) (*structure.Conv
 		return nil, nil
 	}
 
-	return i.(*structure.ConvSymbol).ConvInfo, nil
+	symbol = i.(*structure.Symbol)
+
+	convSymb := &structure.ConvSymbol{ConvType: t, SourceID: symbol.SourceID}
+	j, exist, err := extend.Get(extend.NewConvSymboler(convSymb))
+	if err != nil {
+		return nil, err
+	}
+
+	if !exist {
+		return nil, nil
+	}
+
+	return j.(*structure.ConvSymbol).ConvInfo, nil
 }
 
 func InsertSource(source *structure.Source) error {
