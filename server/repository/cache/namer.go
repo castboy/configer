@@ -48,15 +48,21 @@ func (c *namer) Export() (i interface{}, err error) {
 	return c.cache.Export()
 }
 
-func (c *cacherConvSymbol) Cache(i interface{}) {
-	src := i.([]structure.Source)
+func (c *cacherConvSymbol) Cache(j interface{}) {
+	src := j.([]structure.Source)
 	for i := range src {
+		insertBean := &structure.ConvSymbol{}
 		bean := c.bean.(*structure.ConvSymbol)
+		if bean.ConvType == structure.MarginConv {
+			insertBean.ConvInfo = utils.BuildConvInfo(src[i].MarginCurrency, src)
+		} else if bean.ConvType == structure.ProfitConv {
+			insertBean.ConvInfo = utils.BuildConvInfo(src[i].ProfitCurrency, src)
+		}
 
-		bean.ConvInfo = utils.BuildConvInfo(src[i].Source, src)
-		bean.SourceName = src[i].Source
+		insertBean.SourceName = src[i].Source
+		insertBean.ConvType = bean.ConvType
 
-		c.cache.Insert(bean)
+		c.cache.Insert(insertBean)
 	}
 
 }

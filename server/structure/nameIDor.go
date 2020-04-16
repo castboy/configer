@@ -53,6 +53,16 @@ func (sb *Symbol) IndexCheck() error {
 }
 
 func (sb *Symbol) AutoCondition() (cond string) {
+	if sb.Symbol != "" {
+		cond = fmt.Sprintf("`symbol` = '%s'", sb.Symbol)
+		return
+	}
+
+	if sb.ID != 0 {
+		cond = fmt.Sprintf("where `id` = %d", sb.ID)
+		return
+	}
+
 	return
 }
 
@@ -142,6 +152,16 @@ func (src *Source) IndexCheck() error {
 }
 
 func (src *Source) AutoCondition() (cond string) {
+	if src.Source != "" {
+		cond = fmt.Sprintf("`source` = '%s'", src.Source)
+		return
+	}
+
+	if src.ID != 0 {
+		cond = fmt.Sprintf("where `id` = %d", src.ID)
+		return
+	}
+
 	return
 }
 
@@ -170,6 +190,16 @@ func (sec *Security) IndexCheck() error {
 }
 
 func (sec *Security) AutoCondition() (cond string) {
+	if sec.SecurityName != "" {
+		cond = fmt.Sprintf("`security_name` = '%s'", sec.SecurityName)
+		return
+	}
+
+	if sec.ID != 0 {
+		cond = fmt.Sprintf("where `id` = %d", sec.ID)
+		return
+	}
+
 	return
 }
 

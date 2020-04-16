@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"configer/server/structure"
+	"fmt"
 	"github.com/go-xorm/xorm"
 	"github.com/shopspring/decimal"
 )
@@ -94,15 +95,15 @@ func (t *tabler) Insert() (int64, error) {
 }
 
 func (t *tabler) Delete() (int64, error) {
-	return t.Table(t.bean).Delete(t.bean)
+	return t.Table(t.bean).Where(t.bean.AutoCondition()).NoAutoCondition(true).Delete(t.bean)
 }
 
 func (t *tabler) Update() (int64, error) {
-	return t.Table(t.bean).Update(t.bean)
+	return t.Table(t.bean).Where(t.bean.AutoCondition()).Update(t.bean)
 }
 
 func (t *tabler) Get() (bool, error) {
-	return t.Table(t.bean).Get(t.bean)
+	return t.Table(t.bean).Where(t.bean.AutoCondition()).Get(t.bean)
 }
 
 func (t *tablerSymbol) Export() (interface{}, error) {
@@ -132,7 +133,8 @@ func (t *tablerSource) Export() (interface{}, error) {
 
 func (t *tablerSession) Export() (interface{}, error) {
 	i := []structure.Session{}
-	err := t.Table(t.bean).Find(&i)
+	err := t.Table(t.bean).Where(t.bean.AutoCondition()).Find(&i)
+	fmt.Println(len(i))
 
 	return i, err
 }

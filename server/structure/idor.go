@@ -1,5 +1,7 @@
 package structure
 
+import "fmt"
+
 type IDor interface {
 	GetID() int
 }
@@ -39,7 +41,7 @@ func (se *Session) IndexCheck() error {
 }
 
 func (se *Session) AutoCondition() (cond string) {
-	return
+	return fmt.Sprintf("`type` = %d and `dst_type` = %d", se.Type, se.Dst)
 }
 
 func (se *Session) GetID() int {
@@ -76,7 +78,7 @@ func (ho *Holiday) IndexCheck() error {
 }
 
 func (ho *Holiday) AutoCondition() (cond string) {
-	return
+	return fmt.Sprintf("id = %d", ho.ID)
 }
 
 func (ho *Holiday) GetID() int {

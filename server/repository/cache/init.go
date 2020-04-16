@@ -2,8 +2,8 @@ package cache
 
 import (
 	"configer/server/repository/cache/idor"
-	"configer/server/repository/cache/nameor"
 	"configer/server/repository/cache/nameIDor"
+	"configer/server/repository/cache/nameor"
 	"configer/server/structure"
 	"sync"
 )
