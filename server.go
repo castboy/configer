@@ -10,72 +10,6 @@ import (
 	"time"
 )
 
-func main() {
-	Start()
-	//
-	//i, err := GetSymbolInfoByName("AUDCAD")
-	//fmt.Println(i, err)
-	//
-	//sbs, err := GetSymbols()
-	//fmt.Println(sbs, err)
-	//
-	//sn, err := GetSourceNameBySymbolName("AUDCAD")
-	//fmt.Println(sn, err)
-	//
-	//symb := i.Symbol
-	//symb.ID = 0
-	//symb.Symbol = "wmxx"
-	//
-	//err = DeleteSymbolByName(symb.Symbol)
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//
-	//i, err = GetSymbolInfoByName("wmxx")
-	//fmt.Println(i, err)
-
-	//conv, err := GetConvSymbolInfo(structure.MarginConv, "AUDCAD")
-	//fmt.Println(conv.ConvSymbol, conv.ConvMultiply, conv.ConvNeed, err)
-
-	//source := &structure.Source{Source: "AUDCAD"}
-	//sourcer := base.NewSourcer(source)
-	//i, exist, err := base.Get(sourcer)
-	//fmt.Println(exist, err)
-	//
-	//source = i.(*structure.Source)
-	//source.Source = "wmgg"
-	//source.ID = 0
-	//
-	//fmt.Println(source)
-	//sourcer = base.NewSourcer(source)
-	//
-	//_, err = base.Insert(sourcer)
-	//fmt.Println(err)
-	//
-	//source.Digits = 6
-	//
-	//_, err = base.Update(sourcer)
-	//fmt.Println(err)
-	//
-	//i, exist, err = base.Get(sourcer)
-	//fmt.Println(i, exist, err)
-
-	//fmt.Println(GetSources())
-
-	//fmt.Println(GetSourceByName("AUDCAD"))
-
-	//fmt.Println(GetSymbolsBySourceName("AUDCAD"))
-
-	//ss, err := ExportSessions("AUDCAD", 1, 0)
-	//fmt.Println(ss, err)
-
-	//hs, err := GetHolidays()
-	//fmt.Println(hs, err)
-
-	conv, err := GetConvSymbolInfo(structure.MarginConv, "AUDCAD")
-	fmt.Println(conv, err)
-}
-
 type ExportSymbol struct {
 	*structure.Symbol
 	*structure.Source
@@ -547,14 +481,14 @@ func Start() (err error) {
 }
 
 
-func appendSymbolID(ho *structure.Holiday) (err error) {
+func appendSymbolID(ho *structure.Holiday) error {
 	switch ho.Category {
 	case structure.HolidayAll:
 
 	case structure.HolidaySecurity:
 		i, exist, err := base.Get(base.NewSecurityer(&structure.Security{SecurityName: ho.Symbol}))
 		if err != nil {
-			return
+			return err
 		}
 
 		if !exist {
@@ -567,7 +501,7 @@ func appendSymbolID(ho *structure.Holiday) (err error) {
 	case structure.HolidaySource:
 		i, exist, err := base.Get(base.NewSourcer(&structure.Source{Source: ho.Symbol}))
 		if err != nil {
-			return
+			return err
 		}
 
 		if !exist {
@@ -580,7 +514,7 @@ func appendSymbolID(ho *structure.Holiday) (err error) {
 	case structure.HolidaySymbol:
 		i, exist, err := base.Get(base.NewSymboler(&structure.Symbol{Symbol: ho.Symbol}))
 		if err != nil {
-			return
+			return err
 		}
 
 		if !exist {
@@ -591,10 +525,10 @@ func appendSymbolID(ho *structure.Holiday) (err error) {
 		ho.SymbolID = symb.ID
 
 	default:
-		panic(errors.NotValidf("holiday category: %d", ho.Category))
+		return errors.NotValidf("holiday category: %d", ho.Category)
 	}
 
-	return err
+	return nil
 }
 
 func holidayCanTrade(symb *structure.Symbol) bool {
