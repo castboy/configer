@@ -45,7 +45,7 @@ func (se *Session) AutoCondition() (cond string) {
 }
 
 func (se *Session) GetID() int {
-	return se.ID
+	return se.SourceID
 }
 
 //
