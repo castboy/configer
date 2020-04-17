@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"configer/server/structure"
+	"configer/server/utils"
 	"fmt"
 	"github.com/go-xorm/xorm"
 	"github.com/shopspring/decimal"
@@ -129,6 +130,16 @@ func (t *tablerSource) Export() (interface{}, error) {
 	err := t.Table(t.bean).Find(&i)
 
 	return i, err
+}
+
+func (t *tablerSession) Update() (num int64, err error) {
+	ses := t.bean.(*structure.Session)
+	ses.Session, err = utils.OrderAndFill(ses.Session)
+	if err != nil {
+		return
+	}
+
+	return t.Table(t.bean).Where(t.bean.AutoCondition()).Update(ses)
 }
 
 func (t *tablerSession) Export() (interface{}, error) {

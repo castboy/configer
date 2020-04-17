@@ -62,6 +62,15 @@ func (c *ider) Export() (i interface{}, err error) {
 	return c.cache.Export()
 }
 
+func (c *cacherSession) Update() (num int64, err error) {
+	ses := c.bean.(*structure.Session)
+	ses.Session = utils.TrimZero(ses.Session)
+
+	c.cache.Update(ses)
+
+	return
+}
+
 func (c *cacherSession) Cache(i interface{}) {
 	se := i.([]structure.Session)
 	for i := range se {

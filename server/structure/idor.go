@@ -104,6 +104,10 @@ func (se *Session) IndexCheck() error {
 }
 
 func (se *Session) AutoCondition() (cond string) {
+	if se.ID != 0 {
+		return fmt.Sprintf("`id` = %d", se.ID)
+	}
+
 	return fmt.Sprintf("`type` = %d and `dst_type` = %d", se.Type, se.Dst)
 }
 
