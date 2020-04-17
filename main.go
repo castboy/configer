@@ -6,6 +6,8 @@ import (
 	"configer/server/structure"
 	"fmt"
 	"github.com/juju/errors"
+	"strings"
+	"time"
 )
 
 func main() {
@@ -446,6 +448,23 @@ func ExportMarketDST() map[structure.MarketType]structure.DSTType {
 	return res
 }
 
+func IsQuotable(symb *structure.Symbol) bool {
+	if !holidayCanTrade(symb) {
+		return false
+	}
+
+	return sessionCanQuoteTrade(symb, structure.Quote)
+}
+
+func IsTradable(symb *structure.Symbol) bool {
+	if !holidayCanTrade(symb) {
+		return false
+	}
+
+	return sessionCanQuoteTrade(symb, structure.Trade)
+}
+
+
 func Start() (err error) {
 	// cache symbol.
 	symbol := &structure.Symbol{}
@@ -578,3 +597,104 @@ func appendSymbolID(ho *structure.Holiday) (err error) {
 	return err
 }
 
+func holidayCanTrade(symb *structure.Symbol) bool {
+	date := time.Now().UTC().Format("2006-01-02")
+	holiday := &structure.Holiday{Date: date}
+	i, exist, err := base.Get(base.NewHolidayer(holiday))
+	if err != nil {
+		return true
+	}
+
+	if !exist {
+		return true
+	}
+
+	now := time.Now().UTC().Format("15:04:05")
+	timeCanTrade := func(from, to string) bool {
+		if now >= from && now <= to {
+			return true
+		}
+
+		return false
+	}
+
+	hos := i.(map[int]*structure.Holiday)
+	for j := range hos {
+		switch hos[j].Category {
+		case structure.HolidayAll:
+			if timeCanTrade(hos[j].From, hos[j].To) {
+				return true
+			}
+		case structure.HolidaySecurity:
+			if hos[j].SymbolID == symb.SecurityID {
+				if timeCanTrade(hos[j].From, hos[j].To) {
+					return true
+				}
+			}
+		case structure.HolidaySource:
+			if hos[j].SymbolID == symb.SourceID {
+				if timeCanTrade(hos[j].From, hos[j].To) {
+					return true
+				}
+			}
+		case structure.HolidaySymbol:
+			if hos[j].SymbolID == symb.ID {
+				if timeCanTrade(hos[j].From, hos[j].To) {
+					return true
+				}
+			}
+		}
+	}
+
+	return false
+}
+
+func sessionCanQuoteTrade(symb *structure.Symbol, t structure.SessionType) bool {
+	// get session
+	i, exist, err := base.Get(base.NewSourcer(&structure.Source{ID: symb.SourceID}))
+	if err != nil {
+
+	}
+
+	if !exist {
+
+	}
+
+	src := i.(*structure.Source)
+
+	j, exist, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: src.MarketOwnerType}))
+	if err != nil {
+
+	}
+
+	if !exist {
+
+	}
+
+	md := j.(*structure.MarketDST)
+
+	k, exist, err := base.Get(base.NewSessioner(&structure.Session{SourceID: symb.SourceID, Type: t, Dst: md.DST}))
+	if err != nil {
+
+	}
+
+	if !exist {
+
+	}
+
+	ses := k.(*structure.Session)
+
+	// judge
+	gmt := time.Now().UTC()
+	nowStr := gmt.Format("15:04:05")
+	weekday := gmt.Weekday()
+
+	for _, session := range ses.Session[int32(weekday)] {
+		beginEnd := strings.Split(session, "-")
+		if beginEnd[0] <= nowStr && nowStr < beginEnd[1] {
+			return true
+		}
+	}
+
+	return false
+}
