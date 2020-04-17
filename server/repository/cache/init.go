@@ -17,8 +17,8 @@ type fullSymbolNameCache struct {
 	sync.RWMutex
 }
 
-type holidayCalcCache struct {
-	info map[int]map[structure.DateSymbol]*structure.TimeSpan
+type holidayCache struct {
+	info map[string]map[int]*structure.Holiday
 	sync.RWMutex
 }
 
@@ -32,8 +32,7 @@ var sessCache [AllSessionTypeLength]*idor.IDer
 var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
 var csCache [structure.ConvTypeLength]*idor.IDer
-var holiCache *idor.IDer
-var holiCalcCache *holidayCalcCache
+var holiCache *holidayCache
 
 func init() {
 	symbCache = nameIDor.NewNameIDer()
@@ -56,9 +55,7 @@ func init() {
 		csCache[i] = idor.NewIDer()
 	}
 
-	holiCache = idor.NewIDer()
-
-	holiCalcCache = &holidayCalcCache{
-		info: make(map[int]map[structure.DateSymbol]*structure.TimeSpan),
+	holiCache = &holidayCache{
+		info: map[string]map[int]*structure.Holiday{},
 	}
 }

@@ -28,14 +28,6 @@ func NewFullSymbolNamer(bean *structure.FullSymbolName) *extender {
 	}
 }
 
-func NewHolidayCalcer(symb *structure.Symbol, bean *structure.HolidayCalc) *extender {
-	return &extender{
-		mysql.NewTablerSymbol(symb),
-		cache.NewCacherHolidayCalc(bean),
-		bean,
-	}
-}
-
 func (a *extender) GetTabler() mysql.ExtendOperator {
 	return a.tabler
 }

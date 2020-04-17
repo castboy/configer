@@ -324,9 +324,11 @@ func GetHolidays() (hs []*structure.Holiday, err error) {
 		return
 	}
 
-	hos := i.(map[int]structure.IDor)
-	for j := range hos {
-		hs = append(hs, hos[j].(*structure.Holiday))
+	hos := i.(map[string]map[int]*structure.Holiday)
+	for date := range hos {
+		for id := range hos[date] {
+			hs = append(hs, hos[date][id])
+		}
 	}
 
 	return
@@ -510,17 +512,15 @@ func Start() (err error) {
 
 	}
 
-	// cache holiday.calc
-	hs, err := base.Export(holidayer)
+	i, err := base.Export(holidayer)
 	if err != nil {
 
 	}
 
-	holidays := hs.(map[int]structure.IDor)
-	for i := range holidays {
-		err = CacheHolidayCalc(holidays[i].(*structure.Holiday))
-		if err != nil {
-
+	hos := i.(map[string]map[int]*structure.Holiday)
+	for date := range hos {
+		for id := range hos[date] {
+			appendSymbolID(hos[date][id])
 		}
 	}
 
@@ -528,59 +528,53 @@ func Start() (err error) {
 }
 
 
-func CacheHolidayCalc(ho *structure.Holiday) (err error) {
-	hc := &structure.HolidayCalc{}
-	hc.ID = ho.ID
-	hc.Date = ho.Date
-	hc.TimeSpans = append(hc.TimeSpans, &structure.TimeSpan{From: ho.From, To: ho.To})
-
+func appendSymbolID(ho *structure.Holiday) (err error) {
 	switch ho.Category {
 	case structure.HolidayAll:
-		err := extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{}, hc))
-		if err != nil {
-
-		}
 
 	case structure.HolidaySecurity:
 		i, exist, err := base.Get(base.NewSecurityer(&structure.Security{SecurityName: ho.Symbol}))
 		if err != nil {
-
+			return
 		}
 
 		if !exist {
-			fmt.Println(errors.NotFoundf("%v", &structure.Security{SecurityName: ho.Symbol}))
+			return errors.NotFoundf("%v", &structure.Security{SecurityName: ho.Symbol})
 		}
 
 		se := i.(*structure.Security)
-
-		err = extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{SecurityID: se.ID}, hc))
-		if err != nil {
-
-		}
+		ho.SymbolID = se.ID
 
 	case structure.HolidaySource:
 		i, exist, err := base.Get(base.NewSourcer(&structure.Source{Source: ho.Symbol}))
 		if err != nil {
-
+			return
 		}
 
 		if !exist {
-
+			return errors.NotFoundf("%v", &structure.Source{Source: ho.Symbol})
 		}
 
 		src := i.(*structure.Source)
-
-		err = extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{SourceID: src.ID}, hc))
-		if err != nil {
-
-		}
+		ho.SymbolID = src.ID
 
 	case structure.HolidaySymbol:
-		err = extend.Cache(extend.NewHolidayCalcer(&structure.Symbol{Symbol: ho.Symbol}, hc))
+		i, exist, err := base.Get(base.NewSymboler(&structure.Symbol{Symbol: ho.Symbol}))
 		if err != nil {
-
+			return
 		}
+
+		if !exist {
+			return errors.NotFoundf("%v", &structure.Symbol{Symbol: ho.Symbol})
+		}
+
+		symb := i.(*structure.Symbol)
+		ho.SymbolID = symb.ID
+
+	default:
+		panic(errors.NotValidf("holiday category: %d", ho.Category))
 	}
+
 	return err
 }
 

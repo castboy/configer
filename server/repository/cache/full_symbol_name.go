@@ -18,7 +18,6 @@ func NewCacherFullSymbolName(bean *structure.FullSymbolName) *cacherFullSymbolNa
 	}
 }
 
-// implement NameIDor
 func (c *cacherFullSymbolName) Insert() (num int64, err error) {
 	c.cache.insert(c.bean)
 	return

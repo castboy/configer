@@ -7,10 +7,6 @@ import (
 	"fmt"
 )
 
-type cacherHoliday struct {
-	*ider
-}
-
 type cacherSession struct {
 	*ider
 }
@@ -22,15 +18,6 @@ type cacherConvSymbol struct {
 type ider struct {
 	bean  structure.IDor
 	cache idor.IDor
-}
-
-func NewCacherHoliday(bean *structure.Holiday) *cacherHoliday {
-	return &cacherHoliday{
-		&ider{
-			bean,
-			holiCache,
-		},
-	}
 }
 
 func NewCacherSession(bean *structure.Session) *cacherSession {
@@ -73,13 +60,6 @@ func (c *ider) Get() (i interface{}, exist bool) {
 
 func (c *ider) Export() (i interface{}, err error) {
 	return c.cache.Export()
-}
-
-func (c *cacherHoliday) Cache(i interface{}) {
-	ho := i.([]structure.Holiday)
-	for i := range ho {
-		c.cache.Insert(&ho[i])
-	}
 }
 
 func (c *cacherSession) Cache(i interface{}) {
