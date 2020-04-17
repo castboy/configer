@@ -1,7 +1,6 @@
 package structure
 
 import (
-	"configer/server/constant"
 	"fmt"
 	"github.com/juju/errors"
 	"regexp"
@@ -41,19 +40,19 @@ const (
 
 func (se *Session) FormatCheck() error {
 	if se == nil {
-		return constant.NewErr(constant.ArgsErr, errors.NotValidf("session info"))
+		return errors.NotValidf("session info is null")
 	}
 
 	if se.Type != Quote && se.Type != Trade {
-		return constant.NewErr(constant.TradeErr, errors.NotValidf("type, %v", se.Type))
+		return errors.NotValidf("type, %v", se.Type)
 	}
 
 	if se.Dst != None && se.Dst != DST && se.Dst != DSTNone {
-		return constant.NewErr(constant.ArgsErr, errors.NotValidf("dstType, %v", se.Dst))
+		return errors.NotValidf("dstType, %v", se.Dst)
 	}
 
 	if se.Session == nil || len(se.Session) == 0 {
-		return constant.NewErr(constant.ArgsErr, errors.NotValidf("session, %v", se.Session))
+		return errors.NotValidf("session, %v", se.Session)
 	}
 
 	// sure "00:00-00:00" format
@@ -61,7 +60,7 @@ func (se *Session) FormatCheck() error {
 		for i, _ := range se.Session[weekday] {
 			matched, _ := regexp.MatchString(`^(20|21|22|23|24|[0-1]\d):[0-5]\d-(20|21|22|23|24|[0-1]\d):[0-5]\d$`, se.Session[weekday][i])
 			if !matched {
-				return constant.NewErr(constant.ArgsErr, errors.NotValidf("session format: %s", se.Session[weekday][i]))
+				return errors.NotValidf("session format: %s", se.Session[weekday][i])
 			}
 		}
 	}
