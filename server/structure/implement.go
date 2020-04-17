@@ -1,6 +1,11 @@
 package structure
 
-import "fmt"
+import (
+	"configer/server/constant"
+	"fmt"
+	"github.com/juju/errors"
+	"time"
+)
 
 type MarketDST struct {
 	MarketOwnerType MarketType `json:"market_owner_type" xorm:"market_type"`
@@ -8,6 +13,18 @@ type MarketDST struct {
 }
 
 func (md *MarketDST) FormatCheck() error {
+	if md == nil {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("marketDST info"))
+	}
+
+	if md.MarketOwnerType != NewYork && md.MarketOwnerType != London && md.MarketOwnerType != Sydney && md.MarketOwnerType != HK {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("marketOwnerType: %d", md.MarketOwnerType))
+	}
+
+	if md.DST != DST && md.DST != DSTNone && md.DST != None {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("dstType: %d", md.DST))
+	}
+
 	return nil
 }
 func (md *MarketDST) IndexCheck() error {
@@ -64,6 +81,27 @@ const (
 )
 
 func (ho *Holiday) FormatCheck() error {
+	if ho == nil {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("holiday info"))
+	}
+
+	_, err := time.ParseInLocation("2006-01-02", ho.Date, time.UTC)
+	if err != nil {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("date, %v", ho.Date))
+	}
+
+	_, err = time.ParseInLocation("15:04:05", ho.From, time.UTC)
+	if err != nil {
+		return constant.NewErr(constant.TradeErr, errors.NotValidf("from, %v", ho.From))
+	}
+
+	_, err = time.ParseInLocation("15:04:05", ho.To, time.UTC)
+	if err != nil {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("to, %v", ho.To))
+	}
+
+	// TODO
+
 	return nil
 }
 

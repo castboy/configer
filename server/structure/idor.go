@@ -1,6 +1,13 @@
 package structure
 
-import "fmt"
+import (
+	"configer/server/constant"
+	"fmt"
+	"github.com/juju/errors"
+	"regexp"
+	"sort"
+	"strings"
+)
 
 type IDor interface {
 	GetID() int
@@ -33,6 +40,62 @@ const (
 )
 
 func (se *Session) FormatCheck() error {
+	if se == nil {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("session info"))
+	}
+
+	if se.Type != Quote && se.Type != Trade {
+		return constant.NewErr(constant.TradeErr, errors.NotValidf("type, %v", se.Type))
+	}
+
+	if se.Dst != None && se.Dst != DST && se.Dst != DSTNone {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("dstType, %v", se.Dst))
+	}
+
+	if se.Session == nil || len(se.Session) == 0 {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("session, %v", se.Session))
+	}
+
+	// sure "00:00-00:00" format
+	for weekday, _ := range se.Session {
+		for i, _ := range se.Session[weekday] {
+			matched, _ := regexp.MatchString(`^(20|21|22|23|24|[0-1]\d):[0-5]\d-(20|21|22|23|24|[0-1]\d):[0-5]\d$`, se.Session[weekday][i])
+			if !matched {
+				return constant.NewErr(constant.ArgsErr, errors.NotValidf("session format: %s", se.Session[weekday][i]))
+			}
+		}
+	}
+
+	// "01:00-00:00" -> "01:00->24:00"
+	for weekday, _ := range se.Session {
+		for i, _ := range se.Session[weekday] {
+			ts := strings.Split(se.Session[weekday][i], "-")
+			if ts[0] != "00:00" && ts[1] == "00:00" {
+				se.Session[weekday][i] = ts[0] + "-" + "24:00"
+			}
+		}
+	}
+
+	// sure no overlap
+	for weekday, _ := range se.Session {
+		sort.Strings(se.Session[weekday])
+
+		s := []string{}
+		for i := range se.Session[weekday] {
+			if se.Session[weekday][i] != "00:00-00:00" {
+				s = append(s, strings.Split(se.Session[weekday][i], "-")...)
+			}
+		}
+
+		end := len(s)
+
+		for i := 0; i < end-1; i++ {
+			if s[i] >= s[i+1] {
+				return errors.NotValidf("session format: %v, sessionType: %d", se.Session[weekday], se.Type)
+			}
+		}
+	}
+
 	return nil
 }
 

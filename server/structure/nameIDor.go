@@ -1,7 +1,9 @@
 package structure
 
 import (
+	"configer/server/constant"
 	"fmt"
+	"github.com/juju/errors"
 	"github.com/shopspring/decimal"
 	"time"
 )
@@ -144,6 +146,62 @@ const (
 )
 
 func (src *Source) FormatCheck() error {
+	if src == nil {
+		return constant.NewErr(constant.TradeErr, errors.NotValidf("source info"))
+	}
+
+	if src.Source == "" {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("source, %v", src.Source))
+	}
+
+	if src.SourceType != SourceFx && src.SourceType != SourceMetal && src.SourceType != SourceEnergy &&
+		src.SourceType != SourceIndex && src.SourceType != SourceCrypto {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("sourceType, %v", src.SourceType))
+	}
+
+	const DigitsMaxLimit = 5
+
+	if src.Digits <= 0 || src.Digits > DigitsMaxLimit {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("digits, %v", src.Digits))
+	}
+
+	if src.ContractSize.Equal(decimal.NewFromFloat(0)) {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("contractSize, %v", src.ContractSize.String()))
+	}
+
+	if src.StopsLevel == 0 {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("stopsLevel, %v", src.StopsLevel))
+	}
+
+	if src.ProfitMode != ProfitForex && src.ProfitMode != ProfitCfd {
+		return constant.NewErr(constant.TradeErr, errors.NotValidf("profitMode, %v", src.ProfitMode))
+	}
+
+	if src.Currency == "" {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("currency, %v", src.Currency))
+	}
+
+	if src.ProfitCurrency == "" {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("profitCurrency, %v", src.ProfitCurrency))
+	}
+
+	if src.MarginMode != MarginForex && src.MarginMode != MarginCfd && src.MarginMode != MarginFutures &&
+		src.MarginMode != MarginCfdLeverage {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("marginMode"))
+	}
+
+	if src.MarginCurrency == "" {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("marginCurrency"))
+	}
+
+	if src.SwapType != ByPoints && src.SwapType != ByInterestOfCfds {
+		return constant.NewErr(constant.ArgsErr, errors.NotValidf("swapType"))
+	}
+
+	if src.SwapLong.IsZero() && src.SwapShort.IsZero() {
+		return errors.NotValidf("swapLong/swapShort")
+	}
+
 	return nil
 }
 
