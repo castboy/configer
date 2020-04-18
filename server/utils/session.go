@@ -1,8 +1,6 @@
 package utils
 
 import (
-	"configer/server/constant"
-	"github.com/juju/errors"
 	"sort"
 )
 
@@ -23,11 +21,7 @@ func TrimZero(sess map[int32][]string) map[int32][]string {
 const SessionFull int = 3
 const DaysWeek = 7
 
-func OrderAndFill(sess map[int32][]string) (map[int32][]string, error) {
-	if sess == nil {
-		return nil, constant.NewErr(constant.ArgsErr, errors.NotValidf("session, %v", sess))
-	}
-
+func OrderAndFill(sess map[int32][]string) map[int32][]string {
 	s := map[int32][]string{}
 
 	for weekday := range sess {
@@ -54,5 +48,5 @@ func OrderAndFill(sess map[int32][]string) (map[int32][]string, error) {
 		}
 	}
 
-	return s, nil
+	return s
 }
