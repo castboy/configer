@@ -50,6 +50,10 @@ func (fs *FullSymbolName) FormatCheck() error {
 }
 
 func (fs *FullSymbolName) IndexCheck() error {
+	if fs.Sl.Symbol == "" {
+		return errors.NotValidf("Symbol")
+	}
+
 	return nil
 }
 
@@ -105,6 +109,10 @@ func (ho *Holiday) FormatCheck() error {
 }
 
 func (ho *Holiday) IndexCheck() error {
+	if ho.Date == "" {
+		return errors.NotValidf("Date")
+	}
+
 	return nil
 }
 

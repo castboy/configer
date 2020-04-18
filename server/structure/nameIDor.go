@@ -49,7 +49,12 @@ func (st SymbolStatus) String() string {
 func (sb *Symbol) FormatCheck() error {
 	return nil
 }
+
 func (sb *Symbol) IndexCheck() error {
+	if sb.GetID() == 0 && sb.GetName() == "" {
+		return errors.NotValidf("ID and name")
+	}
+
 	return nil
 }
 
@@ -205,6 +210,10 @@ func (src *Source) FormatCheck() error {
 }
 
 func (src *Source) IndexCheck() error {
+	if src.GetID() == 0 && src.GetName() == "" {
+		return errors.NotValidf("ID and name")
+	}
+
 	return nil
 }
 
@@ -243,6 +252,10 @@ func (sec *Security) FormatCheck() error {
 }
 
 func (sec *Security) IndexCheck() error {
+	if sec.GetID() == 0 && sec.GetName() == "" {
+		return errors.NotValidf("ID and name")
+	}
+
 	return nil
 }
 

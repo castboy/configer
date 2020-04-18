@@ -99,6 +99,10 @@ func (se *Session) FormatCheck() error {
 }
 
 func (se *Session) IndexCheck() error {
+	if se.GetID() == 0 {
+		return errors.NotValidf("ID")
+	}
+
 	return nil
 }
 
@@ -140,6 +144,10 @@ func (cs *ConvSymbol) FormatCheck() error {
 }
 
 func (cs *ConvSymbol) IndexCheck() error {
+	if cs.GetID() == 0 {
+		return errors.NotValidf("ID")
+	}
+
 	return nil
 }
 
