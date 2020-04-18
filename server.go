@@ -4,6 +4,7 @@ import (
 	"configer/server/base"
 	"configer/server/extend"
 	"configer/server/structure"
+	"configer/server/utils"
 	"fmt"
 	"github.com/juju/errors"
 	"strings"
@@ -241,6 +242,7 @@ func ExportSessions(sourceName string, dstType structure.DSTType, sessionType st
 	for j := range ss {
 		s := ss[j].(*structure.Session)
 		if s.SourceID == id {
+			s.Session = utils.OrderAndFill(s.Session)
 			return s.Session, nil
 		}
 	}
