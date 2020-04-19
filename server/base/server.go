@@ -3,7 +3,7 @@ package base
 import "configer/server/constant"
 
 func Insert(a operator) (num int64, err error) {
-	err = a.GetChecker().FormatCheck()
+	err = a.GetHelper().FormatCheck()
 	if err != nil {
 		err = constant.NewErr(constant.ArgsErr, err)
 		return
@@ -29,7 +29,7 @@ func Delete(a operator) (num int64, err error) {
 }
 
 func Update(a operator) (num int64, err error) {
-	err = a.GetChecker().FormatCheck()
+	err = a.GetHelper().FormatCheck()
 	if err != nil {
 		err = constant.NewErr(constant.ArgsErr, err)
 		return
@@ -45,7 +45,7 @@ func Update(a operator) (num int64, err error) {
 }
 
 func Get(a operator) (i interface{}, err error) {
-	err = a.GetChecker().IndexCheck()
+	err = a.GetHelper().IndexCheck()
 	if err != nil {
 		err = constant.NewErr(constant.ArgsErr, err)
 		return
@@ -53,7 +53,7 @@ func Get(a operator) (i interface{}, err error) {
 
 	i, exist := a.GetCacher().Get()
 	if !exist {
-		err = constant.NewErr(constant.ArgsErr, a.GetChecker().NotFoundError())
+		err = constant.NewErr(constant.ArgsErr, a.GetHelper().NotFoundError())
 		return
 	}
 

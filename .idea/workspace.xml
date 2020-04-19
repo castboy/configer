@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b34dd65-c147-44a7-a0be-6ebe88ebf9a5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/base/implement.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/base/implement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/base/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/base/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/base/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/base/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/extend/implement.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/extend/implement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/extend/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/extend/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/structure/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +72,7 @@
       <recent name="$PROJECT_DIR$/server/extend" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_GetSources in configer">
+  <component name="RunManager" selected="Go Test.Test_GetSymbolInfoByName in configer">
     <configuration name="Test_GetSources in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -85,6 +84,17 @@
       <pattern value="^Test_GetSources$" />
       <method v="2" />
     </configuration>
+    <configuration name="Test_GetSymbolInfoByName in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="configer" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="configer" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^Test_GetSymbolInfoByName$" />
+      <method v="2" />
+    </configuration>
     <configuration name="Test_InsertSource in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -94,17 +104,6 @@
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
       <pattern value="^Test_InsertSource$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_InsertSymbol in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="configer" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="configer" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^Test_InsertSymbol$" />
       <method v="2" />
     </configuration>
     <configuration name="Test_UpdateSource in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -131,11 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_GetSymbolInfoByName in configer" />
         <item itemvalue="Go Test.Test_GetSources in configer" />
         <item itemvalue="Go Test.Test_UpdateSource in configer" />
         <item itemvalue="Go Test.Test_InsertSource in configer" />
         <item itemvalue="Go Test.Test_UpdateSymbol in configer" />
-        <item itemvalue="Go Test.Test_InsertSymbol in configer" />
       </list>
     </recent_temporary>
   </component>
@@ -152,28 +151,28 @@
     <proxy>off</proxy>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="521" key="GridCell.Tab.0.bottom" timestamp="1587120460202">
-      <screen x="54" y="23" width="1386" height="877" />
+    <state width="1398" height="343" key="GridCell.Tab.0.bottom" timestamp="1587273539690">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="521" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587114828985" />
+    <state width="1398" height="343" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587273539690" />
     <state width="1398" height="428" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1586861913087" />
     <state width="1398" height="521" key="GridCell.Tab.0.bottom/54.23.1386.877@54.23.1386.877" timestamp="1587120460202" />
-    <state width="1398" height="521" key="GridCell.Tab.0.center" timestamp="1587120460200">
-      <screen x="54" y="23" width="1386" height="877" />
+    <state width="1398" height="343" key="GridCell.Tab.0.center" timestamp="1587273539689">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="521" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587114828984" />
+    <state width="1398" height="343" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587273539689" />
     <state width="1398" height="428" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1586861913086" />
     <state width="1398" height="521" key="GridCell.Tab.0.center/54.23.1386.877@54.23.1386.877" timestamp="1587120460200" />
-    <state width="1398" height="521" key="GridCell.Tab.0.left" timestamp="1587120460199">
-      <screen x="54" y="23" width="1386" height="877" />
+    <state width="1398" height="343" key="GridCell.Tab.0.left" timestamp="1587273539688">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="521" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587114828983" />
+    <state width="1398" height="343" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587273539688" />
     <state width="1398" height="428" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1586861913085" />
     <state width="1398" height="521" key="GridCell.Tab.0.left/54.23.1386.877@54.23.1386.877" timestamp="1587120460199" />
-    <state width="1398" height="521" key="GridCell.Tab.0.right" timestamp="1587120460201">
-      <screen x="54" y="23" width="1386" height="877" />
+    <state width="1398" height="343" key="GridCell.Tab.0.right" timestamp="1587273539690">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="521" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587114828984" />
+    <state width="1398" height="343" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587273539690" />
     <state width="1398" height="428" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1586861913086" />
     <state width="1398" height="521" key="GridCell.Tab.0.right/54.23.1386.877@54.23.1386.877" timestamp="1587120460201" />
     <state x="690" y="163" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1586857202504">
