@@ -1,6 +1,9 @@
 package base
 
-import "configer/server/constant"
+import (
+	"configer/server/constant"
+	"fmt"
+)
 
 func Insert(a operator) (err error) {
 	err = a.GetHelper().FormatCheck()
@@ -16,7 +19,8 @@ func Insert(a operator) (err error) {
 	}
 	
 	if num != 1 {
-		
+		err = constant.NewErr(constant.UnknowErr, fmt.Sprintf("Insert 0 item, no error, structure: %v", a.GetHelper()))
+		return
 	}
 
 	a.GetCacher().Insert()
@@ -49,7 +53,12 @@ func Update(a operator) (num int64, err error) {
 		return
 	}
 
+	if num == 0 {
+		return
+	}
+
 	a.GetCacher().Update()
+
 	return
 }
 

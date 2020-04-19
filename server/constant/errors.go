@@ -19,6 +19,7 @@ const (
 	DBErr     = 2
 	ArgsErr   = 3
 	AssertErr = 4
+	UnknowErr = 5
 )
 
 var ErrMsg = map[ErrCode]string{
