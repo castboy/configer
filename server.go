@@ -496,33 +496,37 @@ func holidayCanTrade(symb *structure.Symbol) bool {
 
 	hos := i.(map[int]*structure.Holiday)
 	for j := range hos {
+		if !hos[j].Enable {
+			continue
+		}
+
 		switch hos[j].Category {
 		case structure.HolidayAll:
-			if timeCanTrade(hos[j].From, hos[j].To) {
-				return true
+			if !timeCanTrade(hos[j].From, hos[j].To) {
+				return false
 			}
 		case structure.HolidaySecurity:
 			if hos[j].SymbolID == symb.SecurityID {
-				if timeCanTrade(hos[j].From, hos[j].To) {
-					return true
+				if !timeCanTrade(hos[j].From, hos[j].To) {
+					return false
 				}
 			}
 		case structure.HolidaySource:
 			if hos[j].SymbolID == symb.SourceID {
-				if timeCanTrade(hos[j].From, hos[j].To) {
-					return true
+				if !timeCanTrade(hos[j].From, hos[j].To) {
+					return false
 				}
 			}
 		case structure.HolidaySymbol:
 			if hos[j].SymbolID == symb.ID {
-				if timeCanTrade(hos[j].From, hos[j].To) {
-					return true
+				if !timeCanTrade(hos[j].From, hos[j].To) {
+					return false
 				}
 			}
 		}
 	}
 
-	return false
+	return true
 }
 
 func sessionCanQuoteTrade(symb *structure.Symbol, t structure.SessionType) bool {
