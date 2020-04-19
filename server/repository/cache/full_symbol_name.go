@@ -29,8 +29,7 @@ func (c *cacherFullSymbolName) Update() {
 }
 
 func (c *cacherFullSymbolName) Get() (i interface{}, exist bool) {
-	c.cache.get(c.bean)
-	return
+	return c.cache.get(c.bean)
 }
 
 func (c *cacherFullSymbolName) Export() (i interface{}, err error) {
@@ -64,11 +63,13 @@ func (c *fullSymbolNameCache) delete(fsn *structure.FullSymbolName) {
 	delete(c.info, fsn.Sl)
 }
 
-func (c *fullSymbolNameCache) get(fsn *structure.FullSymbolName) {
+func (c *fullSymbolNameCache) get(fsn *structure.FullSymbolName) (res interface{}, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
-	fsn = c.info[fsn.Sl]
+	res, exist = c.info[fsn.Sl]
+
+	return
 }
 
 func (c *fullSymbolNameCache) export() (interface{}, error) {

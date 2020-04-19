@@ -52,11 +52,13 @@ func (c *marketDSTCache) set(marketDST *structure.MarketDST) {
 	c.info[marketDST.MarketOwnerType] = marketDST
 }
 
-func (c *marketDSTCache) get(marketDST *structure.MarketDST) {
+func (c *marketDSTCache) get(marketDST *structure.MarketDST) (res interface{}, exist bool) {
 	c.RLock()
 	defer c.RUnlock()
 
-	marketDST = c.info[marketDST.MarketOwnerType]
+	res, exist = c.info[marketDST.MarketOwnerType]
+
+	return
 }
 
 func (c *marketDSTCache) export() (interface{}, error) {
