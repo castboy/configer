@@ -44,14 +44,18 @@ func Update(a operator) (num int64, err error) {
 	return a.GetCacher().Update()
 }
 
-func Get(a operator) (i interface{}, exist bool, err error) {
+func Get(a operator) (i interface{}, err error) {
 	err = a.GetChecker().IndexCheck()
 	if err != nil {
 		err = constant.NewErr(constant.ArgsErr, err)
 		return
 	}
 
-	i, exist = a.GetCacher().Get()
+	i, exist := a.GetCacher().Get()
+	if !exist {
+		err = constant.NewErr(constant.ArgsErr, a.GetChecker().NotFoundError())
+		return
+	}
 
 	return
 }

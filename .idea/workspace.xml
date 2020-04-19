@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3b34dd65-c147-44a7-a0be-6ebe88ebf9a5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/repository/mysql/implement.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/repository/mysql/implement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/utils/session.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/utils/session.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/server_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/base/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/base/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/extend/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/extend/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/idor.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/idor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/implement.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/implement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/nameIDor.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/nameIDor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/structure/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/structure/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

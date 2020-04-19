@@ -106,6 +106,10 @@ func (se *Session) IndexCheck() error {
 	return nil
 }
 
+func (se *Session) NotFoundError() error {
+	return errors.NotFoundf("Session, ID: %d", se.ID)
+}
+
 func (se *Session) AutoCondition() (cond string) {
 	if se.ID != 0 {
 		return fmt.Sprintf("`id` = %d", se.ID)
@@ -149,6 +153,10 @@ func (cs *ConvSymbol) IndexCheck() error {
 	}
 
 	return nil
+}
+
+func (cs *ConvSymbol) NotFoundError() error {
+	return errors.NotFoundf("ConvSymbol, SourceID: %d", cs.SourceID)
 }
 
 func (cs *ConvSymbol) AutoCondition() (cond string) {

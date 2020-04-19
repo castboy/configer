@@ -58,6 +58,10 @@ func (sb *Symbol) IndexCheck() error {
 	return nil
 }
 
+func (sb *Symbol) NotFoundError() error {
+	return errors.NotFoundf("Symbol, SymbolName: %s, ID: %d", sb.Symbol, sb.ID)
+}
+
 func (sb *Symbol) AutoCondition() (cond string) {
 	if sb.Symbol != "" {
 		cond = fmt.Sprintf("`symbol` = '%s'", sb.Symbol)
@@ -217,6 +221,10 @@ func (src *Source) IndexCheck() error {
 	return nil
 }
 
+func (src *Source) NotFoundError() error {
+	return errors.NotFoundf("Source, SourceName: %s, ID: %d", src.Source, src.ID)
+}
+
 func (src *Source) AutoCondition() (cond string) {
 	if src.Source != "" {
 		cond = fmt.Sprintf("`source` = '%s'", src.Source)
@@ -257,6 +265,10 @@ func (sec *Security) IndexCheck() error {
 	}
 
 	return nil
+}
+
+func (sec *Security) NotFoundError() error {
+	return errors.NotFoundf("Security, SecurityName: %s, ID: %d", sec.SecurityName, sec.ID)
 }
 
 func (sec *Security) AutoCondition() (cond string) {

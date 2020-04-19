@@ -19,12 +19,8 @@ type ExportSymbol struct {
 func GetSymbolInfoByName(symb string) (*ExportSymbol, error) {
 	symbol := &structure.Symbol{Symbol: symb}
 	symboler := base.NewSymboler(symbol)
-	i, exist, err := base.Get(symboler)
+	i, err := base.Get(symboler)
 	if err != nil {
-		return nil, err
-	}
-
-	if !exist {
 		return nil, err
 	}
 
@@ -32,12 +28,8 @@ func GetSymbolInfoByName(symb string) (*ExportSymbol, error) {
 
 	source := &structure.Source{ID: symbol.SourceID}
 	sourcer := base.NewSourcer(source)
-	j, exist, err := base.Get(sourcer)
+	j, err := base.Get(sourcer)
 	if err != nil {
-		return nil, err
-	}
-
-	if !exist {
 		return nil, err
 	}
 
@@ -63,8 +55,8 @@ func GetSymbols() (symbols []ExportSymbol, err error) {
 
 		source := &structure.Source{ID: sb.SourceID}
 		sourcer := base.NewSourcer(source)
-		j, exist, err := base.Get(sourcer)
-		if err != nil || !exist {
+		j, err := base.Get(sourcer)
+		if err != nil {
 			continue
 		}
 
@@ -82,26 +74,18 @@ func GetSymbols() (symbols []ExportSymbol, err error) {
 func GetSourceNameBySymbolName(symbolName string) (string, error) {
 	symbol := &structure.Symbol{Symbol: symbolName}
 	symboler := base.NewSymboler(symbol)
-	i, exist, err := base.Get(symboler)
+	i, err := base.Get(symboler)
 	if err != nil {
 		return "", err
-	}
-
-	if !exist {
-		return "", nil
 	}
 
 	symbol = i.(*structure.Symbol)
 
 	source := &structure.Source{ID: symbol.SourceID}
 	sourcer := base.NewSourcer(source)
-	j, exist, err := base.Get(sourcer)
+	j, err := base.Get(sourcer)
 	if err != nil {
 		return "", err
-	}
-
-	if !exist {
-		return "", nil
 	}
 
 	source = j.(*structure.Source)
@@ -130,25 +114,17 @@ func DeleteSymbolByName(symbolName string) error {
 func GetConvSymbolInfo(t structure.ConvType, symbolName string) (*structure.ConvInfo, error) {
 	symbol := &structure.Symbol{Symbol: symbolName}
 	symboler := base.NewSymboler(symbol)
-	i, exist, err := base.Get(symboler)
+	i, err := base.Get(symboler)
 	if err != nil {
 		return nil, err
-	}
-
-	if !exist {
-		return nil, nil
 	}
 
 	symbol = i.(*structure.Symbol)
 
 	convSymb := &structure.ConvSymbol{ConvType: t, SourceID: symbol.SourceID}
-	j, exist, err := extend.Get(extend.NewConvSymboler(convSymb))
+	j, err := extend.Get(extend.NewConvSymboler(convSymb))
 	if err != nil {
 		return nil, err
-	}
-
-	if !exist {
-		return nil, nil
 	}
 
 	return j.(*structure.ConvSymbol).ConvInfo, nil
@@ -182,13 +158,9 @@ func GetSources() (sources map[int]*structure.Source) {
 }
 
 func GetSourceByName(sourceName string) (*structure.Source, error) {
-	i, exist, err := base.Get(base.NewSourcer(&structure.Source{Source: sourceName}))
+	i, err := base.Get(base.NewSourcer(&structure.Source{Source: sourceName}))
 	if err != nil {
 		return nil, err
-	}
-
-	if !exist {
-		return nil, nil
 	}
 
 	return i.(*structure.Source), nil
@@ -273,12 +245,8 @@ func GetHolidays() (hs []*structure.Holiday, err error) {
 }
 
 func GetHolidayByID(ID int) (ho *structure.Holiday, err error) {
-	i, exist, err := base.Get(base.NewHolidayer(&structure.Holiday{ID: ID}))
+	i, err := base.Get(base.NewHolidayer(&structure.Holiday{ID: ID}))
 	if err != nil {
-		return
-	}
-
-	if !exist {
 		return
 	}
 
@@ -302,13 +270,9 @@ func DeleteHolidayByID(ID int) error {
 }
 
 func GetSecurityInfo(id int) (bean *structure.Security, err error) {
-	i, exist, err := base.Get(base.NewSecurityer(&structure.Security{ID: id}))
+	i, err := base.Get(base.NewSecurityer(&structure.Security{ID: id}))
 	if err != nil {
 		return
-	}
-
-	if !exist {
-		return nil, nil
 	}
 
 	return i.(*structure.Security), nil
@@ -355,12 +319,8 @@ func DeleteSecurityInfo(id int) error {
 }
 
 func GetDST(marketType structure.MarketType) (dst structure.DSTType, err error) {
-	i, exist, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: marketType}))
+	i, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: marketType}))
 	if err != nil {
-		return
-	}
-
-	if !exist {
 		return
 	}
 
@@ -488,39 +448,27 @@ func appendSymbolID(ho *structure.Holiday) error {
 	case structure.HolidayAll:
 
 	case structure.HolidaySecurity:
-		i, exist, err := base.Get(base.NewSecurityer(&structure.Security{SecurityName: ho.Symbol}))
+		i, err := base.Get(base.NewSecurityer(&structure.Security{SecurityName: ho.Symbol}))
 		if err != nil {
 			return err
-		}
-
-		if !exist {
-			return errors.NotFoundf("%v", &structure.Security{SecurityName: ho.Symbol})
 		}
 
 		se := i.(*structure.Security)
 		ho.SymbolID = se.ID
 
 	case structure.HolidaySource:
-		i, exist, err := base.Get(base.NewSourcer(&structure.Source{Source: ho.Symbol}))
+		i, err := base.Get(base.NewSourcer(&structure.Source{Source: ho.Symbol}))
 		if err != nil {
 			return err
-		}
-
-		if !exist {
-			return errors.NotFoundf("%v", &structure.Source{Source: ho.Symbol})
 		}
 
 		src := i.(*structure.Source)
 		ho.SymbolID = src.ID
 
 	case structure.HolidaySymbol:
-		i, exist, err := base.Get(base.NewSymboler(&structure.Symbol{Symbol: ho.Symbol}))
+		i, err := base.Get(base.NewSymboler(&structure.Symbol{Symbol: ho.Symbol}))
 		if err != nil {
 			return err
-		}
-
-		if !exist {
-			return errors.NotFoundf("%v", &structure.Symbol{Symbol: ho.Symbol})
 		}
 
 		symb := i.(*structure.Symbol)
@@ -536,12 +484,8 @@ func appendSymbolID(ho *structure.Holiday) error {
 func holidayCanTrade(symb *structure.Symbol) bool {
 	date := time.Now().UTC().Format("2006-01-02")
 	holiday := &structure.Holiday{Date: date}
-	i, exist, err := base.Get(base.NewHolidayer(holiday))
+	i, err := base.Get(base.NewHolidayer(holiday))
 	if err != nil {
-		return true
-	}
-
-	if !exist {
 		return true
 	}
 
@@ -587,34 +531,22 @@ func holidayCanTrade(symb *structure.Symbol) bool {
 
 func sessionCanQuoteTrade(symb *structure.Symbol, t structure.SessionType) bool {
 	// get session
-	i, exist, err := base.Get(base.NewSourcer(&structure.Source{ID: symb.SourceID}))
+	i, err := base.Get(base.NewSourcer(&structure.Source{ID: symb.SourceID}))
 	if err != nil {
-
-	}
-
-	if !exist {
 
 	}
 
 	src := i.(*structure.Source)
 
-	j, exist, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: src.MarketOwnerType}))
+	j, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: src.MarketOwnerType}))
 	if err != nil {
-
-	}
-
-	if !exist {
 
 	}
 
 	md := j.(*structure.MarketDST)
 
-	k, exist, err := base.Get(base.NewSessioner(&structure.Session{SourceID: symb.SourceID, Type: t, Dst: md.DST}))
+	k, err := base.Get(base.NewSessioner(&structure.Session{SourceID: symb.SourceID, Type: t, Dst: md.DST}))
 	if err != nil {
-
-	}
-
-	if !exist {
 
 	}
 

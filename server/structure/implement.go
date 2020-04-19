@@ -30,6 +30,10 @@ func (md *MarketDST) IndexCheck() error {
 	return nil
 }
 
+func (md *MarketDST) NotFoundError() error {
+	return errors.NotFoundf("MarketDST, MarketOwnerType: %d", md.MarketOwnerType)
+}
+
 func (md *MarketDST) AutoCondition() (cond string) {
 	return
 }
@@ -55,6 +59,10 @@ func (fs *FullSymbolName) IndexCheck() error {
 	}
 
 	return nil
+}
+
+func (fs *FullSymbolName) NotFoundError() error {
+	return errors.NotFoundf("FullSymbolName, Symbol: %s, Leverage: %d", fs.Sl.Symbol, fs.Sl.Leverage)
 }
 
 func (fs *FullSymbolName) AutoCondition() (cond string) {
@@ -113,6 +121,10 @@ func (ho *Holiday) IndexCheck() error {
 		return errors.NotValidf("Date")
 	}
 
+	return nil
+}
+
+func (ho *Holiday) NotFoundError() error {
 	return nil
 }
 
