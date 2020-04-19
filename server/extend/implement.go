@@ -9,7 +9,7 @@ import (
 type extender struct {
 	tabler  mysql.ExtendOperator
 	cacher  cache.BaseOperator
-	checker structure.Checkor
+	checker structure.Helpor
 }
 
 func NewConvSymboler(bean *structure.ConvSymbol) *extender {
@@ -36,6 +36,6 @@ func (a *extender) GetCacher() cache.BaseOperator {
 	return a.cacher
 }
 
-func (a *extender) GetChecker() structure.Checkor {
+func (a *extender) GetChecker() structure.Helpor {
 	return a.checker
 }

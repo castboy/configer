@@ -9,7 +9,7 @@ import (
 type baser struct {
 	cacher  cache.BaseOperator
 	tabler  mysql.BaseOperator
-	checker structure.Checkor
+	checker structure.Helpor
 }
 
 func NewHolidayer(bean *structure.Holiday) *baser {
@@ -68,6 +68,6 @@ func (a *baser) GetTabler() mysql.BaseOperator {
 	return a.tabler
 }
 
-func (a *baser) GetChecker() structure.Checkor {
+func (a *baser) GetChecker() structure.Helpor {
 	return a.checker
 }

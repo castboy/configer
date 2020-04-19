@@ -9,5 +9,5 @@ import (
 type operator interface {
 	GetTabler() mysql.BaseOperator
 	GetCacher() cache.BaseOperator
-	GetChecker() structure.Checkor
+	GetChecker() structure.Helpor
 }
