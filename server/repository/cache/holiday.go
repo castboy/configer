@@ -16,19 +16,16 @@ func NewCacherHoliday(bean *structure.Holiday) *cacherHoliday {
 	}
 }
 
-func (c *cacherHoliday) Insert() (num int64, err error) {
+func (c *cacherHoliday) Insert() {
 	c.cache.insert(c.bean)
-	return
 }
 
-func (c *cacherHoliday) Delete() (num int64, err error) {
+func (c *cacherHoliday) Delete() {
 	c.cache.delete(c.bean)
-	return
 }
 
-func (c *cacherHoliday) Update() (num int64, err error) {
+func (c *cacherHoliday) Update() {
 	c.cache.update(c.bean)
-	return
 }
 
 func (c *cacherHoliday) Get() (i interface{}, exist bool) {

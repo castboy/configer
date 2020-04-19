@@ -4,26 +4,30 @@ import "configer/server/constant"
 
 // all functions under this package
 
-func Insert(a operator) (num int64, err error) {
+func Insert(a operator) (err error) {
 	err = a.GetHelper().FormatCheck()
 	if err != nil {
 		return
 	}
 
-	return a.GetCacher().Insert()
+	a.GetCacher().Insert()
+
+	return nil
 }
 
-func Delete(a operator) (num int64, err error) {
-	return a.GetCacher().Delete()
+func Delete(a operator) {
+	a.GetCacher().Delete()
 }
 
-func Update(a operator) (num int64, err error) {
-	err = a.GetHelper().FormatCheck()
+func Update(a operator) error {
+	err := a.GetHelper().FormatCheck()
 	if err != nil {
-		return
+		return err
 	}
 
-	return a.GetCacher().Update()
+	a.GetCacher().Update()
+
+	return nil
 }
 
 func Get(a operator) (i interface{}, err error) {

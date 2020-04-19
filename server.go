@@ -95,8 +95,7 @@ func GetSourceNameBySymbolName(symbolName string) (string, error) {
 
 func InsertSymbol(symbol *structure.Symbol) error {
 	symboler := base.NewSymboler(symbol)
-	_, err := base.Insert(symboler)
-	return err
+	return base.Insert(symboler)
 }
 
 func UpdateSymbol(symbol *structure.Symbol) error {
@@ -131,8 +130,7 @@ func GetConvSymbolInfo(t structure.ConvType, symbolName string) (*structure.Conv
 }
 
 func InsertSource(source *structure.Source) error {
-	_, err := base.Insert(base.NewSourcer(source))
-	return err
+	return base.Insert(base.NewSourcer(source))
 }
 
 func UpdateSource(source *structure.Source) error {
@@ -254,8 +252,7 @@ func GetHolidayByID(ID int) (ho *structure.Holiday, err error) {
 }
 
 func InsertHoliday(holi *structure.Holiday) error {
-	_, err := base.Insert(base.NewHolidayer(holi))
-	return err
+	return base.Insert(base.NewHolidayer(holi))
 }
 
 func UpdateHolidayByID(ID int, holi *structure.Holiday) error {
@@ -309,8 +306,7 @@ func UpdateSecurityInfo(id int, info *structure.Security) error {
 }
 
 func InsertSecurityInfo(info *structure.Security) error {
-	_, err := base.Insert(base.NewSecurityer(info))
-	return err
+	return base.Insert(base.NewSecurityer(info))
 }
 
 func DeleteSecurityInfo(id int) error {

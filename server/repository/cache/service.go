@@ -1,9 +1,9 @@
 package cache
 
 type BaseOperator interface {
-	Insert() (int64, error)
-	Delete() (int64, error)
-	Update() (int64, error)
+	Insert()
+	Delete()
+	Update()
 	Get() (interface{}, bool)
 	Export() (i interface{}, err error)
 

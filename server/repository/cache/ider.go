@@ -4,7 +4,6 @@ import (
 	"configer/server/repository/cache/idor"
 	"configer/server/structure"
 	"configer/server/utils"
-	"fmt"
 )
 
 type cacherSession struct {
@@ -39,19 +38,15 @@ func NewCacherConvSymbol(bean *structure.ConvSymbol) *cacherConvSymbol {
 }
 
 
-func (c *ider) Insert() (num int64, err error) {
+func (c *ider) Insert() {
 	c.cache.Insert(c.bean)
-	return
 }
 
-func (c *ider) Delete() (num int64, err error) {
+func (c *ider) Delete() {
 	c.cache.Delete(c.bean)
-	return
 }
 
-func (c *ider) Update() (num int64, err error) {
-	err = fmt.Errorf("Method Not Support!")
-	return
+func (c *ider) Update() {
 }
 
 func (c *ider) Get() (i interface{}, exist bool) {
@@ -62,13 +57,11 @@ func (c *ider) Export() (i interface{}, err error) {
 	return c.cache.Export()
 }
 
-func (c *cacherSession) Update() (num int64, err error) {
+func (c *cacherSession) Update() {
 	ses := c.bean.(*structure.Session)
 	ses.Session = utils.TrimZero(ses.Session)
 
 	c.cache.Update(ses)
-
-	return
 }
 
 func (c *cacherSession) Cache(i interface{}) {

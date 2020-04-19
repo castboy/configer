@@ -50,19 +50,17 @@ func NewCacherSecurity(bean *structure.Security) *cacherSecurity {
 }
 
 // implement NameIDor
-func (c *nameIDer) Insert() (num int64, err error) {
+func (c *nameIDer) Insert() {
 	c.cache.Insert(c.bean)
 	return
 }
 
-func (c *nameIDer) Delete() (num int64, err error) {
+func (c *nameIDer) Delete() {
 	c.cache.Delete(c.bean)
-	return
 }
 
-func (c *nameIDer) Update() (num int64, err error) {
+func (c *nameIDer) Update() {
 	c.cache.Update(c.bean)
-	return
 }
 
 func (c *nameIDer) Get() (i interface{}, exist bool) {

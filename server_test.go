@@ -88,8 +88,8 @@ func Test_InsertSource(t *testing.T) {
 		SwapLong: decimal.NewFromFloat(1),
 	}
 
-	num, err := base.Insert(base.NewSourcer(src))
-	fmt.Println(num, err)
+	err := base.Insert(base.NewSourcer(src))
+	fmt.Println(err)
 }
 
 func Test_UpdateSource(t *testing.T) {
@@ -108,8 +108,8 @@ func Test_UpdateSource(t *testing.T) {
 		SwapLong: decimal.NewFromFloat(1),
 	}
 
-	num, err := base.Insert(base.NewSourcer(src))
-	fmt.Println(num, err)
+	err := base.Insert(base.NewSourcer(src))
+	fmt.Println(err)
 }
 
 func Test_GetSources(t *testing.T)  {

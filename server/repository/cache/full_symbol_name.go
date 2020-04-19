@@ -3,7 +3,6 @@ package cache
 import (
 	"configer/server/structure"
 	"configer/server/utils"
-	"fmt"
 )
 
 type cacherFullSymbolName struct {
@@ -18,19 +17,15 @@ func NewCacherFullSymbolName(bean *structure.FullSymbolName) *cacherFullSymbolNa
 	}
 }
 
-func (c *cacherFullSymbolName) Insert() (num int64, err error) {
+func (c *cacherFullSymbolName) Insert() {
 	c.cache.insert(c.bean)
-	return
 }
 
-func (c *cacherFullSymbolName) Delete() (num int64, err error) {
+func (c *cacherFullSymbolName) Delete() {
 	c.cache.delete(c.bean)
-	return
 }
 
-func (c *cacherFullSymbolName) Update() (num int64, err error) {
-	err = fmt.Errorf("Method Not Support!")
-	return
+func (c *cacherFullSymbolName) Update() {
 }
 
 func (c *cacherFullSymbolName) Get() (i interface{}, exist bool) {

@@ -2,20 +2,26 @@ package base
 
 import "configer/server/constant"
 
-func Insert(a operator) (num int64, err error) {
+func Insert(a operator) (err error) {
 	err = a.GetHelper().FormatCheck()
 	if err != nil {
 		err = constant.NewErr(constant.ArgsErr, err)
 		return
 	}
 
-	num, err = a.GetTabler().Insert()
+	num, err := a.GetTabler().Insert()
 	if err != nil {
 		err = constant.NewErr(constant.DBErr, err)
 		return
 	}
+	
+	if num != 1 {
+		
+	}
 
-	return a.GetCacher().Insert()
+	a.GetCacher().Insert()
+
+	return nil
 }
 
 func Delete(a operator) (num int64, err error) {
@@ -25,7 +31,9 @@ func Delete(a operator) (num int64, err error) {
 		return
 	}
 
-	return a.GetCacher().Delete()
+	a.GetCacher().Delete()
+
+	return
 }
 
 func Update(a operator) (num int64, err error) {
@@ -41,7 +49,8 @@ func Update(a operator) (num int64, err error) {
 		return
 	}
 
-	return a.GetCacher().Update()
+	a.GetCacher().Update()
+	return
 }
 
 func Get(a operator) (i interface{}, err error) {

@@ -2,7 +2,6 @@ package cache
 
 import (
 	"configer/server/structure"
-	"fmt"
 )
 
 type cacherMarketDST struct {
@@ -18,19 +17,15 @@ func NewCacherMarketDST(bean *structure.MarketDST) *cacherMarketDST {
 }
 
 // implement Cacheor1
-func (c *cacherMarketDST) Insert() (num int64, err error) {
-	err = fmt.Errorf("Method Not Support!")
+func (c *cacherMarketDST) Insert() {
 	return
 }
 
-func (c *cacherMarketDST) Delete() (num int64, err error) {
-	err = fmt.Errorf("Method Not Support!")
-	return
+func (c *cacherMarketDST) Delete() {
 }
 
-func (c *cacherMarketDST) Update() (num int64, err error) {
+func (c *cacherMarketDST) Update() {
 	c.cache.set(c.bean)
-	return
 }
 
 func (c *cacherMarketDST) Get() (i interface{}, exist bool) {
