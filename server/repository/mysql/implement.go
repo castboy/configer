@@ -131,10 +131,6 @@ func (t *tablerSource) Export() (interface{}, error) {
 	return i, err
 }
 
-func (t *tablerSource) Update() (int64, error) {
-	return t.Table(t.bean).Where(t.bean.AutoCondition()).Cols("source_type, digits, multiply, contract_size,stops_level,currency,profit_currency,margin_mode,margin_currency,swap_type,swap_long,swap_short,swap_3_day,market_owner_type").Update(t.bean)
-}
-
 func (t *tablerSession) Update() (num int64, err error) {
 	ses := t.bean.(*structure.Session)
 	ses.Session = utils.OrderAndFill(ses.Session)

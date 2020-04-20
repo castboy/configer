@@ -42,7 +42,7 @@ func Test_GetConvSymbolInfo(t *testing.T) {
 
 func Test_InsertSymbol(t *testing.T)  {
 	symb := &structure.Symbol{
-		Symbol: "www",
+		Symbol: "wwwmwg",
 		SourceID: 1,
 		Leverage: 100,
 		SecurityID: 1,
@@ -53,7 +53,7 @@ func Test_InsertSymbol(t *testing.T)  {
 	}
 
 	err := InsertSymbol(symb)
-	fmt.Println(err)
+	fmt.Println(err, symb.ID)
 }
 
 func Test_UpdateSymbol(t *testing.T) {

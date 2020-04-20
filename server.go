@@ -2,6 +2,7 @@ package main
 
 import (
 	"configer/server/base"
+	"configer/server/constant"
 	"configer/server/extend"
 	"configer/server/structure"
 	"configer/server/utils"
@@ -94,13 +95,39 @@ func GetSourceNameBySymbolName(symbolName string) (string, error) {
 }
 
 func InsertSymbol(symbol *structure.Symbol) error {
+	// insert symbol.
+	_, err := base.Get(base.NewSourcer(&structure.Source{ID: symbol.SourceID}))
+	if err != nil {
+		return err
+	}
+
+	_, err = base.Get(base.NewSecurityer(&structure.Security{ID: symbol.SecurityID}))
+	if err != nil {
+		return err
+	}
+
 	symboler := base.NewSymboler(symbol)
-	return base.Insert(symboler)
+	err = base.Insert(symboler)
+	if err != nil {
+		return err
+	}
+
+	// insert full_symbol_name
+	fsn := &structure.FullSymbolName{}
+	fsn.Sl.Symbol = utils.GetRequestSymbol(symbol.Symbol)
+	fsn.Sl.Leverage = symbol.Leverage
+	fsn.FullName = symbol.Symbol
+
+	return extend.Insert(extend.NewFullSymbolNamer(fsn))
 }
 
 func UpdateSymbol(symbol *structure.Symbol) error {
 	symboler := base.NewSymboler(symbol)
 	_, err := base.Update(symboler)
+
+	// effect for full_symbol_name/conv_symbol_info ?
+	// TODO
+
 	return err
 }
 
@@ -130,11 +157,54 @@ func GetConvSymbolInfo(t structure.ConvType, symbolName string) (*structure.Conv
 }
 
 func InsertSource(source *structure.Source) error {
-	return base.Insert(base.NewSourcer(source))
+	// insert source
+	err := base.Insert(base.NewSourcer(source))
+	if err != nil {
+		return err
+	}
+
+	// insert conv_symbol_info
+	sources := GetSources()
+
+	srcs := []structure.Source{}
+	for j := range sources {
+		srcs = append(srcs, *sources[j])
+	}
+
+	mc := utils.BuildConvInfo(source.MarginCurrency, srcs)
+	cs := &structure.ConvSymbol{ConvType: structure.MarginConv, SourceID: source.ID, ConvInfo: mc}
+	err = extend.Insert(extend.NewConvSymboler(cs))
+	if err != nil {
+		return err
+	}
+
+	pc := utils.BuildConvInfo(source.ProfitCurrency, srcs)
+	cs = &structure.ConvSymbol{ConvType: structure.ProfitConv, SourceID: source.ID, ConvInfo: pc}
+	err = extend.Insert(extend.NewConvSymboler(cs))
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func UpdateSource(source *structure.Source) error {
-	_, err := base.Update(base.NewSourcer(source))
+	src := &structure.Source{Source: source.Source}
+	i, err := base.Get(base.NewSourcer(src))
+	if err != nil {
+		return err
+	}
+
+	src = i.(*structure.Source)
+
+	// no updated fields.
+	source.ID = src.ID
+	source.Source = src.Source
+	source.SourceCN = src.SourceCN
+	source.ProfitMode = src.ProfitMode
+	source.SwapCurrency = src.SwapCurrency
+
+	_, err = base.Update(base.NewSourcer(source))
 	return err
 }
 
@@ -176,7 +246,6 @@ func GetSourceIDByName(sourceName string) (ID int, err error) {
 
 func GetSymbolsBySourceName(sourceName string) (symbols []string) {
 	id, err := GetSourceIDByName(sourceName)
-	fmt.Println(id)
 	if err != nil {
 		return nil
 	}
@@ -296,6 +365,24 @@ func GetAllSecuritiesInfos() (res []*structure.Security, err error) {
 		res = append(res, se[j].(*structure.Security))
 	}
 
+	// append symbols
+	symbols := map[int][]string{}
+
+	j, err := base.Export(base.NewSymboler(&structure.Symbol{}))
+	if err != nil {
+		return
+	}
+
+	sbs := j.(map[string]structure.NameIDor)
+	for j := range sbs {
+		sb := sbs[j].(*structure.Symbol)
+		symbols[sb.SecurityID] = append(symbols[sb.SecurityID], sb.Symbol)
+	}
+
+	for i := range res {
+		res[i].Symbols = symbols[res[i].ID]
+	}
+
 	return
 }
 
@@ -310,7 +397,27 @@ func InsertSecurityInfo(info *structure.Security) error {
 }
 
 func DeleteSecurityInfo(id int) error {
-	_, err := base.Delete(base.NewSecurityer(&structure.Security{ID: id}))
+	symbName := []string{}
+
+	i, err := base.Export(base.NewSymboler(&structure.Symbol{}))
+	if err != nil {
+		return err
+	}
+
+	sbs := i.(map[string]structure.NameIDor)
+	for j := range sbs {
+		sb := sbs[j].(*structure.Symbol)
+		if sb.SecurityID == id {
+			symbName = append(symbName, sb.Symbol)
+		}
+	}
+
+	if len(symbName) != 0 {
+		return constant.NewErr(constant.ArgsErr, fmt.Sprintf("Forbidden DeleteSecurityInfo, securityID: %d", id))
+	}
+
+	_, err = base.Delete(base.NewSecurityer(&structure.Security{ID: id}))
+
 	return err
 }
 
