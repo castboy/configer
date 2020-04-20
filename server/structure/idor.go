@@ -110,12 +110,24 @@ func (se *Session) NotFoundError() error {
 	return errors.NotFoundf("Session, ID: %d", se.ID)
 }
 
-func (se *Session) AutoCondition() (cond string) {
+func (se *Session) ExportCondition() (cond string) {
+	return fmt.Sprintf("`type` = %d and `dst_type` = %d", se.Type, se.Dst)
+}
+
+func (se *Session) UpdateCondition() (cond string) {
 	if se.ID != 0 {
 		return fmt.Sprintf("`id` = %d", se.ID)
 	}
 
-	return fmt.Sprintf("`type` = %d and `dst_type` = %d", se.Type, se.Dst)
+	return fmt.Sprintf("`source_id` = %d and `type` = %d and `dst_type` = %d", se.SourceID, se.Type, se.Dst)
+}
+
+func (se *Session) DeleteCondition() (cond string) {
+	return se.UpdateCondition()
+}
+
+func (se *Session) GetCondition() (cond string) {
+	return se.UpdateCondition()
 }
 
 func (se *Session) GetID() int {

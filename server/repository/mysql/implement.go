@@ -95,15 +95,15 @@ func (t *tabler) Insert() (int64, error) {
 }
 
 func (t *tabler) Delete() (int64, error) {
-	return t.Table(t.bean).Where(t.bean.AutoCondition()).NoAutoCondition(true).Delete(t.bean)
+	return t.Table(t.bean).Where(t.bean.DeleteCondition()).NoAutoCondition(true).Delete(t.bean)
 }
 
 func (t *tabler) Update() (int64, error) {
-	return t.Table(t.bean).Where(t.bean.AutoCondition()).Update(t.bean)
+	return t.Table(t.bean).Where(t.bean.UpdateCondition()).Update(t.bean)
 }
 
 func (t *tabler) Get() (bool, error) {
-	return t.Table(t.bean).Where(t.bean.AutoCondition()).Get(t.bean)
+	return t.Table(t.bean).Where(t.bean.GetCondition()).Get(t.bean)
 }
 
 func (t *tablerSymbol) Export() (interface{}, error) {
@@ -135,12 +135,12 @@ func (t *tablerSession) Update() (num int64, err error) {
 	ses := t.bean.(*structure.Session)
 	ses.Session = utils.OrderAndFill(ses.Session)
 
-	return t.Table(t.bean).Where(t.bean.AutoCondition()).Update(ses)
+	return t.Table(t.bean).Where(t.bean.UpdateCondition()).Update(ses)
 }
 
 func (t *tablerSession) Export() (interface{}, error) {
 	i := []structure.Session{}
-	err := t.Table(t.bean).Where(t.bean.AutoCondition()).Find(&i)
+	err := t.Table(t.bean).Where(t.bean.ExportCondition()).Find(&i)
 
 	return i, err
 }

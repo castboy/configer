@@ -34,8 +34,20 @@ func (md *MarketDST) NotFoundError() error {
 	return errors.NotFoundf("MarketDST, MarketOwnerType: %d", md.MarketOwnerType)
 }
 
-func (md *MarketDST) AutoCondition() (cond string) {
-	return
+func (md *MarketDST) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (md *MarketDST) UpdateCondition() (cond string) {
+	return md.ExportCondition()
+}
+
+func (md *MarketDST) DeleteCondition() (cond string) {
+	return md.ExportCondition()
+}
+
+func (md *MarketDST) GetCondition() (cond string) {
+	return md.ExportCondition()
 }
 
 // full.symbol.name
@@ -124,8 +136,20 @@ func (ho *Holiday) NotFoundError() error {
 	return nil
 }
 
-func (ho *Holiday) AutoCondition() (cond string) {
+func (ho *Holiday) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (ho *Holiday) UpdateCondition() (cond string) {
 	return fmt.Sprintf("id = %d", ho.ID)
+}
+
+func (ho *Holiday) DeleteCondition() (cond string) {
+	return ho.UpdateCondition()
+}
+
+func (ho *Holiday) GetCondition() (cond string) {
+	return ho.UpdateCondition()
 }
 
 
