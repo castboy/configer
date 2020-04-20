@@ -47,6 +47,30 @@ func (st SymbolStatus) String() string {
 }
 
 func (sb *Symbol) FormatCheck() error {
+	if sb.Symbol == "" {
+		return errors.NotValidf("Symbol, %v", sb.Symbol)
+	}
+
+	if sb.SourceID == 0 {
+		return errors.NotValidf("SourceID, %v", sb.SourceID)
+	}
+
+	if sb.SecurityID == 0 {
+		return errors.NotValidf("SecurityID, %v", sb.SecurityID)
+	}
+
+	if sb.Leverage == 0 {
+		return errors.NotValidf("Leverage, %v", sb.Leverage)
+	}
+
+	if sb.MarginDivider.IsZero() {
+		return errors.NotValidf("MarginDivider, %v", 0)
+	}
+
+	if sb.Percentage.IsZero() {
+		return errors.NotValidf("Percentage, %v", 0)
+	}
+
 	return nil
 }
 
