@@ -65,10 +65,6 @@ func (fs *FullSymbolName) NotFoundError() error {
 	return errors.NotFoundf("FullSymbolName, Symbol: %s, Leverage: %d", fs.Sl.Symbol, fs.Sl.Leverage)
 }
 
-func (fs *FullSymbolName) AutoCondition() (cond string) {
-	return
-}
-
 // map holiday table.
 type Holiday struct {
 	ID          int             `json:"id" xorm:"id"`

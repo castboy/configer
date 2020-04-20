@@ -159,10 +159,6 @@ func (cs *ConvSymbol) NotFoundError() error {
 	return errors.NotFoundf("ConvSymbol, SourceID: %d", cs.SourceID)
 }
 
-func (cs *ConvSymbol) AutoCondition() (cond string) {
-	return
-}
-
 func (cs *ConvSymbol) GetID() int {
 	return cs.SourceID
 }
