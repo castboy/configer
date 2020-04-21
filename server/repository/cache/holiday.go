@@ -90,18 +90,15 @@ func (c *holidayCache) get(bean *structure.Holiday) (i interface{}, exist bool) 
 }
 
 func (c *holidayCache) update(bean *structure.Holiday) {
-	c.RLock()
-	defer c.RUnlock()
-
 	// if `Date` is not updated.
+	c.RLock()
 	if c.info[bean.Date][bean.ID] != nil {
 		c.info[bean.Date][bean.ID] = bean
+		c.RUnlock()
 		return
 	}
 
 	// if `Date` is updated.
-	c.RUnlock()
-
 	c.delete(bean)
 	c.insert(bean)
 }
