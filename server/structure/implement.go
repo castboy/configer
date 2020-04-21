@@ -39,15 +39,15 @@ func (md *MarketDST) ExportCondition() (cond string) {
 }
 
 func (md *MarketDST) UpdateCondition() (cond string) {
-	return md.ExportCondition()
+	return fmt.Sprintf("`market_type` = %d", md.MarketOwnerType)
 }
 
 func (md *MarketDST) DeleteCondition() (cond string) {
-	return md.ExportCondition()
+	return md.UpdateCondition()
 }
 
 func (md *MarketDST) GetCondition() (cond string) {
-	return md.ExportCondition()
+	return md.UpdateCondition()
 }
 
 // full.symbol.name
