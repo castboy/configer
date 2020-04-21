@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b34dd65-c147-44a7-a0be-6ebe88ebf9a5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/start.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/session_holiday.go" beforeDir="false" afterPath="$PROJECT_DIR$/session_holiday.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symbol_source_dst.go" beforeDir="false" afterPath="$PROJECT_DIR$/symbol_source_dst.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +71,8 @@
       <recent name="$PROJECT_DIR$/server/extend" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_GetSymbolInfoByName in configer">
-    <configuration name="Test_GetSources in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.Test_ExportMarketDST in configer">
+    <configuration name="Test_ExportMarketDST in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -80,10 +80,10 @@
       <package value="configer" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^Test_GetSources$" />
+      <pattern value="^Test_ExportMarketDST$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_GetSymbolInfoByName in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_GetAllSecuritiesInfos in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -91,10 +91,10 @@
       <package value="configer" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^Test_GetSymbolInfoByName$" />
+      <pattern value="^Test_GetAllSecuritiesInfos$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_InsertSource in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_GetDST in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -102,10 +102,10 @@
       <package value="configer" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^Test_InsertSource$" />
+      <pattern value="^Test_GetDST$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_InsertSymbol in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_GetSecurityNameByID in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -113,10 +113,10 @@
       <package value="configer" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^Test_InsertSymbol$" />
+      <pattern value="^Test_GetSecurityNameByID$" />
       <method v="2" />
     </configuration>
-    <configuration name="Test_UpdateSource in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_SetDST in configer" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="configer" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -124,16 +124,16 @@
       <package value="configer" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^Test_UpdateSource$" />
+      <pattern value="^Test_SetDST$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.Test_GetSymbolInfoByName in configer" />
-        <item itemvalue="Go Test.Test_InsertSymbol in configer" />
-        <item itemvalue="Go Test.Test_GetSources in configer" />
-        <item itemvalue="Go Test.Test_UpdateSource in configer" />
-        <item itemvalue="Go Test.Test_InsertSource in configer" />
+        <item itemvalue="Go Test.Test_ExportMarketDST in configer" />
+        <item itemvalue="Go Test.Test_SetDST in configer" />
+        <item itemvalue="Go Test.Test_GetDST in configer" />
+        <item itemvalue="Go Test.Test_GetAllSecuritiesInfos in configer" />
+        <item itemvalue="Go Test.Test_GetSecurityNameByID in configer" />
       </list>
     </recent_temporary>
   </component>
@@ -150,31 +150,31 @@
     <proxy>off</proxy>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="315" key="GridCell.Tab.0.bottom" timestamp="1587379728015">
+    <state width="1398" height="417" key="GridCell.Tab.0.bottom" timestamp="1587453886769">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="315" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587379728015" />
+    <state width="1398" height="417" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587453886769" />
     <state width="1398" height="403" key="GridCell.Tab.0.bottom/48.23.1392.877@48.23.1392.877" timestamp="1587348963419" />
     <state width="1398" height="428" key="GridCell.Tab.0.bottom/50.23.1390.877@50.23.1390.877" timestamp="1586861913087" />
     <state width="1398" height="521" key="GridCell.Tab.0.bottom/54.23.1386.877@54.23.1386.877" timestamp="1587120460202" />
-    <state width="1398" height="315" key="GridCell.Tab.0.center" timestamp="1587379728013">
+    <state width="1398" height="417" key="GridCell.Tab.0.center" timestamp="1587453886767">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="315" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587379728013" />
+    <state width="1398" height="417" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587453886767" />
     <state width="1398" height="403" key="GridCell.Tab.0.center/48.23.1392.877@48.23.1392.877" timestamp="1587348963417" />
     <state width="1398" height="428" key="GridCell.Tab.0.center/50.23.1390.877@50.23.1390.877" timestamp="1586861913086" />
     <state width="1398" height="521" key="GridCell.Tab.0.center/54.23.1386.877@54.23.1386.877" timestamp="1587120460200" />
-    <state width="1398" height="315" key="GridCell.Tab.0.left" timestamp="1587379728012">
+    <state width="1398" height="417" key="GridCell.Tab.0.left" timestamp="1587453886766">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="315" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587379728012" />
+    <state width="1398" height="417" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587453886766" />
     <state width="1398" height="403" key="GridCell.Tab.0.left/48.23.1392.877@48.23.1392.877" timestamp="1587348963416" />
     <state width="1398" height="428" key="GridCell.Tab.0.left/50.23.1390.877@50.23.1390.877" timestamp="1586861913085" />
     <state width="1398" height="521" key="GridCell.Tab.0.left/54.23.1386.877@54.23.1386.877" timestamp="1587120460199" />
-    <state width="1398" height="315" key="GridCell.Tab.0.right" timestamp="1587379728014">
+    <state width="1398" height="417" key="GridCell.Tab.0.right" timestamp="1587453886768">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="315" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587379728014" />
+    <state width="1398" height="417" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587453886768" />
     <state width="1398" height="403" key="GridCell.Tab.0.right/48.23.1392.877@48.23.1392.877" timestamp="1587348963418" />
     <state width="1398" height="428" key="GridCell.Tab.0.right/50.23.1390.877@50.23.1390.877" timestamp="1586861913086" />
     <state width="1398" height="521" key="GridCell.Tab.0.right/54.23.1386.877@54.23.1386.877" timestamp="1587120460201" />
@@ -182,6 +182,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="690" y="163" key="com.goide.refactor.move.GoMoveDeclarationDialog/0.0.1440.900@0.0.1440.900" timestamp="1586857202504" />
+    <state x="421" y="207" width="598" height="486" key="find.popup" timestamp="1587449874958">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="421" y="207" width="598" height="486" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1587449874958" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

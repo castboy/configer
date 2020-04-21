@@ -122,7 +122,7 @@ func UpdateSymbol(symbol *structure.Symbol) error {
 	symboler := base.NewSymboler(symbol)
 	_, err := base.Update(symboler)
 
-	// effect for full_symbol_name/conv_symbol_info ?
+	// effect for full_symbol_name ?
 	// TODO
 
 	return err

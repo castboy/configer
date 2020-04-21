@@ -17,7 +17,7 @@ func ExportSessions(sourceName string, dstType structure.DSTType, sessionType st
 
 	i, err := base.Export(base.NewSessioner(&structure.Session{Type: sessionType, Dst: dstType}))
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	ss := i.(map[int]structure.IDor)
@@ -75,7 +75,10 @@ func IsQuotable(symb *structure.Symbol) bool {
 		return false
 	}
 
-	return sessionCanQuoteTrade(symb, structure.Quote)
+	can, _ := sessionCanQuoteTrade(symb, structure.Quote)
+	// TODO log ?
+
+	return can
 }
 
 func IsTradable(symb *structure.Symbol) bool {
@@ -83,7 +86,10 @@ func IsTradable(symb *structure.Symbol) bool {
 		return false
 	}
 
-	return sessionCanQuoteTrade(symb, structure.Trade)
+	can, _ := sessionCanQuoteTrade(symb, structure.Trade)
+	// TODO log ?
+
+	return can
 }
 
 
@@ -177,25 +183,25 @@ func holidayCanTrade(symb *structure.Symbol) bool {
 	return true
 }
 
-func sessionCanQuoteTrade(symb *structure.Symbol, t structure.SessionType) bool {
+func sessionCanQuoteTrade(symb *structure.Symbol, t structure.SessionType) (can bool, err error) {
 	// get session
 	i, err := base.Get(base.NewSourcer(&structure.Source{ID: symb.SourceID}))
 	if err != nil {
-
+		return
 	}
 
 	src := i.(*structure.Source)
 
 	j, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: src.MarketOwnerType}))
 	if err != nil {
-
+		return
 	}
 
 	md := j.(*structure.MarketDST)
 
 	k, err := base.Get(base.NewSessioner(&structure.Session{SourceID: symb.SourceID, Type: t, Dst: md.DST}))
 	if err != nil {
-
+		return
 	}
 
 	ses := k.(*structure.Session)
@@ -208,9 +214,9 @@ func sessionCanQuoteTrade(symb *structure.Symbol, t structure.SessionType) bool 
 	for _, session := range ses.Session[int32(weekday)] {
 		beginEnd := strings.Split(session, "-")
 		if beginEnd[0] <= nowStr && nowStr < beginEnd[1] {
-			return true
+			return true, nil
 		}
 	}
 
-	return false
+	return false, nil
 }
