@@ -54,15 +54,6 @@ func GetHolidays() (hs []*structure.Holiday, err error) {
 	return
 }
 
-func GetHolidayByID(ID int) (ho *structure.Holiday, err error) {
-	i, err := base.Get(base.NewHolidayer(&structure.Holiday{ID: ID}))
-	if err != nil {
-		return
-	}
-
-	return i.(*structure.Holiday), nil
-}
-
 func InsertHoliday(holi *structure.Holiday) error {
 	return base.Insert(base.NewHolidayer(holi))
 }
