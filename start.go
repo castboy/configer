@@ -8,6 +8,13 @@ import (
 
 func Start() (err error) {
 	// cache symbol.
+	group := &structure.AccountGroup{}
+	grouper := base.NewGrouper(group)
+	err = base.Cache(grouper)
+	if err != nil {
+
+	}
+	// cache symbol.
 	symbol := &structure.Symbol{}
 	symboler := base.NewSymboler(symbol)
 	err = base.Cache(symboler)

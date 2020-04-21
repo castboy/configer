@@ -22,7 +22,7 @@ type holidayCache struct {
 	sync.RWMutex
 }
 
-const AllSessionTypeLength = int(structure.SessionTypeLength)*int(structure.DSTTypeLength)
+const AllSessionTypeLength = int(structure.SessionTypeLength) * int(structure.DSTTypeLength)
 
 var symbCache *nameIDor.NameIDer
 var srcCache *nameIDor.NameIDer
@@ -38,6 +38,7 @@ func init() {
 	symbCache = nameIDor.NewNameIDer()
 	srcCache = nameIDor.NewNameIDer()
 	secCache = nameIDor.NewNameIDer()
+	grpCache = nameIDor.NewNameIDer()
 
 	for i := 0; i < AllSessionTypeLength; i++ {
 		sessCache[i] = idor.NewIDer()
