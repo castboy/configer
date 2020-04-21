@@ -17,7 +17,7 @@ func Insert(a operator) (err error) {
 		err = constant.NewErr(constant.DBErr, err)
 		return
 	}
-	
+
 	if num != 1 {
 		err = constant.NewErr(constant.UnknowErr, fmt.Sprintf("Insert 0 item, no error, structure: %v", a.GetHelper()))
 		return
@@ -48,6 +48,7 @@ func Update(a operator) (num int64, err error) {
 	}
 
 	num, err = a.GetTabler().Update()
+	fmt.Println("num",num)
 	if err != nil {
 		err = constant.NewErr(constant.DBErr, err)
 		return

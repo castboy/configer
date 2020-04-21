@@ -40,16 +40,16 @@ func Test_GetConvSymbolInfo(t *testing.T) {
 	fmt.Println(conv.ConvSymbol, conv.ConvMultiply, conv.ConvNeed, err)
 }
 
-func Test_InsertSymbol(t *testing.T)  {
+func Test_InsertSymbol(t *testing.T) {
 	symb := &structure.Symbol{
-		Symbol: "www",
-		SourceID: 1,
-		Leverage: 100,
-		SecurityID: 1,
+		Symbol:        "www",
+		SourceID:      1,
+		Leverage:      100,
+		SecurityID:    1,
 		MarginInitial: decimal.New(1, 1),
 		MarginDivider: decimal.New(1, 1),
-		Percentage: decimal.New(1, 1),
-		Status: structure.SymbolStatus(1),
+		Percentage:    decimal.New(1, 1),
+		Status:        structure.SymbolStatus(1),
 	}
 
 	err := InsertSymbol(symb)
@@ -58,14 +58,14 @@ func Test_InsertSymbol(t *testing.T)  {
 
 func Test_UpdateSymbol(t *testing.T) {
 	symb := &structure.Symbol{
-		Symbol: "www",
-		SourceID: 2,
-		Leverage: 100,
-		SecurityID: 1,
+		Symbol:        "www",
+		SourceID:      2,
+		Leverage:      100,
+		SecurityID:    1,
 		MarginInitial: decimal.New(1, 1),
 		MarginDivider: decimal.New(1, 1),
-		Percentage: decimal.New(1, 1),
-		Status: structure.SymbolStatus(1),
+		Percentage:    decimal.New(1, 1),
+		Status:        structure.SymbolStatus(1),
 	}
 
 	err := UpdateSymbol(symb)
@@ -74,18 +74,18 @@ func Test_UpdateSymbol(t *testing.T) {
 
 func Test_InsertSource(t *testing.T) {
 	src := &structure.Source{
-		Source:          "wmgz",
-		SourceCN:        "wmg" ,
-		SourceType:      structure.SourceType(1),
-		Digits:          1,
-		Currency:        "123",
-		ContractSize: decimal.NewFromFloat(1),
-		StopsLevel: 100,
-		ProfitCurrency:  "123",
-		MarginCurrency:  "123",
-		SwapCurrency:    "123",
-		Swap3Day:        time.Weekday(1),
-		SwapLong: decimal.NewFromFloat(1),
+		Source:         "wmgz",
+		SourceCN:       "wmg",
+		SourceType:     structure.SourceType(1),
+		Digits:         1,
+		Currency:       "123",
+		ContractSize:   decimal.NewFromFloat(1),
+		StopsLevel:     100,
+		ProfitCurrency: "123",
+		MarginCurrency: "123",
+		SwapCurrency:   "123",
+		Swap3Day:       time.Weekday(1),
+		SwapLong:       decimal.NewFromFloat(1),
 	}
 
 	err := base.Insert(base.NewSourcer(src))
@@ -94,52 +94,50 @@ func Test_InsertSource(t *testing.T) {
 
 func Test_UpdateSource(t *testing.T) {
 	src := &structure.Source{
-		Source:          "wmgz",
-		SourceCN:        "wmgxxx" ,
-		SourceType:      structure.SourceType(1),
-		Digits:          1,
-		Currency:        "123",
-		ContractSize: decimal.NewFromFloat(1),
-		StopsLevel: 200,
-		ProfitCurrency:  "123",
-		MarginCurrency:  "123",
-		SwapCurrency:    "123",
-		Swap3Day:        time.Weekday(1),
-		SwapLong: decimal.NewFromFloat(1),
+		Source:         "wmgz",
+		SourceCN:       "wmgxxx",
+		SourceType:     structure.SourceType(1),
+		Digits:         1,
+		Currency:       "123",
+		ContractSize:   decimal.NewFromFloat(1),
+		StopsLevel:     200,
+		ProfitCurrency: "123",
+		MarginCurrency: "123",
+		SwapCurrency:   "123",
+		Swap3Day:       time.Weekday(1),
+		SwapLong:       decimal.NewFromFloat(1),
 	}
 
 	err := base.Insert(base.NewSourcer(src))
 	fmt.Println(err)
 }
 
-func Test_GetSources(t *testing.T)  {
+func Test_GetSources(t *testing.T) {
 	srcs := GetSources()
 	fmt.Println(srcs)
 }
 
-func Test_GetSourceByName(t *testing.T)  {
+func Test_GetSourceByName(t *testing.T) {
 
 }
 
-func Test_GetSourceIDByName(t *testing.T)  {
+func Test_GetSourceIDByName(t *testing.T) {
 
 }
 
-func Test_GetSymbolsBySourceName(t *testing.T)  {
+func Test_GetSymbolsBySourceName(t *testing.T) {
 
 }
 
-
-func Test_ExportSessions(t *testing.T)  {
-
-}
-
-func Test_SetSession(t *testing.T)  {
+func Test_ExportSessions(t *testing.T) {
 
 }
 
+func Test_SetSession(t *testing.T) {
 
-func Test_GetHolidays(t *testing.T)  {
+}
+
+func Test_GetHolidays(t *testing.T) {
 
 }
 
@@ -158,7 +156,6 @@ func Test_UpdateHolidayByID(t *testing.T) {
 func Test_DeleteHolidayByID(t *testing.T) {
 
 }
-
 
 func Test_GetSecurityInfo(t *testing.T) {
 
@@ -188,11 +185,10 @@ func Test_GetDST(t *testing.T) {
 
 }
 
-func Test_SetDST(t *testing.T)  {
+func Test_SetDST(t *testing.T) {
 
 }
 
 func Test_ExportMarketDST(t *testing.T) {
 
 }
-

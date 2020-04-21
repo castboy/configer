@@ -131,5 +131,3 @@ func (ho *Holiday) NotFoundError() error {
 func (ho *Holiday) AutoCondition() (cond string) {
 	return fmt.Sprintf("id = %d", ho.ID)
 }
-
-

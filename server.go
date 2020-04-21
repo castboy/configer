@@ -356,8 +356,15 @@ func IsTradable(symb *structure.Symbol) bool {
 	return sessionCanQuoteTrade(symb, structure.Trade)
 }
 
-
 func Start() (err error) {
+	//cache group
+	group:=&structure.AccountGroup{}
+	grouper:=base.NewGrouper(group)
+	err=base.Cache(grouper)
+	if err!=nil{
+
+	}
+
 	// cache symbol.
 	symbol := &structure.Symbol{}
 	symboler := base.NewSymboler(symbol)
@@ -437,7 +444,6 @@ func Start() (err error) {
 
 	return nil
 }
-
 
 func appendSymbolID(ho *structure.Holiday) error {
 	switch ho.Category {

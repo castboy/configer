@@ -22,8 +22,8 @@ type ider struct {
 func NewCacherSession(bean *structure.Session) *cacherSession {
 	return &cacherSession{
 		&ider{
-		bean,
-		sessCache[int(bean.Dst*2)+int(bean.Type)],
+			bean,
+			sessCache[int(bean.Dst*2)+int(bean.Type)],
 		},
 	}
 }
@@ -36,7 +36,6 @@ func NewCacherConvSymbol(bean *structure.ConvSymbol) *cacherConvSymbol {
 		},
 	}
 }
-
 
 func (c *ider) Insert() {
 	c.cache.Insert(c.bean)
