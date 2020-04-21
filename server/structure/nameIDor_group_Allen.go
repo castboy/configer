@@ -21,6 +21,29 @@ type AccountGroup struct {
 }
 
 func (grp *AccountGroup) FormatCheck() error {
+	if grp==nil{
+		return errors.NotValidf("AccountGroup info is null")
+	}
+
+	if grp.Name==""{
+		return errors.NotValidf("AccountGroup, %v", grp.Name)
+	}
+
+	if grp.DepositCurrency==""{
+		return errors.NotValidf("AccountGroup DepositCurrency is null")
+	}
+
+	if grp.MarginStopOut.LessThanOrEqual(decimal.Zero){
+		return errors.NotValidf("AccountGroup MarginStopOut is invalid")
+	}
+
+	if grp.MarginMode>=constant.MarginCalcModeEnd  {
+		return errors.NotValidf("AccountGroup MarginMode is invalid")
+	}
+
+	if grp.TradeType>=constant.GroupTradeTypeEnd  {
+		return errors.NotValidf("AccountGroup TradeType is invalid")
+	}
 	return nil
 }
 
@@ -33,10 +56,15 @@ func (grp *AccountGroup) IndexCheck() error {
 }
 
 func (grp *AccountGroup) NotFoundError() error {
-	return errors.NotFoundf("AccountGroup, SecurityName: %s, ID: %d", grp.Name, grp.ID)
+	return errors.NotFoundf("AccountGroupName, AccountGroupID: %s, ID: %d", grp.Name, grp.ID)
 }
 
-func (grp *AccountGroup) AutoCondition() (cond string) {
+
+func (sgrp *AccountGroup) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (grp *AccountGroup) UpdateCondition() (cond string) {
 	if grp.Name != "" {
 		cond = fmt.Sprintf("`name` = '%s'", grp.Name)
 		return
@@ -48,6 +76,12 @@ func (grp *AccountGroup) AutoCondition() (cond string) {
 	}
 
 	return
+}
+func (grp *AccountGroup) DeleteCondition() (cond string) {
+	return grp.UpdateCondition()
+}
+func (grp *AccountGroup) GetCondition() (cond string) {
+	return grp.UpdateCondition()
 }
 
 func (grp *AccountGroup) GetName() string {
