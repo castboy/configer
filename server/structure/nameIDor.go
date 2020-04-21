@@ -47,6 +47,30 @@ func (st SymbolStatus) String() string {
 }
 
 func (sb *Symbol) FormatCheck() error {
+	if sb.Symbol == "" {
+		return errors.NotValidf("Symbol, %v", sb.Symbol)
+	}
+
+	if sb.SourceID == 0 {
+		return errors.NotValidf("SourceID, %v", sb.SourceID)
+	}
+
+	if sb.SecurityID == 0 {
+		return errors.NotValidf("SecurityID, %v", sb.SecurityID)
+	}
+
+	if sb.Leverage == 0 {
+		return errors.NotValidf("Leverage, %v", sb.Leverage)
+	}
+
+	if sb.MarginDivider.IsZero() {
+		return errors.NotValidf("MarginDivider, %v", 0)
+	}
+
+	if sb.Percentage.IsZero() {
+		return errors.NotValidf("Percentage, %v", 0)
+	}
+
 	return nil
 }
 
@@ -62,7 +86,11 @@ func (sb *Symbol) NotFoundError() error {
 	return errors.NotFoundf("Symbol, SymbolName: %s, ID: %d", sb.Symbol, sb.ID)
 }
 
-func (sb *Symbol) AutoCondition() (cond string) {
+func (sb *Symbol) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (sb *Symbol) UpdateCondition() (cond string) {
 	if sb.Symbol != "" {
 		cond = fmt.Sprintf("`symbol` = '%s'", sb.Symbol)
 		return
@@ -74,6 +102,12 @@ func (sb *Symbol) AutoCondition() (cond string) {
 	}
 
 	return
+}
+func (sb *Symbol) DeleteCondition() (cond string) {
+	return sb.UpdateCondition()
+}
+func (sb *Symbol) GetCondition() (cond string) {
+	return sb.UpdateCondition()
 }
 
 func (sb *Symbol) GetName() string {
@@ -225,7 +259,11 @@ func (src *Source) NotFoundError() error {
 	return errors.NotFoundf("Source, SourceName: %s, ID: %d", src.Source, src.ID)
 }
 
-func (src *Source) AutoCondition() (cond string) {
+func (src *Source) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (src *Source) UpdateCondition() (cond string) {
 	if src.Source != "" {
 		cond = fmt.Sprintf("`source` = '%s'", src.Source)
 		return
@@ -237,6 +275,12 @@ func (src *Source) AutoCondition() (cond string) {
 	}
 
 	return
+}
+func (src *Source) DeleteCondition() (cond string) {
+	return src.UpdateCondition()
+}
+func (src *Source) GetCondition() (cond string) {
+	return src.UpdateCondition()
 }
 
 func (src *Source) GetName() string {
@@ -271,7 +315,11 @@ func (sec *Security) NotFoundError() error {
 	return errors.NotFoundf("Security, SecurityName: %s, ID: %d", sec.SecurityName, sec.ID)
 }
 
-func (sec *Security) AutoCondition() (cond string) {
+func (sec *Security) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (sec *Security) UpdateCondition() (cond string) {
 	if sec.SecurityName != "" {
 		cond = fmt.Sprintf("`security_name` = '%s'", sec.SecurityName)
 		return
@@ -283,6 +331,12 @@ func (sec *Security) AutoCondition() (cond string) {
 	}
 
 	return
+}
+func (sec *Security) DeleteCondition() (cond string) {
+	return sec.UpdateCondition()
+}
+func (sec *Security) GetCondition() (cond string) {
+	return sec.UpdateCondition()
 }
 
 func (sec *Security) GetName() string {

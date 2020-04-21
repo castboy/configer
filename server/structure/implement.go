@@ -34,8 +34,20 @@ func (md *MarketDST) NotFoundError() error {
 	return errors.NotFoundf("MarketDST, MarketOwnerType: %d", md.MarketOwnerType)
 }
 
-func (md *MarketDST) AutoCondition() (cond string) {
-	return
+func (md *MarketDST) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (md *MarketDST) UpdateCondition() (cond string) {
+	return fmt.Sprintf("`market_type` = %d", md.MarketOwnerType)
+}
+
+func (md *MarketDST) DeleteCondition() (cond string) {
+	return md.UpdateCondition()
+}
+
+func (md *MarketDST) GetCondition() (cond string) {
+	return md.UpdateCondition()
 }
 
 // full.symbol.name
@@ -63,10 +75,6 @@ func (fs *FullSymbolName) IndexCheck() error {
 
 func (fs *FullSymbolName) NotFoundError() error {
 	return errors.NotFoundf("FullSymbolName, Symbol: %s, Leverage: %d", fs.Sl.Symbol, fs.Sl.Leverage)
-}
-
-func (fs *FullSymbolName) AutoCondition() (cond string) {
-	return
 }
 
 // map holiday table.
@@ -128,6 +136,20 @@ func (ho *Holiday) NotFoundError() error {
 	return nil
 }
 
-func (ho *Holiday) AutoCondition() (cond string) {
+func (ho *Holiday) ExportCondition() (cond string) {
+	return "1"
+}
+
+func (ho *Holiday) UpdateCondition() (cond string) {
 	return fmt.Sprintf("id = %d", ho.ID)
 }
+
+func (ho *Holiday) DeleteCondition() (cond string) {
+	return ho.UpdateCondition()
+}
+
+func (ho *Holiday) GetCondition() (cond string) {
+	return ho.UpdateCondition()
+}
+
+

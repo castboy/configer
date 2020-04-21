@@ -11,5 +11,8 @@ type Checkor interface {
 }
 
 type Xormor interface {
-	AutoCondition() string
+	ExportCondition() string
+	UpdateCondition() string
+	DeleteCondition() string
+	GetCondition() string
 }

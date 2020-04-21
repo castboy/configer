@@ -29,8 +29,7 @@ func (c *cacherMarketDST) Update() {
 }
 
 func (c *cacherMarketDST) Get() (i interface{}, exist bool) {
-	c.cache.get(c.bean)
-	return
+	return c.cache.get(c.bean)
 }
 
 func (c *cacherMarketDST) Export() (i interface{}, err error) {
