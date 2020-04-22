@@ -7,13 +7,21 @@ import (
 )
 
 func Start() (err error) {
+	// con_group_security
+	cgs := &structure.ConGroupSec{}
+	cgser := base.NewConGroupSec(cgs)
+	err = base.Cache(cgser)
+	if err != nil {
+		return
+	}
 	// cache group.
 	group := &structure.AccountGroup{}
 	grouper := base.NewGrouper(group)
 	err = base.Cache(grouper)
 	if err != nil {
-
+		return
 	}
+
 	// cache symbol.
 	symbol := &structure.Symbol{}
 	symboler := base.NewSymboler(symbol)

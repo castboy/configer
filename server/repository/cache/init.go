@@ -59,4 +59,8 @@ func init() {
 	holiCache = &holidayCache{
 		info: map[string]map[int]*structure.Holiday{},
 	}
+
+	grpSecCache = &groupSecurityCache{
+		info: map[int]map[int]*structure.ConGroupSec{},
+	}
 }
