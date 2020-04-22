@@ -7,7 +7,7 @@ import (
 )
 
 func Start() (err error) {
-	// cache symbol.
+	// cache group.
 	group := &structure.AccountGroup{}
 	grouper := base.NewGrouper(group)
 	err = base.Cache(grouper)

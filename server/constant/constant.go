@@ -7,6 +7,7 @@ const (
 	DoubleLegs MarginCalcMode = iota
 	LargerLeg
 	NetLeg
+	MarginCalcModeEnd
 )
 
 // GroupTradeType group trade type
@@ -16,4 +17,5 @@ const (
 	TestBook GroupTradeType = iota
 	ABook
 	BBook
+	GroupTradeTypeEnd
 )
