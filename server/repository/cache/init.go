@@ -33,6 +33,8 @@ var mdCache *marketDSTCache
 var fsnCache *fullSymbolNameCache
 var csCache [structure.ConvTypeLength]*idor.IDer
 var holiCache *holidayCache
+var grpCache *nameIDor.NameIDer
+var grpSecCache *groupSecurityCache
 
 func init() {
 	symbCache = nameIDor.NewNameIDer()

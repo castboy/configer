@@ -60,6 +60,22 @@ func NewSymboler(a *structure.Symbol) *baser {
 	}
 }
 
+func NewGrouper(bean *structure.AccountGroup) *baser {
+	return &baser{
+		cache.NewCacherAccountGroup(bean),
+		mysql.NewTablerAccountGroup(bean),
+		bean,
+	}
+}
+
+func NewConGroupSec(bean *structure.ConGroupSec) *baser {
+	return &baser{
+		cache.NewCacherConGroupSeucrity(bean),
+		mysql.NewTablertablerConGroupSecurity(bean),
+		bean,
+	}
+}
+
 func (a *baser) GetCacher() cache.BaseOperator {
 	return a.cacher
 }

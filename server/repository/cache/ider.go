@@ -4,6 +4,7 @@ import (
 	"configer/server/repository/cache/idor"
 	"configer/server/structure"
 	"configer/server/utils"
+	"sync"
 )
 
 type cacherSession struct {
@@ -17,6 +18,12 @@ type cacherConvSymbol struct {
 type ider struct {
 	bean  structure.IDor
 	cache idor.IDor
+}
+
+//conGroupSecurity
+type groupSecurityCache struct {
+	info map[int]map[int]*structure.ConGroupSec // key: groupID, key2: securityID
+	sync.RWMutex
 }
 
 func NewCacherSession(bean *structure.Session) *cacherSession {

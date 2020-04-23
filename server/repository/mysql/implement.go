@@ -36,6 +36,14 @@ type tablerMarketDST struct {
 	*tabler
 }
 
+type tablerGroup struct {
+	*tabler
+}
+
+type tablerConGroupSecurity struct {
+	*tabler
+}
+
 func NewTablerSymbol(bean *structure.Symbol) *tablerSymbol {
 	return &tablerSymbol{
 		&tabler{
@@ -155,6 +163,38 @@ func (t *tablerSecurity) Export() (interface{}, error) {
 func (t *tablerMarketDST) Export() (interface{}, error) {
 	i := []structure.MarketDST{}
 	err := t.Table(t.bean).Find(&i)
+
+	return i, err
+}
+
+func NewTablerAccountGroup(bean *structure.AccountGroup) *tablerGroup {
+	return &tablerGroup{
+		&tabler{
+			bean,
+			xEngine,
+		},
+	}
+}
+
+func (t *tablerGroup) Export() (interface{}, error) {
+	i := []structure.AccountGroup{}
+	err := t.Table(t.bean).Where(t.bean.ExportCondition()).Find(&i)
+
+	return i, err
+}
+
+func NewTablertablerConGroupSecurity(bean *structure.ConGroupSec) *tablerConGroupSecurity {
+	return &tablerConGroupSecurity{
+		&tabler{
+			bean,
+			xEngine,
+		},
+	}
+}
+
+func (t *tablerConGroupSecurity) Export() (interface{}, error) {
+	i := []structure.ConGroupSec{}
+	err := t.Table(t.bean).Where(t.bean.ExportCondition()).Find(&i)
 
 	return i, err
 }

@@ -17,6 +17,10 @@ type cacherSecurity struct {
 	*nameIDer
 }
 
+type cacherGroup struct {
+	*nameIDer
+}
+
 type nameIDer struct {
 	bean  structure.NameIDor
 	cache nameIDor.NameIDor
@@ -89,5 +93,21 @@ func (c *cacherSecurity) Cache(i interface{}) {
 	se := i.([]structure.Security)
 	for i := range se {
 		c.cache.Insert(&se[i])
+	}
+}
+
+func NewCacherAccountGroup(bean *structure.AccountGroup) *cacherGroup {
+	return &cacherGroup{
+		&nameIDer{
+			bean,
+			grpCache,
+		},
+	}
+}
+
+func (c *cacherGroup) Cache(i interface{}) {
+	gps := i.([]structure.AccountGroup)
+	for i := range gps {
+		c.cache.Insert(&gps[i])
 	}
 }
