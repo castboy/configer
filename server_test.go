@@ -6,6 +6,7 @@ import (
 	"configer/server/structure"
 	"fmt"
 	"github.com/shopspring/decimal"
+	"log"
 	"testing"
 	"time"
 )
@@ -230,6 +231,26 @@ func Test_SetDST(t *testing.T) {
 func Test_ExportMarketDST(t *testing.T) {
 	md := ExportMarketDST()
 	fmt.Println(md)
+}
+
+func Test_IsQuotable(t *testing.T) {
+	res, err := GetSymbolInfoByName("AUDCAD")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ok := IsQuotable(res.Symbol)
+	fmt.Println(ok)
+}
+
+func Test_IsTradable(t *testing.T) {
+	res, err := GetSymbolInfoByName("AUDCAD")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ok := IsTradable(res.Symbol)
+	fmt.Println(ok)
 }
 
 func Test_GetGroupIDByName(t *testing.T) {
