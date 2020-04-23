@@ -22,6 +22,12 @@ type holidayCache struct {
 	sync.RWMutex
 }
 
+//conGroupSecurity
+type groupSecurityCache struct {
+	info map[int]map[int]*structure.ConGroupSec // key: groupID, key2: securityID
+	sync.RWMutex
+}
+
 const AllSessionTypeLength = int(structure.SessionTypeLength) * int(structure.DSTTypeLength)
 
 var symbCache *nameIDor.NameIDer
