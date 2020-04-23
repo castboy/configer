@@ -67,6 +67,18 @@ func GetSymbols() (symbols []ExportSymbol, err error) {
 	return
 }
 
+func GetFullSymbolName(name string, leverage int32) (fn string, err error) {
+	fsn := &structure.FullSymbolName{Sl: structure.SymbolLeverage{Symbol: name, Leverage: leverage}}
+	i, err := extend.Get(extend.NewFullSymbolNamer(fsn))
+	if err != nil {
+		return
+	}
+
+	fn = i.(*structure.FullSymbolName).FullName
+
+	return
+}
+
 func GetSourceNameBySymbolName(symbolName string) (string, error) {
 	symbol := &structure.Symbol{Symbol: symbolName}
 	symboler := base.NewSymboler(symbol)

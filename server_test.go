@@ -20,6 +20,11 @@ func Test_GetSymbolInfoByName(t *testing.T) {
 	fmt.Println(i, err)
 }
 
+func Test_GetFullSymbolName(t *testing.T) {
+	fn, err := GetFullSymbolName("AUDCAD", 20)
+	fmt.Println(fn, err)
+}
+
 func Test_GetSymbols(t *testing.T) {
 	sbs, err := GetSymbols()
 	fmt.Println(sbs, err)
