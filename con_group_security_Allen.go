@@ -3,18 +3,16 @@ package main
 import (
 	"configer/server/base"
 	"configer/server/structure"
-	"fmt"
-	"github.com/juju/errors"
 )
 
 func AddConGroupSec(gs *structure.ConGroupSec) error {
-	group,err:=FindGroupById(gs.GroupId)
-	if err!=nil || group==nil{
-		fmt.Printf(":%+v",err)
-		return errors.NotValidf("group id: %d", gs.GroupId)
+	_, err := FindGroupById(gs.GroupId)
+	if err != nil {
+		return err
 	}
-	sec,err := GetSecurityInfo(gs.SecurityId)
-	if sec==nil || err != nil {
+
+	_, err = GetSecurityInfo(gs.SecurityId)
+	if err != nil {
 		return err
 	}
 
@@ -26,13 +24,13 @@ func AddConGroupSec(gs *structure.ConGroupSec) error {
 	return err
 }
 func FindConGroupSecById(groupId, securityId int) (cg *structure.ConGroupSec, err error) {
-	cg= &structure.ConGroupSec{GroupId:groupId,SecurityId:securityId}
+	cg = &structure.ConGroupSec{GroupId: groupId, SecurityId: securityId}
 	cgser := base.NewConGroupSec(cg)
 	i, err := base.Get(cgser)
-	if err!=nil{
-		return nil,err
+	if err != nil {
+		return nil, err
 	}
-	cg=i.(*structure.ConGroupSec)
+	cg = i.(*structure.ConGroupSec)
 
 	return
 }
@@ -49,23 +47,23 @@ func ModifyConGroupSec(cg *structure.ConGroupSec) error {
 //TODO: sync cache
 
 func RemoveConGroupSecById(groupId, securityId int) error {
-	cgs:= &structure.ConGroupSec{GroupId:groupId,SecurityId:securityId}
+	cgs := &structure.ConGroupSec{GroupId: groupId, SecurityId: securityId}
 	cgser := base.NewConGroupSec(cgs)
-	_,err:=base.Delete(cgser)
+	_, err := base.Delete(cgser)
 	return err
 }
 
 func FindAllConGroup() (cgss []*structure.ConGroupSec, err error) {
-	cgs:= &structure.ConGroupSec{}
+	cgs := &structure.ConGroupSec{}
 	cgser := base.NewConGroupSec(cgs)
-	i,err:=base.Export(cgser)
-	if err!=nil{
-		return nil,err
+	i, err := base.Export(cgser)
+	if err != nil {
+		return nil, err
 	}
-	cgmap:=i.(map[int]map[int]*structure.ConGroupSec)
-	for j:=range cgmap{
-		for k:=range cgmap[j]{
-			cgss=append(cgss,cgmap[j][k])
+	cgmap := i.(map[int]map[int]*structure.ConGroupSec)
+	for j := range cgmap {
+		for k := range cgmap[j] {
+			cgss = append(cgss, cgmap[j][k])
 		}
 	}
 
@@ -73,19 +71,19 @@ func FindAllConGroup() (cgss []*structure.ConGroupSec, err error) {
 }
 
 func FindConGroupSecsByGroupID(groupId int) (cgss []*structure.ConGroupSec, err error) {
-	cgs:= &structure.ConGroupSec{}
+	cgs := &structure.ConGroupSec{}
 	cgser := base.NewConGroupSec(cgs)
-	i,err:=base.Export(cgser)
-	if err!=nil{
-		return nil,err
+	i, err := base.Export(cgser)
+	if err != nil {
+		return nil, err
 	}
-	cgmap:=i.(map[int]map[int]*structure.ConGroupSec)
-	for j:=range cgmap{
-		if j!=groupId {
+	cgmap := i.(map[int]map[int]*structure.ConGroupSec)
+	for j := range cgmap {
+		if j != groupId {
 			continue
 		}
-		for k:=range cgmap[j]{
-			cgss=append(cgss,cgmap[j][k])
+		for k := range cgmap[j] {
+			cgss = append(cgss, cgmap[j][k])
 		}
 	}
 
@@ -93,15 +91,15 @@ func FindConGroupSecsByGroupID(groupId int) (cgss []*structure.ConGroupSec, err 
 }
 
 func IsGroupHoldSecurity(groupID int) (bool, error) {
-	cgs:= &structure.ConGroupSec{}
+	cgs := &structure.ConGroupSec{}
 	cgser := base.NewConGroupSec(cgs)
-	i,err:=base.Export(cgser)
-	if err!=nil{
-		return false,err
+	i, err := base.Export(cgser)
+	if err != nil {
+		return false, err
 	}
-	cgmap:=i.(map[int]map[int]*structure.ConGroupSec)
-	if cgmap[groupID]!=nil || len(cgmap[groupID])!=0{
-		return true,nil
+	cgmap := i.(map[int]map[int]*structure.ConGroupSec)
+	if len(cgmap[groupID]) != 0 {
+		return true, nil
 	}
-	return false,nil
+	return false, nil
 }

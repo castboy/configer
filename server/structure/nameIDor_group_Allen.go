@@ -21,27 +21,27 @@ type AccountGroup struct {
 }
 
 func (grp *AccountGroup) FormatCheck() error {
-	if grp==nil{
+	if grp == nil {
 		return errors.NotValidf("AccountGroup info is null")
 	}
 
-	if grp.Name==""{
+	if grp.Name == "" {
 		return errors.NotValidf("AccountGroup, %v", grp.Name)
 	}
 
-	if grp.DepositCurrency==""{
+	if grp.DepositCurrency == "" {
 		return errors.NotValidf("AccountGroup DepositCurrency is null")
 	}
 
-	if grp.MarginStopOut.LessThanOrEqual(decimal.Zero){
+	if grp.MarginStopOut.LessThanOrEqual(decimal.Zero) {
 		return errors.NotValidf("AccountGroup MarginStopOut is invalid")
 	}
 
-	if grp.MarginMode>=constant.MarginCalcModeEnd  {
+	if grp.MarginMode >= constant.MarginCalcModeEnd {
 		return errors.NotValidf("AccountGroup MarginMode is invalid")
 	}
 
-	if grp.TradeType>=constant.GroupTradeTypeEnd  {
+	if grp.TradeType >= constant.GroupTradeTypeEnd {
 		return errors.NotValidf("AccountGroup TradeType is invalid")
 	}
 	return nil
@@ -58,7 +58,6 @@ func (grp *AccountGroup) IndexCheck() error {
 func (grp *AccountGroup) NotFoundError() error {
 	return errors.NotFoundf("AccountGroupName, AccountGroupID: %s, ID: %d", grp.Name, grp.ID)
 }
-
 
 func (sgrp *AccountGroup) ExportCondition() (cond string) {
 	return "1"

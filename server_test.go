@@ -117,32 +117,31 @@ func Test_GetSources(t *testing.T) {
 	fmt.Println(srcs)
 }
 
-func Test_GetSourceByName(t *testing.T)  {
+func Test_GetSourceByName(t *testing.T) {
 	src, err := GetSourceByName("AUDCAD")
 	fmt.Println(src, err)
 }
 
-func Test_GetSourceIDByName(t *testing.T)  {
+func Test_GetSourceIDByName(t *testing.T) {
 	id, err := GetSourceIDByName("AUDCAD")
 	fmt.Println(id, err)
 }
 
-func Test_GetSymbolsBySourceName(t *testing.T)  {
+func Test_GetSymbolsBySourceName(t *testing.T) {
 	symbs := GetSymbolsBySourceName("AUDCAD")
 	fmt.Println(symbs)
 }
 
-
-func Test_ExportSessions(t *testing.T)  {
+func Test_ExportSessions(t *testing.T) {
 	ss, err := ExportSessions("AUDCAD", structure.DST, structure.Quote)
 	fmt.Println(ss, err)
 }
 
-func Test_SetSession(t *testing.T)  {
+func Test_SetSession(t *testing.T) {
 	se := &structure.Session{
 		SourceID: 1,
-		Type: structure.Quote,
-		Dst: structure.DST,
+		Type:     structure.Quote,
+		Dst:      structure.DST,
 		Session: map[int32][]string{
 			0: []string{"00:00-01:00"},
 		},
@@ -152,18 +151,18 @@ func Test_SetSession(t *testing.T)  {
 	fmt.Println(err)
 }
 
-func Test_GetHolidays(t *testing.T)  {
+func Test_GetHolidays(t *testing.T) {
 	hs, err := GetHolidays()
 	fmt.Println(hs, err)
 }
 
 func Test_InsertHoliday(t *testing.T) {
 	ho := &structure.Holiday{
-		Enable: true,
-		Date: "2020-04-10",
-		From: "00:00:00",
-		To: "10:00:00",
-		Category: structure.HolidayAll,
+		Enable:      true,
+		Date:        "2020-04-10",
+		From:        "00:00:00",
+		To:          "10:00:00",
+		Category:    structure.HolidayAll,
 		Description: "just test",
 	}
 
@@ -173,11 +172,11 @@ func Test_InsertHoliday(t *testing.T) {
 
 func Test_UpdateHolidayByID(t *testing.T) {
 	ho := &structure.Holiday{
-		Enable: true,
-		Date: "2020-05-10",
-		From: "01:00:01",
-		To: "10:00:00",
-		Category: structure.HolidaySymbol,
+		Enable:      true,
+		Date:        "2020-05-10",
+		From:        "01:00:01",
+		To:          "10:00:00",
+		Category:    structure.HolidaySymbol,
 		Description: "just test",
 	}
 
@@ -222,7 +221,7 @@ func Test_GetDST(t *testing.T) {
 	fmt.Println(dst, err)
 }
 
-func Test_SetDST(t *testing.T)  {
+func Test_SetDST(t *testing.T) {
 	err := SetDST(&structure.MarketDST{MarketOwnerType: 0, DST: 2})
 	fmt.Println(err)
 }

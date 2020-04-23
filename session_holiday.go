@@ -69,7 +69,6 @@ func DeleteHolidayByID(ID int) error {
 	return err
 }
 
-
 func IsQuotable(symb *structure.Symbol) bool {
 	if !holidayCanTrade(symb) {
 		return false
@@ -91,7 +90,6 @@ func IsTradable(symb *structure.Symbol) bool {
 
 	return can
 }
-
 
 func appendSymbolID(ho *structure.Holiday) error {
 	switch ho.Category {

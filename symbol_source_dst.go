@@ -89,8 +89,6 @@ func GetSourceNameBySymbolName(symbolName string) (string, error) {
 	return source.Source, nil
 }
 
-
-
 func InsertSymbol(symbol *structure.Symbol) error {
 	// insert symbol.
 	_, err := base.Get(base.NewSourcer(&structure.Source{ID: symbol.SourceID}))
@@ -263,7 +261,6 @@ func GetSymbolsBySourceName(sourceName string) (symbols []string) {
 	return
 }
 
-
 func GetDST(marketType structure.MarketType) (dst structure.DSTType, err error) {
 	i, err := base.Get(base.NewMarketDSTer(&structure.MarketDST{MarketOwnerType: marketType}))
 	if err != nil {
@@ -289,4 +286,3 @@ func ExportMarketDST() map[structure.MarketType]structure.DSTType {
 
 	return res
 }
-

@@ -2,8 +2,8 @@ package structure
 
 import (
 	"fmt"
-	"github.com/shopspring/decimal"
 	"github.com/juju/errors"
+	"github.com/shopspring/decimal"
 )
 
 //congroup security
@@ -26,23 +26,23 @@ func (cgs *ConGroupSec) FormatCheck() error {
 		return errors.NotValidf("session info is null")
 	}
 
-	if cgs.GroupId <=0  {
+	if cgs.GroupId <= 0 {
 		return errors.NotValidf("groupID, %v", cgs.GroupId)
 	}
 
-	if cgs.SecurityId <=0 {
+	if cgs.SecurityId <= 0 {
 		return errors.NotValidf("SecurityId, %v", cgs.SecurityId)
 	}
 
-	if cgs.LotMin.LessThan(decimal.Zero)   {
+	if cgs.LotMin.LessThan(decimal.Zero) {
 		return errors.NotValidf("LotMin, %v", cgs.LotMin)
 	}
 
-	if cgs.LotMax.LessThan(decimal.Zero)   {
+	if cgs.LotMax.LessThan(decimal.Zero) {
 		return errors.NotValidf("LotMax, %v", cgs.LotMax)
 	}
 
-	if cgs.LotStep.LessThan(decimal.Zero)   {
+	if cgs.LotStep.LessThan(decimal.Zero) {
 		return errors.NotValidf("LotStep, %v", cgs.LotStep)
 	}
 
@@ -50,15 +50,19 @@ func (cgs *ConGroupSec) FormatCheck() error {
 }
 
 func (cgs *ConGroupSec) IndexCheck() error {
-	if cgs.GetID() < 0 {
-		return errors.NotValidf("ID")
+	if cgs.GroupId == 0 {
+		return errors.NotValidf("GroupID, %v", cgs.GroupId)
+	}
+
+	if cgs.SecurityId == 0 {
+		return errors.NotValidf("SecurityID, %v", cgs.SecurityId)
 	}
 
 	return nil
 }
 
 func (cgs *ConGroupSec) NotFoundError() error {
-	return errors.NotFoundf("ConGroupSec, groupID: %d, securityID:%d", cgs.GroupId,cgs.SecurityId)
+	return errors.NotFoundf("ConGroupSec, groupID: %d, securityID:%d", cgs.GroupId, cgs.SecurityId)
 }
 
 func (cgs *ConGroupSec) ExportCondition() (cond string) {
@@ -79,8 +83,4 @@ func (cgs *ConGroupSec) DeleteCondition() (cond string) {
 
 func (cgs *ConGroupSec) GetCondition() (cond string) {
 	return cgs.UpdateCondition()
-}
-
-func (cgs *ConGroupSec) GetID() int {
-	return cgs.ID
 }

@@ -151,5 +151,3 @@ func (ho *Holiday) DeleteCondition() (cond string) {
 func (ho *Holiday) GetCondition() (cond string) {
 	return ho.UpdateCondition()
 }
-
-

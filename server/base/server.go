@@ -48,7 +48,7 @@ func Update(a operator) (num int64, err error) {
 	}
 
 	num, err = a.GetTabler().Update()
-	fmt.Println("num",num)
+	fmt.Println("num", num)
 	if err != nil {
 		err = constant.NewErr(constant.DBErr, err)
 		return

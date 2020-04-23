@@ -92,5 +92,3 @@ func DeleteSecurityInfo(id int) error {
 
 	return err
 }
-
-
