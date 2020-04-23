@@ -100,14 +100,14 @@ func (se *Session) FormatCheck() error {
 
 func (se *Session) IndexCheck() error {
 	if se.GetID() == 0 {
-		return errors.NotValidf("ID")
+		return errors.NotValidf("SourceID, %v", se.GetID())
 	}
 
 	return nil
 }
 
 func (se *Session) NotFoundError() error {
-	return errors.NotFoundf("Session, ID: %d", se.ID)
+	return errors.NotFoundf("`source_id` = %d and `type` = %d and `dst_type` = %d", se.SourceID, se.Type, se.Dst)
 }
 
 func (se *Session) ExportCondition() (cond string) {
