@@ -13,3 +13,11 @@ func NewGrouper(bean *structure.AccountGroup) *baser {
 		bean,
 	}
 }
+
+func NewConGroupSec(bean *structure.ConGroupSec) *baser {
+	return &baser{
+		cache.NewCacherConGroupSeucrity(bean),
+		mysql.NewTablertablerConGroupSecurity(bean),
+		bean,
+	}
+}
