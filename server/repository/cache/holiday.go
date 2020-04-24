@@ -29,8 +29,7 @@ func (c *cacherHoliday) Update() {
 }
 
 func (c *cacherHoliday) Get() (i interface{}, exist bool) {
-	c.cache.get(c.bean)
-	return
+	return c.cache.get(c.bean)
 }
 
 func (c *cacherHoliday) Export() (i interface{}, err error) {
