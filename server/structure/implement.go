@@ -134,7 +134,7 @@ func (ho *Holiday) IndexCheck() error {
 }
 
 func (ho *Holiday) NotFoundError() error {
-	return nil
+	return errors.NotFoundf("Date: %v", ho.Date)
 }
 
 func (ho *Holiday) ExportCondition() (cond string) {
