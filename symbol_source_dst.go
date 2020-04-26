@@ -59,7 +59,7 @@ func GetSymbols() (symbols []ExportSymbol, err error) {
 		source = j.(*structure.Source)
 
 		symbols = append(symbols, ExportSymbol{
-			symbol,
+			sb,
 			source,
 		})
 	}
